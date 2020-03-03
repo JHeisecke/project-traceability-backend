@@ -16,6 +16,8 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<joko-security.version>1.1.6</joko-security.version>
+		<joko-utils.version>0.6.2</joko-utils.version>
 	</properties>
 
 	<dependencies>
@@ -44,6 +46,27 @@
 					<groupId>dom4j</groupId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>io.github.jokoframework</groupId>
+			<artifactId>joko-security</artifactId>
+			<version>${joko-security.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>io.github.jokoframework</groupId>
+			<artifactId>joko-utils</artifactId>
+			<version>${joko-utils.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.jokoframework</groupId>
+			<artifactId>joko-utils</artifactId>
+			<version>0.6.2</version>
 		</dependency>
 	</dependencies>
 
