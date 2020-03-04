@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+/**
+ * @author jvillagra
+ */
 @Entity
 @Table(name = "permiso_rol", schema = "public")
 public class PermisoRol {

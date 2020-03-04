@@ -2,6 +2,9 @@ package com.github.pol.una.traceability.entities;
 
 import javax.persistence.*;
 
+/**
+ * @author jvillagra
+ */
 @Entity
 @Table(name = "permiso", schema = "public")
 public class Permiso {
