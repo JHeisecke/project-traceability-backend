@@ -1,7 +1,6 @@
 package com.github.pol.una.traceability.dto;
-import io.github.jokoframework.utils.dto_mapping.BaseDTO;
 
-public class Usuario extends BaseDTO {
+public class UsuarioDTO {
 
     private Long id;
     private String nombreCompleto;
@@ -49,16 +48,4 @@ public class Usuario extends BaseDTO {
         this.email = email;
     }
 
-
-    @Override
-    public String toString() {
-        return new org.apache.commons.lang3.builder.ToStringBuilder(this)
-                .appendSuper(super.toString())
-                .append("id", id)
-                .append("nombreCompleto", nombreCompleto)
-                .append("username", username)
-                .append("password", password)
-                .append("email", email)
-                .toString();
-    }
 }
