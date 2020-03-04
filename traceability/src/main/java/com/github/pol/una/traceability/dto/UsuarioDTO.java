@@ -1,5 +1,8 @@
 package com.github.pol.una.traceability.dto;
 
+/**
+ * @author jvillagra
+ */
 public class UsuarioDTO {
 
     private Long id;
