@@ -1,177 +1,177 @@
-CREATE TABLE PROYECTO (
-ID BIGSERIAL PRIMARY KEY,
-NOMBRE VARCHAR(255),
-ESTADO VARCHAR(255) unique,
-FECHA_INICIO DATE,
-FECHA_FIN DATE,
-ID_LIDER INTEGER NOT NULL,
-FECHA_ALTA DATE,
-FECHA_MODIFICACION DATE,
-USUARIO_ALTA BIGINT,
-USUARIO_MODIFICACION int);
+create table proyecto (
+id bigserial primary key,
+nombre varchar(255),
+estado varchar(255) unique,
+fecha_inicio date,
+fecha_fin date,
+id_lider bigint not null,
+fecha_alta date,
+fecha_modificacion date,
+usuario_alta bigint,
+usuario_modificacion int);
 	
 
-CREATE TABLE PARAMETRO (
-ID BIGSERIAL PRIMARY KEY,
-DOMINIO VARCHAR (50),
-VALOR VARCHAR (50) ,
-ORDEN VARCHAR(50),
-DESCRIPCION VARCHAR(1000)
+create table parametro (
+id bigserial primary key,
+dominio varchar (50),
+valor varchar (50) ,
+orden varchar(50),
+descripcion varchar(1000)
 );
 
-CREATE TABLE USUARIO (
-ID BIGSERIAL PRIMARY KEY,
-NOMBRE_COMPLETO VARCHAR(255),
-ID_ROL INTEGER ,
-CONTRASEÑA VARCHAR(255),
-USERNAME VARCHAR(255),
-EMAIL VARCHAR(255)
+create table usuario (
+id bigserial primary key,
+nombre_completo varchar(255),
+id_rol bigint ,
+password varchar(70),
+username varchar(25) unique,
+email varchar(50) unique
 );
 
-CREATE TABLE FASE (
-ID BIGSERIAL PRIMARY KEY,
-ID_PROYECTO INTEGER UNIQUE NOT NULL,
-ESTADO VARCHAR(25) unique,
-FECHA_ALTA DATE,
-USUARIO_MODIFICACION int UNIQUE,
-USUARIO_ALTA BIGINT UNIQUE,
-FECHA_MODIFICACION DATE
+create table fase (
+id bigserial primary key,
+id_proyecto bigint unique not null,
+estado varchar(25) unique,
+fecha_alta date,
+usuario_modificacion int unique,
+usuario_alta bigint unique,
+fecha_modificacion date
 );
 
 
-CREATE TABLE USUARIO_ROL_PROYECTO (
-ID_PROYECTO INTEGER,
-ID_ROL INTEGER,
-ID_USUARIO INTEGER,
-PRIMARY KEY (ID_PROYECTO,ID_ROL,ID_USUARIO)
+create table usuario_rol_proyecto (
+id bigserial primary key,
+id_proyecto bigint,
+id_rol bigint,
+id_usuario bigint
 );	
 	
 
-CREATE TABLE ROL (
-ID BIGSERIAL PRIMARY KEY,
-NOMBRE VARCHAR (255),
-DESCRIPCION VARCHAR (255)
+create table rol (
+id bigserial primary key,
+nombre varchar (255),
+descripcion varchar (255)
 );
 
-CREATE TABLE PERMISO_ROL (
-ID_ROL INTEGER,
-ID_PERMISO INTEGER,
-PRIMARY KEY (ID_ROL,ID_PERMISO)
-);
-
-
-CREATE TABLE PERMISO (
-ID BIGSERIAL PRIMARY KEY,
-NOMBRE VARCHAR(100),
-DESCRIPCION VARCHAR (1000)
+create table permiso_rol (
+id_rol bigint,
+id_permiso bigint,
+primary key (id_rol,id_permiso)
 );
 
 
-CREATE TABLE LINEA_BASE (
-ID BIGSERIAL PRIMARY KEY,
-ID_FASE INTEGER unique,
-ESTADO VARCHAR(40),
-FECHA_ALTA DATE,
-FECHA_MODIFICACION DATE,
-USUARIO_MODIFICACION int UNIQUE,
-USUARIO_ALTA BIGINT UNIQUE
+create table permiso (
+id bigserial primary key,
+nombre varchar(100),
+descripcion varchar (1000)
 );
 
 
-CREATE TABLE ITEM (
-ID BIGSERIAL PRIMARY KEY,
-ID_ITEM_PADRE INTEGER UNIQUE,
-ID_FASE INTEGER UNIQUE,
-ESTADO VARCHAR (25) UNIQUE,
-ID_LINEA_BASE INTEGER UNIQUE,
-FECHA_ALTA DATE,
-FECHA_MODIFICACION DATE,
-USUARIO_MODIFICACION int UNIQUE,
-USUARIO_ALTA BIGINT UNIQUE,
-OBSERVACION VARCHAR (70),
-DESCRIPCION VARCHAR (50),
-PRIORIDAD VARCHAR (20)
+create table linea_base (
+id bigserial primary key,
+id_fase integer unique,
+estado varchar(40),
+fecha_alta date,
+fecha_modificacion date,
+usuario_modificacion int unique,
+usuario_alta bigint unique
 );
 
 
-ALTER TABLE PROYECTO ADD CONSTRAINT USUARIO_ALTA_FKEY FOREIGN KEY (USUARIO_ALTA)
-REFERENCES FASE (USUARIO_ALTA) MATCH SIMPLE
-	ON UPDATE NO ACTION ON DELETE NO ACTION;
+create table item (
+id bigserial primary key,
+id_item_padre bigint unique,
+id_fase bigint unique,
+estado varchar (25) unique,
+id_linea_base bigint unique,
+fecha_alta date,
+fecha_modificacion date,
+usuario_modificacion int unique,
+usuario_alta bigint unique,
+observacion varchar (70),
+descripcion varchar (50),
+prioridad varchar (20)
+);
+
+
+alter table proyecto add constraint usuario_alta_fkey foreign key (usuario_alta)
+references fase (usuario_alta) match simple
+	on update no action on delete no action;
 
 	
-ALTER TABLE PROYECTO ADD CONSTRAINT USUARIO_MODIFICACION_FKEY FOREIGN KEY (USUARIO_MODIFICACION)
-REFERENCES FASE (USUARIO_MODIFICACION) MATCH SIMPLE
-	ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table proyecto add constraint usuario_modificacion_fkey foreign key (usuario_modificacion)
+references fase (usuario_modificacion) match simple
+	on update no action on delete no action;
 
 
-ALTER TABLE FASE ADD CONSTRAINT USUARIO_ALTA_FKEY2 FOREIGN KEY (USUARIO_ALTA)
-REFERENCES LINEA_BASE (USUARIO_ALTA) MATCH SIMPLE
-	ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table fase add constraint usuario_alta_fkey2 foreign key (usuario_alta)
+references linea_base (usuario_alta) match simple
+	on update no action on delete no action;
 
-ALTER TABLE FASE ADD CONSTRAINT ID_PROYECTO_FKEY FOREIGN KEY (USUARIO_ALTA)
-REFERENCES PROYECTO (ID) MATCH SIMPLE
-	ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table fase add constraint id_proyecto_fkey foreign key (usuario_alta)
+references proyecto (id) match simple
+	on update no action on delete no action;
 	
-ALTER TABLE FASE ADD CONSTRAINT USUARIO_MODIFICACION_FKEY2 FOREIGN KEY (USUARIO_MODIFICACION)
-REFERENCES LINEA_BASE (USUARIO_MODIFICACION) MATCH SIMPLE
-	ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table fase add constraint usuario_modificacion_fkey2 foreign key (usuario_modificacion)
+references linea_base (usuario_modificacion) match simple
+	on update no action on delete no action;
 
 
-ALTER TABLE USUARIO_ROL_PROYECTO ADD CONSTRAINT USUARIO_ROL_PROYECTO_FKEY FOREIGN KEY (ID_PROYECTO)
-REFERENCES PROYECTO (ID) MATCH SIMPLE
-	ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table usuario_rol_proyecto add constraint usuario_rol_proyecto_fkey foreign key (id_proyecto)
+references proyecto (id) match simple
+	on update no action on delete no action;
 	
 	
-ALTER TABLE USUARIO_ROL_PROYECTO ADD CONSTRAINT ID_ROL_FKEY FOREIGN KEY (ID_ROL)
-REFERENCES ROL (ID) MATCH SIMPLE
-	ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table usuario_rol_proyecto add constraint id_rol_fkey foreign key (id_rol)
+references rol (id) match simple
+	on update no action on delete no action;
 	
 
-ALTER TABLE USUARIO_ROL_PROYECTO ADD CONSTRAINT ID_USUARIO_2_FKEY FOREIGN KEY (ID_USUARIO)
-REFERENCES USUARIO (ID) MATCH SIMPLE
-	ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table usuario_rol_proyecto add constraint id_usuario_2_fkey foreign key (id_usuario)
+references usuario (id) match simple
+	on update no action on delete no action;
 
 
-ALTER TABLE PERMISO_ROL ADD CONSTRAINT ID_ROL_2_FKEY FOREIGN KEY (ID_ROL)
-REFERENCES ROL (ID) MATCH SIMPLE
-ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table permiso_rol add constraint id_rol_2_fkey foreign key (id_rol)
+references rol (id) match simple
+on update no action on delete no action;
 
 
-ALTER TABLE PERMISO_ROL ADD CONSTRAINT ID_PERMISO_2_FKEY FOREIGN KEY (ID_PERMISO)
-REFERENCES PERMISO (ID) MATCH SIMPLE
-ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table permiso_rol add constraint id_permiso_2_fkey foreign key (id_permiso)
+references permiso (id) match simple
+on update no action on delete no action;
 
 
-ALTER TABLE LINEA_BASE ADD CONSTRAINT ID_FASE_2_FKEY FOREIGN KEY (ID_FASE)
-REFERENCES FASE (ID) MATCH SIMPLE
-ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table linea_base add constraint id_fase_2_fkey foreign key (id_fase)
+references fase (id) match simple
+on update no action on delete no action;
 
 
-ALTER TABLE LINEA_BASE ADD CONSTRAINT ID_USUARIO_ALTA_2_FKEY FOREIGN KEY (USUARIO_ALTA)
-REFERENCES ITEM (USUARIO_ALTA) MATCH SIMPLE
-ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table linea_base add constraint id_usuario_alta_2_fkey foreign key (usuario_alta)
+references item (usuario_alta) match simple
+on update no action on delete no action;
 
 
-ALTER TABLE LINEA_BASE ADD CONSTRAINT USUARIO_MODIFICACION_2_FKEY FOREIGN KEY (USUARIO_MODIFICACION)
-REFERENCES ITEM (USUARIO_MODIFICACION) MATCH SIMPLE
-ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table linea_base add constraint usuario_modificacion_2_fkey foreign key (usuario_modificacion)
+references item (usuario_modificacion) match simple
+on update no action on delete no action;
 
 
-ALTER TABLE ITEM ADD CONSTRAINT ITEM_PADRE_FKEY FOREIGN KEY (ID_ITEM_PADRE)
-REFERENCES ITEM (USUARIO_MODIFICACION) MATCH SIMPLE
-ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table item add constraint item_padre_fkey foreign key (id_item_padre)
+references item (usuario_modificacion) match simple
+on update no action on delete no action;
 
 
-ALTER TABLE ITEM ADD CONSTRAINT LINEA_BASE_3_FKEY FOREIGN KEY (ID_LINEA_BASE)
-REFERENCES LINEA_BASE (ID) MATCH SIMPLE
-ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table item add constraint linea_base_3_fkey foreign key (id_linea_base)
+references linea_base (id) match simple
+on update no action on delete no action;
 
 
-ALTER TABLE ITEM ADD CONSTRAINT USUARIO_MODIFICACION_3_FKEY_FKEY FOREIGN KEY (USUARIO_MODIFICACION)
-REFERENCES LINEA_BASE (USUARIO_MODIFICACION) MATCH SIMPLE
-ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table item add constraint usuario_modificacion_3_fkey_fkey foreign key (usuario_modificacion)
+references linea_base (usuario_modificacion) match simple
+on update no action on delete no action;
 
 
-ALTER TABLE ITEM ADD CONSTRAINT USUARIO_ALTA_3_FKEY FOREIGN KEY (USUARIO_ALTA)
-REFERENCES LINEA_BASE (USUARIO_ALTA) MATCH SIMPLE
-ON UPDATE NO ACTION ON DELETE NO ACTION;
+alter table item add constraint usuario_alta_3_fkey foreign key (usuario_alta)
+references linea_base (usuario_alta) match simple
+on update no action on delete no action;
