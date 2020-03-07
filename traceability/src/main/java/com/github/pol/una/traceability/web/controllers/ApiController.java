@@ -5,6 +5,7 @@ import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.entities.Usuario;
 import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.service.UsuarioService;
+import com.github.pol.una.traceability.web.response.BaseResponseDTO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class ApiController extends BaseRestController{
     private UsuarioService usuarioService;
 
     @PostMapping(ApiPaths.LOGIN)
-    public ResponseEntity<UsuarioDTO> login(@RequestBody UsuarioDTO usuario) throws UserException {
+    public ResponseEntity<Usuario> login(@RequestBody UsuarioDTO usuario) throws UserException {
         return ResponseEntity.ok(usuarioService.login(usuario));
     }
 
