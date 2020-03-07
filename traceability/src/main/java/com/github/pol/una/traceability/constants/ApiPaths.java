@@ -12,5 +12,5 @@ public class ApiPaths {
     public static final String SUFFIX_HEART_BEAT = "/heartbeat";
     public static final String API_SECURE = "/api/secure";
 
-    public static final String LOGIN = API_PATTERN + "/login";
+    public static final String LOGIN = BASE + "/login";
 }

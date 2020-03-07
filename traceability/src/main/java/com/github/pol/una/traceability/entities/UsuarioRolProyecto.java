@@ -2,11 +2,15 @@ package com.github.pol.una.traceability.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "usuario_rol_proyecto", schema = "public")
 public class UsuarioRolProyecto {
+
+    @Id
+    private Long id;
 
     @Column(name = "id_proyecto")
     private Long idProyecto;

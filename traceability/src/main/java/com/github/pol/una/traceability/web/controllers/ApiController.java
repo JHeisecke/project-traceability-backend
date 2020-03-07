@@ -1,35 +1,28 @@
 package com.github.pol.una.traceability.web.controllers;
 
 import com.github.pol.una.traceability.constants.ApiPaths;
-import com.github.pol.una.traceability.service.SecurityService;
+import com.github.pol.una.traceability.dto.UsuarioDTO;
+import com.github.pol.una.traceability.entities.Usuario;
+import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.service.UsuarioService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
+@Controller
 @RequestMapping("/")
 public class ApiController extends BaseRestController{
 
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private SecurityService securityService;
-
-
-    @GetMapping(ApiPaths.LOGIN)
-    public String getLogin(Model model, String error, String logout) {
-        if (error != null) {
-            model.addAttribute("error", "Your username and password is invalid.");
-        }
-        if (logout != null) {
-            model.addAttribute("message", "You have been logged out successfully.");
-        }
-        return "login";
+    @PostMapping(ApiPaths.LOGIN)
+    public UsuarioDTO login(@RequestBody UsuarioDTO usuario) throws UserException {
+        return usuarioService.login(usuario);
     }
 
-    @GetMapping({ApiPaths.API_PATTERN})
+    @GetMapping({ApiPaths.BASE})
     public String welcome(Model model) {
         return "welcome";
     }
