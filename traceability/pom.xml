@@ -19,7 +19,7 @@
 		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
 		<httpclient.version>4.5.1</httpclient.version>
 		<commons-text.version>1.1</commons-text.version>
-		<joko-utils.version>0.6.2</joko-utils.version>
+
 	</properties>
 
 	<dependencies>
@@ -69,14 +69,6 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${springfox-swagger2.version}</version>
 			<scope>compile</scope>
-		</dependency>
-		<!--
-        Joko dependencies
-        -->
-		<dependency>
-			<groupId>io.github.jokoframework</groupId>
-			<artifactId>joko-utils</artifactId>
-			<version>${joko-utils.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
