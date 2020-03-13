@@ -3,6 +3,7 @@ package com.github.pol.una.traceability.repository;
 import com.github.pol.una.traceability.entities.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -10,8 +11,12 @@ import java.util.Optional;
  */
 public interface RolRepository extends JpaRepository<Rol, Long> {
 
-    Rol findByNombre(String nombre);
+    Optional<Rol> findByNombre(String nombre);
 
     Optional<Rol> findById(Long id);
+
+    List<Rol> findAll();
+
+    Rol findByNombreAndId(String nombre, Long id);
 
 }
