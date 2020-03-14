@@ -5,6 +5,9 @@ import com.github.pol.una.traceability.exceptions.RolException;
 
 import java.util.List;
 
+/**
+ * @author jvillagra
+ */
 public interface RolService {
 
     List<RolDTO> getAll();
