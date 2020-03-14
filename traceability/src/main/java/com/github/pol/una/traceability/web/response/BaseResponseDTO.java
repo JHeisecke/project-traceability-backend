@@ -23,6 +23,12 @@ public class BaseResponseDTO {
         this.message = message;
     }
 
+    public BaseResponseDTO(boolean success, HttpStatus httpStatus) {
+        this.success = success;
+        this.httpStatus = httpStatus;
+        this.message = message;
+    }
+
     protected BaseResponseDTO(Builder<?> builder) {
         this.success = builder.success;
         this.errorCode = builder.errorCode;
