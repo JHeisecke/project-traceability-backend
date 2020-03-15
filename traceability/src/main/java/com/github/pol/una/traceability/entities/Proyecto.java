@@ -1,5 +1,8 @@
 package com.github.pol.una.traceability.entities;
 
+import javax.persistence.*;
+
+
 public class Proyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +33,7 @@ public class Proyecto {
     @Column (name = "fecha_modificacion")
     private String fecha_modificacion;
 
-    @Column (name = "usuario_alta")
+    @Column(name = "usuario_alta")
     private long usuario_alta;
 
     @Column (name = "usuario_modificacion")
