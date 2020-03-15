@@ -36,6 +36,12 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(usuarioService.login(usuario));
     }
 
+    @GetMapping(ApiPaths.USER)
+    public ResponseEntity<ListResponseDTO> getUsuariosExistentes() {
+        List<UsuarioDTO> users = usuarioService.getAll();
+        return ResponseEntity.ok(ListResponseDTO.success(users));
+    }
+
     @GetMapping(ApiPaths.ROL)
     public ResponseEntity<ListResponseDTO> getRolesExistentes(){
         List<RolDTO> roles = rolService.getAll();
