@@ -5,6 +5,7 @@ import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.entities.Rol;
 import com.github.pol.una.traceability.entities.Usuario;
 import com.github.pol.una.traceability.exceptions.BusinessException;
+import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.mapper.impl.RolMapper;
 import com.github.pol.una.traceability.mapper.impl.UsuarioMapper;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author jvillagra
@@ -28,7 +30,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
-    private UsuarioMapper usuMapper;
+    private UsuarioMapper mapper;
     @Autowired
     private EntityManager em;
 
@@ -52,21 +54,33 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<Usuario> listaUsuarios = usuarioRepository.findAll();
         List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
         for(Usuario usu : listaUsuarios){
-            usuarioDTOS.add(usuMapper.mapToDto(usu));
+            usuarioDTOS.add(mapper.mapToDto(usu));
         }
         return usuarioDTOS;
     }
 
     @Override
-    public Usuario saveUser(UsuarioDTO usuarioDTO) {
-        Usuario usuario = new Usuario();
-        usuario = usuMapper.mapToEntity(usuarioDTO);
+    public UsuarioDTO saveUser(UsuarioDTO usuarioDTO) {
+        Usuario usuario = mapper.mapToEntity(usuarioDTO);
         usuarioRepository.save(usuario);
-        return usuario;
+        return mapper.mapToDto(usuario);
     }
 
     @Override
     public Usuario findByUsername(String username) {
         return usuarioRepository.findByUsername(username);
+    }
+
+    @Override
+    public UsuarioDTO updateUser(UsuarioDTO usuarioDTO) throws UserException {
+
+        Usuario usuario = usuarioRepository.findByUsername(usuarioDTO.getUsername());
+
+        if(usuario != null) {
+            usuarioDTO.setId(usuario.getId());
+            return mapper.mapToDto(usuarioRepository.save(mapper.mapToEntity(usuarioDTO)));
+        } else {
+            throw new UserException("notFound", "No se encontró el usuario");
+        }
     }
 }
