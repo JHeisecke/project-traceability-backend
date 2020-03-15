@@ -56,7 +56,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<Usuario> listaUsuarios = usuarioRepository.findAll();
         List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
         for(Usuario usu : listaUsuarios){
-            usuarioDTOS.add(mapper.mapToDto(usu));
+            UsuarioDTO usuarioDTO = mapper.mapToDto(usu);
+            listarRolesUsuarios(usuarioDTO);
+            usuarioDTOS.add(usuarioDTO);
         }
         return usuarioDTOS;
     }
@@ -75,12 +77,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioDTO findByUsername(String username) {
         UsuarioDTO usuarioDTO = mapper.mapToDto(usuarioRepository.findByUsername(username));
+        listarRolesUsuarios(usuarioDTO);
+        return usuarioDTO;
+    }
+
+    private void listarRolesUsuarios(UsuarioDTO usuarioDTO) {
         try {
             usuarioDTO.setRoles(rolService.getRolesByUsuarioId(usuarioDTO.getId()));
         } catch (RolException e) {
             e.printStackTrace();
         }
-        return usuarioDTO;
     }
 
 }
