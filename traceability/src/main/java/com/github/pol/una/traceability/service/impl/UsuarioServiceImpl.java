@@ -76,7 +76,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         usuarioRepository.save(mapper.mapToEntity(usuarioDTO));
         for(RolDTO rol : usuarioDTO.getRoles()){
-            usuarioRolProyectoService.asignarRolUsuario(usuarioDTO.getId(), rol.getId());
+            usuario= usuarioRepository.findByUsername(usuarioDTO.getUsername());
+            usuarioRolProyectoService.asignarRolUsuario(usuario.getId(), rol.getId());
         }
         return usuarioDTO;
     }
