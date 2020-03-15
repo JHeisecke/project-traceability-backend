@@ -1,12 +1,14 @@
 package com.github.pol.una.traceability.service.impl;
 
 import com.github.pol.una.traceability.dto.RolDTO;
+import com.github.pol.una.traceability.dto.UsuarioRolProyectoDTO;
 import com.github.pol.una.traceability.entities.Rol;
-import com.github.pol.una.traceability.exceptions.BusinessException;
+import com.github.pol.una.traceability.entities.UsuarioRolProyecto;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.mapper.impl.RolMapper;
 import com.github.pol.una.traceability.repository.RolRepository;
 import com.github.pol.una.traceability.service.RolService;
+import com.github.pol.una.traceability.service.UsuarioRolProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,9 @@ public class RolServiceImpl implements RolService {
 
     @Autowired
     private RolMapper rolMapper;
+
+    @Autowired
+    private UsuarioRolProyectoService usuarioRolProyectoService;
 
     @Override
     public List<RolDTO> getAll(){
@@ -53,5 +58,21 @@ public class RolServiceImpl implements RolService {
         } else {
             throw new RolException("notFound", "No se encontró el rol");
         }
+    }
+
+
+    @Override
+    public List<RolDTO> getRolesByUsuarioId(Long usuarioId) throws RolException {
+
+        List<UsuarioRolProyectoDTO> usuarioRolesProyectos = usuarioRolProyectoService.getAllRolesUsuario(usuarioId);
+        List<RolDTO> rolesUsuario = new ArrayList<>();
+
+        if(usuarioRolesProyectos != null){
+            for(UsuarioRolProyectoDTO urp : usuarioRolesProyectos){
+                rolesUsuario.add(this.getRolById(urp.getIdRol()));
+            }
+
+        }
+        return rolesUsuario;
     }
 }

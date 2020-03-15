@@ -16,7 +16,7 @@ public class Usuario {
     @Column(name = "nombre_completo")
     private String nombreCompleto;
 
-    @Column(name = "username")
+    @Column(name = "username", updatable = false)
     private String username;
 
     @Column(name = "password")

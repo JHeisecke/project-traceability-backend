@@ -1,5 +1,9 @@
 package com.github.pol.una.traceability.dto;
 
+import com.github.pol.una.traceability.entities.Rol;
+
+import java.util.List;
+
 /**
  * @author jvillagra
  */
@@ -10,7 +14,7 @@ public class UsuarioDTO {
     private String username;
     private String password;
     private String email;
-    private String confirmPassword;
+    private List<RolDTO> roles;
 
     public Long getId() {
         return id;
@@ -52,11 +56,11 @@ public class UsuarioDTO {
         this.email = email;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public List<RolDTO> getRoles(){
+        return roles;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setRoles(List<RolDTO> roles){
+        this.roles = roles;
     }
 }
