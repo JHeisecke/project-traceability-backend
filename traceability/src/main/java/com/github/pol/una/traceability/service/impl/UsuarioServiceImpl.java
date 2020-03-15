@@ -4,11 +4,15 @@ import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.entities.Rol;
 import com.github.pol.una.traceability.entities.Usuario;
+import com.github.pol.una.traceability.entities.UsuarioRolProyecto;
 import com.github.pol.una.traceability.exceptions.BusinessException;
+import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.mapper.impl.RolMapper;
 import com.github.pol.una.traceability.mapper.impl.UsuarioMapper;
 import com.github.pol.una.traceability.repository.UsuarioRepository;
+import com.github.pol.una.traceability.service.RolService;
+import com.github.pol.una.traceability.service.UsuarioRolProyectoService;
 import com.github.pol.una.traceability.service.UsuarioService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author jvillagra
@@ -28,10 +33,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
-    private UsuarioMapper usuMapper;
+    private UsuarioMapper mapper;
     @Autowired
     private EntityManager em;
-
+    @Autowired
+    private RolService rolService;
+    @Autowired
+    private UsuarioRolProyectoService usuarioRolProyectoService;
 
     @Override
     public Usuario login(UsuarioDTO usuarioDTO) throws UserException {
@@ -52,21 +60,40 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<Usuario> listaUsuarios = usuarioRepository.findAll();
         List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
         for(Usuario usu : listaUsuarios){
-            usuarioDTOS.add(usuMapper.mapToDto(usu));
+            UsuarioDTO usuarioDTO = mapper.mapToDto(usu);
+            listarRolesUsuarios(usuarioDTO);
+            usuarioDTOS.add(usuarioDTO);
         }
         return usuarioDTOS;
     }
 
     @Override
-    public Usuario saveUser(UsuarioDTO usuarioDTO) {
-        Usuario usuario = new Usuario();
-        usuario = usuMapper.mapToEntity(usuarioDTO);
-        usuarioRepository.save(usuario);
-        return usuario;
+    public UsuarioDTO saveUser(UsuarioDTO usuarioDTO) {
+
+        Usuario usuario = usuarioRepository.findByUsername(usuarioDTO.getUsername());
+        if(usuario != null) {
+            usuarioDTO.setId(usuario.getId());
+        }
+        usuarioRepository.save(mapper.mapToEntity(usuarioDTO));
+        for(RolDTO rol : usuarioDTO.getRoles()){
+            usuarioRolProyectoService.asignarRolUsuario(usuarioDTO.getId(), rol.getId());
+        }
+        return usuarioDTO;
     }
 
     @Override
-    public Usuario findByUsername(String username) {
-        return usuarioRepository.findByUsername(username);
+    public UsuarioDTO findByUsername(String username) {
+        UsuarioDTO usuarioDTO = mapper.mapToDto(usuarioRepository.findByUsername(username));
+        listarRolesUsuarios(usuarioDTO);
+        return usuarioDTO;
     }
+
+    private void listarRolesUsuarios(UsuarioDTO usuarioDTO) {
+        try {
+            usuarioDTO.setRoles(rolService.getRolesByUsuarioId(usuarioDTO.getId()));
+        } catch (RolException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

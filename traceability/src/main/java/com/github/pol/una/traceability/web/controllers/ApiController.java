@@ -4,22 +4,17 @@ import com.github.pol.una.traceability.constants.ApiPaths;
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.entities.Usuario;
-import com.github.pol.una.traceability.exceptions.BusinessException;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.service.RolService;
 import com.github.pol.una.traceability.service.UsuarioService;
-import com.github.pol.una.traceability.web.response.BaseResponseDTO;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.List;
 
 @Controller
@@ -37,19 +32,15 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(usuarioService.login(usuario));
     }
 
-    @GetMapping(ApiPaths.USER)
+    @GetMapping(ApiPaths.USER_ALL)
     public ResponseEntity<ListResponseDTO> getUsuariosExistentes() {
         List<UsuarioDTO> users = usuarioService.getAll();
         return ResponseEntity.ok(ListResponseDTO.success(users));
     }
 
-    @PostMapping(ApiPaths.SAVE_USER)
-    public ResponseEntity<Usuario> saveUser(@RequestBody UsuarioDTO usuarioDTO) {
-        try {
-            return ResponseEntity.ok(usuarioService.saveUser(usuarioDTO));
-        } catch(Exception e){
-            throw e;
-        }
+    @PostMapping(ApiPaths.USER_SAVE)
+    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> saveUser(@RequestBody UsuarioDTO user){
+        return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.saveUser(user)));
     }
 
     @GetMapping(ApiPaths.ROL)
@@ -66,5 +57,10 @@ public class ApiController extends BaseRestController{
     @GetMapping(ApiPaths.ROL_BY_NOMBRE)
     public ResponseEntity<ObjectResponseDTO<RolDTO>> getRolByNombre(@PathVariable String nombre) throws RolException{
         return ResponseEntity.ok(ObjectResponseDTO.success(rolService.getRolByNombre(nombre)));
+    }
+
+    @GetMapping(ApiPaths.USER)
+    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> getUsuario(@RequestBody UsuarioDTO usuarioDTO){
+        return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.findByUsername(usuarioDTO.getUsername())));
     }
 }
