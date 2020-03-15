@@ -4,6 +4,7 @@ import com.github.pol.una.traceability.constants.ApiPaths;
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.entities.Usuario;
+import com.github.pol.una.traceability.exceptions.BusinessException;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.service.RolService;
@@ -40,6 +41,15 @@ public class ApiController extends BaseRestController{
     public ResponseEntity<ListResponseDTO> getUsuariosExistentes() {
         List<UsuarioDTO> users = usuarioService.getAll();
         return ResponseEntity.ok(ListResponseDTO.success(users));
+    }
+
+    @PostMapping(ApiPaths.SAVE_USER)
+    public ResponseEntity<Usuario> saveUser(@RequestBody UsuarioDTO usuarioDTO) {
+        try {
+            return ResponseEntity.ok(usuarioService.saveUser(usuarioDTO));
+        } catch(Exception e){
+            throw e;
+        }
     }
 
     @GetMapping(ApiPaths.ROL)

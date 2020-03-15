@@ -4,6 +4,7 @@ import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.entities.Rol;
 import com.github.pol.una.traceability.entities.Usuario;
+import com.github.pol.una.traceability.exceptions.BusinessException;
 import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.mapper.impl.RolMapper;
 import com.github.pol.una.traceability.mapper.impl.UsuarioMapper;
@@ -11,6 +12,7 @@ import com.github.pol.una.traceability.repository.UsuarioRepository;
 import com.github.pol.una.traceability.service.UsuarioService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -53,6 +55,14 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioDTOS.add(usuMapper.mapToDto(usu));
         }
         return usuarioDTOS;
+    }
+
+    @Override
+    public Usuario saveUser(UsuarioDTO usuarioDTO) {
+        Usuario usuario = new Usuario();
+        usuario = usuMapper.mapToEntity(usuarioDTO);
+        usuarioRepository.save(usuario);
+        return usuario;
     }
 
     @Override
