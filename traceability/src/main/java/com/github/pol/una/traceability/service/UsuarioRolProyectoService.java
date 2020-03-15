@@ -10,4 +10,6 @@ import java.util.List;
 public interface UsuarioRolProyectoService {
 
     List<UsuarioRolProyectoDTO> getAllRolesUsuario(Long usuarioId);
+
+    void asignarRolUsuario(Long usuarioId, Long rolId);
 }

@@ -4,6 +4,7 @@ import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.entities.Rol;
 import com.github.pol.una.traceability.entities.Usuario;
+import com.github.pol.una.traceability.entities.UsuarioRolProyecto;
 import com.github.pol.una.traceability.exceptions.BusinessException;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
@@ -11,6 +12,7 @@ import com.github.pol.una.traceability.mapper.impl.RolMapper;
 import com.github.pol.una.traceability.mapper.impl.UsuarioMapper;
 import com.github.pol.una.traceability.repository.UsuarioRepository;
 import com.github.pol.una.traceability.service.RolService;
+import com.github.pol.una.traceability.service.UsuarioRolProyectoService;
 import com.github.pol.una.traceability.service.UsuarioService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     private EntityManager em;
     @Autowired
     private RolService rolService;
+    @Autowired
+    private UsuarioRolProyectoService usuarioRolProyectoService;
 
     @Override
     public Usuario login(UsuarioDTO usuarioDTO) throws UserException {
@@ -67,11 +71,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioDTO saveUser(UsuarioDTO usuarioDTO) {
 
         Usuario usuario = usuarioRepository.findByUsername(usuarioDTO.getUsername());
-
         if(usuario != null) {
             usuarioDTO.setId(usuario.getId());
         }
-        return mapper.mapToDto(usuarioRepository.save(mapper.mapToEntity(usuarioDTO)));
+        usuarioRepository.save(mapper.mapToEntity(usuarioDTO));
+        for(RolDTO rol : usuarioDTO.getRoles()){
+            usuarioRolProyectoService.asignarRolUsuario(usuarioDTO.getId(), rol.getId());
+        }
+        return usuarioDTO;
     }
 
     @Override
