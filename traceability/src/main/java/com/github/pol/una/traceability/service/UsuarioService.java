@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface UsuarioService {
 
-    Usuario findByUsername(String username);
+    UsuarioDTO findByUsername(String username);
 
     Usuario login(UsuarioDTO usuarioDTO) throws UserException;
 

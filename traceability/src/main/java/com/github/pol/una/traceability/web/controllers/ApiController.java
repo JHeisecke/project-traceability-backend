@@ -32,7 +32,7 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(usuarioService.login(usuario));
     }
 
-    @GetMapping(ApiPaths.USER)
+    @GetMapping(ApiPaths.USER_ALL)
     public ResponseEntity<ListResponseDTO> getUsuariosExistentes() {
         List<UsuarioDTO> users = usuarioService.getAll();
         return ResponseEntity.ok(ListResponseDTO.success(users));
@@ -59,4 +59,8 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ObjectResponseDTO.success(rolService.getRolByNombre(nombre)));
     }
 
+    @GetMapping(ApiPaths.USER)
+    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> getUsuario(@RequestBody UsuarioDTO usuarioDTO){
+        return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.findByUsername(usuarioDTO.getUsername())));
+    }
 }
