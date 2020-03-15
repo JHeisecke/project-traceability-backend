@@ -16,7 +16,7 @@ public interface UsuarioService {
 
     UsuarioDTO findByUsername(String username);
 
-    Usuario login(UsuarioDTO usuarioDTO) throws UserException;
+    UsuarioDTO login(UsuarioDTO usuarioDTO) throws UserException;
 
     List<UsuarioDTO> getAll();
 

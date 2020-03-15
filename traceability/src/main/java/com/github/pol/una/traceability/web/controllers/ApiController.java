@@ -28,8 +28,8 @@ public class ApiController extends BaseRestController{
     private RolService rolService;
 
     @PostMapping(ApiPaths.LOGIN)
-    public ResponseEntity<Usuario> login(@RequestBody UsuarioDTO usuario) throws UserException {
-        return ResponseEntity.ok(usuarioService.login(usuario));
+    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> login(@RequestBody UsuarioDTO usuario) throws UserException {
+        return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.login(usuario)));
     }
 
     @GetMapping(ApiPaths.USER_ALL)

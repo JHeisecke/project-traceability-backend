@@ -42,14 +42,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioRolProyectoService usuarioRolProyectoService;
 
     @Override
-    public Usuario login(UsuarioDTO usuarioDTO) throws UserException {
+    public UsuarioDTO login(UsuarioDTO usuarioDTO) throws UserException {
 
         Usuario usuario = usuarioRepository.findByUsernameAndPassword(usuarioDTO.getUsername(),
                                                                         usuarioDTO.getPassword());
         if(usuario !=null){
             Session session = em.unwrap(Session.class);
             session.persist(usuario);
-            return usuario;
+            return findByUsername(usuarioDTO.getUsername());
         }else{
             throw new UserException("login.password.error", "Las credenciales ingresadas son incorrectas");
         }
