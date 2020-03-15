@@ -61,9 +61,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioDTO saveUser(UsuarioDTO usuarioDTO) {
-        Usuario usuario = mapper.mapToEntity(usuarioDTO);
-        usuarioRepository.save(usuario);
-        return mapper.mapToDto(usuario);
+
+        Usuario usuario = usuarioRepository.findByUsername(usuarioDTO.getUsername());
+
+        if(usuario != null) {
+            usuarioDTO.setId(usuario.getId());
+        }
+
+        return mapper.mapToDto(usuarioRepository.save(mapper.mapToEntity(usuarioDTO)));
     }
 
     @Override
@@ -71,16 +76,4 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.findByUsername(username);
     }
 
-    @Override
-    public UsuarioDTO updateUser(UsuarioDTO usuarioDTO) throws UserException {
-
-        Usuario usuario = usuarioRepository.findByUsername(usuarioDTO.getUsername());
-
-        if(usuario != null) {
-            usuarioDTO.setId(usuario.getId());
-            return mapper.mapToDto(usuarioRepository.save(mapper.mapToEntity(usuarioDTO)));
-        } else {
-            throw new UserException("notFound", "No se encontró el usuario");
-        }
-    }
 }

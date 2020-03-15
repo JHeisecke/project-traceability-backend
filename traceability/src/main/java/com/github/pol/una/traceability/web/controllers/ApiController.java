@@ -38,8 +38,8 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ListResponseDTO.success(users));
     }
 
-    @PostMapping(ApiPaths.USER_CREATE)
-    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> saveUser(@RequestBody UsuarioDTO user) throws UserException{
+    @PostMapping(ApiPaths.USER_SAVE)
+    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> saveUser(@RequestBody UsuarioDTO user){
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.saveUser(user)));
     }
 
@@ -59,8 +59,4 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ObjectResponseDTO.success(rolService.getRolByNombre(nombre)));
     }
 
-    @PostMapping(ApiPaths.USER_UPDATE)
-    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> updateUser(@RequestBody UsuarioDTO user) throws UserException{
-        return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.updateUser(user)));
-    }
 }

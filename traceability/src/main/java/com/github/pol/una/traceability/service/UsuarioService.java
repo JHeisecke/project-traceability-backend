@@ -21,6 +21,4 @@ public interface UsuarioService {
     List<UsuarioDTO> getAll();
 
     UsuarioDTO saveUser(UsuarioDTO usuarioDTO);
-
-    UsuarioDTO updateUser(UsuarioDTO usuarioDTO) throws UserException;
 }
