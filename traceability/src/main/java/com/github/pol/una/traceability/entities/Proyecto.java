@@ -18,26 +18,26 @@ public class Proyecto {
     private String estado;
 
     @Column (name = "fecha_inicio")
-    private String fecha_inicio;
+    private String fechaInicio;
 
     @Column (name = "fecha_fin")
-    private String fecha_fin;
+    private String fechaFin;
 
     @Id
     @Column (name = "id_lider")
-    private long id_lider;
+    private long idLider;
 
     @Column (name = "fecha_alta")
-    private String fecha_alta;
+    private String fechaAlta;
 
     @Column (name = "fecha_modificacion")
-    private String fecha_modificacion;
+    private String fechaModificacion;
 
     @Column(name = "usuario_alta")
-    private long usuario_alta;
+    private long usuarioAlta;
 
     @Column (name = "usuario_modificacion")
-    private long usuario_modificacion;
+    private long usuarioModificacion;
 
 
 
@@ -49,9 +49,7 @@ public class Proyecto {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() { return nombre; }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -73,52 +71,51 @@ public class Proyecto {
         this.estado = estado;
     }
 
-    public String getFecha_inicio() {
-        return fecha_inicio;
+    public String getFechaInicio() { return fechaInicio; }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public void setFecha_inicio(String fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
+    public String getFechaFin() {
+        return fechaFin;
     }
 
-    public String getFecha_fin() {
-        return fecha_fin;
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
-    public void setFecha_fin(String descripcion) {
-        this.fecha_fin = fecha_fin;
+    public long getIdLider() { return idLider; }
+
+    public void setIdLider(long idLider) {
+        this.idLider = idLider;
     }
 
-    public long getId_lider() {
-        return id_lider;
+    public String getFechaAlta() {
+        return fechaAlta;
     }
 
-    public void setId_lider(long id_lider) {
-        this.id_lider = id_lider;
+    public void setFechaAlta(String fechaAlta) {
+        this.fechaAlta = fechaAlta;
     }
 
-    public String getFecha_alta() {
-        return fecha_alta;
+    public String getFechaModificacion() {
+        return fechaModificacion;
     }
 
-    public void setFecha_alta(String fecha_alta) {
-        this.fecha_alta = fecha_alta;
+    public void setFechaModificacion(String fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
     }
 
-    public String getFecha_modificacion() {
-        return fecha_modificacion;
+    public long getUsuarioAlta() { return usuarioAlta; }
+
+    public void setUsuarioAlta(long usuarioAlta) {
+        this.usuarioAlta = usuarioAlta;
     }
 
-    public void setFecha_modificacion(String fecha_modificacion) {
-        this.fecha_modificacion = fecha_modificacion;
+    public long getUsuarioModificacion() {
+        return usuarioModificacion;
     }
 
-    public long getUsuario_alta() {
-        return usuario_alta;
-    }
-
-    public void setUsuario_alta(long usuario_alta) {
-        this.usuario_alta = usuario_alta;
-    }
-
+    public void setUsuarioModificacion(long usuarioModificacion) { this.usuarioModificacion = usuarioModificacion; }
 }
