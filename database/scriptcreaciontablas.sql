@@ -22,7 +22,6 @@ descripcion varchar(1000)
 create table usuario (
 id bigserial primary key,
 nombre_completo varchar(255),
-id_rol bigint ,
 password varchar(70),
 username varchar(25) unique,
 email varchar(50) unique
@@ -38,6 +37,11 @@ usuario_alta bigint unique,
 fecha_modificacion date
 );
 
+create table recurso(
+id bigserial primary key,
+nombre varchar (80),
+descripcion varchar (1000)
+);
 
 create table usuario_rol_proyecto (
 id bigserial primary key,
@@ -49,14 +53,15 @@ id_usuario bigint
 
 create table rol (
 id bigserial primary key,
-nombre varchar (255),
-descripcion varchar (255)
+nombre varchar (80),
+descripcion varchar (1000)
 );
 
 create table permiso_rol (
+id bigserial primary key,
 id_rol bigint,
 id_permiso bigint,
-primary key (id_rol,id_permiso)
+id_recurso bigint
 );
 
 
@@ -95,25 +100,25 @@ prioridad varchar (20)
 
 
 alter table proyecto add constraint usuario_alta_fkey foreign key (usuario_alta)
-references fase (usuario_alta) match simple
+references usuario (id) match simple
 	on update no action on delete no action;
 
 	
 alter table proyecto add constraint usuario_modificacion_fkey foreign key (usuario_modificacion)
-references fase (usuario_modificacion) match simple
+references usuario (id) match simple
 	on update no action on delete no action;
 
 
 alter table fase add constraint usuario_alta_fkey2 foreign key (usuario_alta)
-references linea_base (usuario_alta) match simple
+references usuario (id) match simple
 	on update no action on delete no action;
 
-alter table fase add constraint id_proyecto_fkey foreign key (usuario_alta)
-references proyecto (id) match simple
+alter table fase add constraint id_faseuseral_fkey foreign key (usuario_alta)
+references usuario (id) match simple
 	on update no action on delete no action;
 	
 alter table fase add constraint usuario_modificacion_fkey2 foreign key (usuario_modificacion)
-references linea_base (usuario_modificacion) match simple
+references usuario (id) match simple
 	on update no action on delete no action;
 
 
@@ -148,17 +153,17 @@ on update no action on delete no action;
 
 
 alter table linea_base add constraint id_usuario_alta_2_fkey foreign key (usuario_alta)
-references item (usuario_alta) match simple
+references usuario (id) match simple
 on update no action on delete no action;
 
 
 alter table linea_base add constraint usuario_modificacion_2_fkey foreign key (usuario_modificacion)
-references item (usuario_modificacion) match simple
+references usuario (id) match simple
 on update no action on delete no action;
 
 
 alter table item add constraint item_padre_fkey foreign key (id_item_padre)
-references item (usuario_modificacion) match simple
+references usuario (id) match simple
 on update no action on delete no action;
 
 
@@ -168,7 +173,7 @@ on update no action on delete no action;
 
 
 alter table item add constraint usuario_modificacion_3_fkey_fkey foreign key (usuario_modificacion)
-references linea_base (usuario_modificacion) match simple
+references usuario (id) match simple
 on update no action on delete no action;
 
 
