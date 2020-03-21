@@ -22,7 +22,6 @@ descripcion varchar(1000)
 create table usuario (
 id bigserial primary key,
 nombre_completo varchar(255),
-id_rol bigint ,
 password varchar(70),
 username varchar(25) unique,
 email varchar(50) unique
