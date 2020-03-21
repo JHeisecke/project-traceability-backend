@@ -1,11 +1,12 @@
 package com.github.pol.una.traceability.web.controllers;
 
 import com.github.pol.una.traceability.constants.ApiPaths;
+import com.github.pol.una.traceability.dto.ProyectoDTO;
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
-import com.github.pol.una.traceability.entities.Usuario;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
+import com.github.pol.una.traceability.service.ProyectoService;
 import com.github.pol.una.traceability.service.RolService;
 import com.github.pol.una.traceability.service.UsuarioService;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
@@ -22,8 +23,9 @@ import java.util.List;
 public class ApiController extends BaseRestController{
 
     @Autowired
+    private ProyectoService proyectoService;
+    @Autowired
     private UsuarioService usuarioService;
-
     @Autowired
     private RolService rolService;
 
@@ -63,4 +65,10 @@ public class ApiController extends BaseRestController{
     public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> getUsuario(@RequestBody UsuarioDTO usuarioDTO){
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.findByUsername(usuarioDTO.getUsername())));
     }
+
+    @PostMapping(ApiPaths.PROJECT_SAVE)
+    public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> saveProject(@RequestBody ProyectoDTO proyecto){
+        return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.saveProject(proyecto)));
+    }
+
 }

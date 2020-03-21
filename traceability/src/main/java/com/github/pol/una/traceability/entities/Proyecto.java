@@ -1,8 +1,10 @@
 package com.github.pol.una.traceability.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
-
+@Entity
+@Table(name = "proyecto", schema = "public")
 public class Proyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,20 +20,19 @@ public class Proyecto {
     private String estado;
 
     @Column (name = "fecha_inicio")
-    private String fechaInicio;
+    private Date fechaInicio;
 
     @Column (name = "fecha_fin")
-    private String fechaFin;
+    private Date fechaFin;
 
-    @Id
     @Column (name = "id_lider")
     private long idLider;
 
     @Column (name = "fecha_alta")
-    private String fechaAlta;
+    private Date fechaAlta;
 
     @Column (name = "fecha_modificacion")
-    private String fechaModificacion;
+    private Date fechaModificacion;
 
     @Column(name = "usuario_alta")
     private long usuarioAlta;
@@ -71,19 +72,15 @@ public class Proyecto {
         this.estado = estado;
     }
 
-    public String getFechaInicio() { return fechaInicio; }
-
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
-    public String getFechaFin() {
-        return fechaFin;
-    }
+    public void setFechaInicio(Date fechaInicio) { this.fechaInicio = fechaInicio; }
 
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
-    }
+    public Date getFechaFin() { return fechaFin; }
+
+    public void setFechaFin(Date fechaFin) { this.fechaFin = fechaFin; }
 
     public long getIdLider() { return idLider; }
 
@@ -91,19 +88,19 @@ public class Proyecto {
         this.idLider = idLider;
     }
 
-    public String getFechaAlta() {
+    public Date getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(String fechaAlta) {
+    public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public String getFechaModificacion() {
+    public Date getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(String fechaModificacion) {
+    public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 

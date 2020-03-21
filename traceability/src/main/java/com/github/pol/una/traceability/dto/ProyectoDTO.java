@@ -1,15 +1,18 @@
 package com.github.pol.una.traceability.dto;
 
+import java.util.Date;
+
 public class ProyectoDTO {
 
     private Long id;
     private String nombre;
+    private String descripcion;
     private String estado;
-    private String fechaInicio;
-    private String fechaFin;
+    private Date fechaInicio;
+    private Date fechaFin;
     private Long idLider;
-    private String fechaAlta;
-    private String fechaModificacion;
+    private Date fechaAlta;
+    private Date fechaModificacion;
     private Long usuarioAlta;
     private Long usuarioModificacion;
 
@@ -37,19 +40,19 @@ public class ProyectoDTO {
         this.estado = estado;
     }
 
-    public String getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public String getFechaFin() {
+    public Date getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(String fechaFin) {
+    public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -61,17 +64,17 @@ public class ProyectoDTO {
         this.idLider = idLider;
     }
 
-    public String getFechaAlta() {
+    public Date getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(String fechaAlta) { this.fechaAlta = fechaAlta;}
+    public void setFechaAlta(Date fechaAlta) { this.fechaAlta = fechaAlta;}
 
-    public String getFechaModificacion() {
+    public Date getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(String fechaModificacion) { this.fechaModificacion = fechaModificacion; }
+    public void setFechaModificacion(Date fechaModificacion) { this.fechaModificacion = fechaModificacion; }
 
     public Long getUsuarioAlta() { return usuarioAlta; }
 
@@ -87,5 +90,11 @@ public class ProyectoDTO {
         this.usuarioModificacion = usuarioModificacion;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }
