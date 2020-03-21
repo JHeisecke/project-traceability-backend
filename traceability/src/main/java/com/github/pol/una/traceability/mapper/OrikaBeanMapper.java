@@ -55,7 +55,7 @@ public class OrikaBeanMapper extends ConfigurableMapper implements ApplicationCo
                 mapper.getBType())
                 .byDefault()
                 .customize((Mapper) mapper)
-                .mapNulls(false)
+                .mapNulls(true)
                 .mapNullsInReverse(false)
                 .register();
     }
