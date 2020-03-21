@@ -71,4 +71,8 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.saveProject(proyecto)));
     }
 
+    @GetMapping(ApiPaths.PROJECT_ALL)
+    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> getAllProjects(){
+        return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.getAllProjects()));
+    }
 }
