@@ -1,7 +1,7 @@
 create table proyecto (
 id bigserial primary key,
 nombre varchar(255),
-estado varchar(255) unique,
+estado varchar(255),
 fecha_inicio date,
 fecha_fin date,
 id_lider bigint not null,
