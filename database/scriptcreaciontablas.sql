@@ -187,14 +187,24 @@ INSERT INTO USUARIO(nombre_completo, password,username,email)
 VALUES('Administrador','admin','admin','admin@gmail.com');
 INSERT INTO USUARIO(nombre_completo, password,username,email)
 VALUES('MatiasFare','mfare','mfare','mfare@gmail.com');
+INSERT INTO USUARIO(nombre_completo, password,username,email)
+VALUES('Yeshua','yedalog','yedalog','jessica@gmail.com');
+INSERT INTO USUARIO(nombre_completo, password,username,email)
+VALUES('Javier Heinecken','javier','javier','javier@gmail.com');
+INSERT INTO USUARIO(nombre_completo, password,username,email)
+VALUES('Jazmin','jazmin','jazmin','jazmin@gmail.com');
 
+-- Estos permisos son de pruba, hace falta definir los permisos reales del sistema
 INSERT INTO permiso(nombre, descripcion) VALUES ('ABM Proyecto', 'Permite acceso a modulo Proyecto');
 INSERT INTO permiso(nombre, descripcion) VALUES ('ABM Usuario', 'Permite acceso a modulo Usuario');
 INSERT INTO permiso(nombre, descripcion) VALUES ('ABM Roles', 'Permite Acceso a modulo Roles');
 
 INSERT INTO ROL(nombre, descripcion) VALUES('sysadmin','Administrador del sistema');
 INSERT INTO ROL(nombre, descripcion) VALUES('Developer','Desarrollador en proyectos');
-INSERT INTO ROL(nombre, descripcion) VALUES('Team_Leader','Lider de proyectos');
+INSERT INTO ROL(nombre, descripcion) VALUES('Team Leader','Lider de proyectos');
 
-INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (2, 1);
-INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (1, 2);
+INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (1, 1);
+INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (2, 2);
+INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (3, 3);
+INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (4, 3);
+INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (5, 2);
