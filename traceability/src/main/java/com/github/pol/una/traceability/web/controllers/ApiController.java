@@ -4,6 +4,7 @@ import com.github.pol.una.traceability.constants.ApiPaths;
 import com.github.pol.una.traceability.dto.ProyectoDTO;
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
+import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.service.ProyectoService;
@@ -72,7 +73,13 @@ public class ApiController extends BaseRestController{
     }
 
     @GetMapping(ApiPaths.PROJECT_ALL)
-    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> getAllProjects(){
-        return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.getAllProjects()));
+    public ResponseEntity<ListResponseDTO> getAllProjects(){
+        List<ProyectoDTO> projects = proyectoService.getAllProjects();
+        return ResponseEntity.ok(ListResponseDTO.success(projects));
+    }
+
+    @GetMapping(ApiPaths.PROJECT_BY_ID)
+    public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> getProjectById(@PathVariable Long id) throws ProjectException {
+        return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.getProjectById(id)));
     }
 }

@@ -1,14 +1,10 @@
 package com.github.pol.una.traceability.service.impl;
 
 import com.github.pol.una.traceability.dto.ProyectoDTO;
-import com.github.pol.una.traceability.dto.RolDTO;
-import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.entities.Proyecto;
-import com.github.pol.una.traceability.entities.Usuario;
+import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.mapper.impl.ProyectoMapper;
-import com.github.pol.una.traceability.mapper.impl.UsuarioMapper;
 import com.github.pol.una.traceability.repository.ProyectoRepository;
-import com.github.pol.una.traceability.repository.UsuarioRepository;
 import com.github.pol.una.traceability.service.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author jheisecke
@@ -48,6 +45,16 @@ public class ProyectoServiceImpl  implements ProyectoService {
             proyectoDTOS.add(proyectoDTO);
         }
         return proyectoDTOS;
+    }
+
+    @Override
+    public ProyectoDTO getProjectById(Long id) throws ProjectException {
+        Optional<Proyecto> proyecto = proyectoRepository.findById(id);
+        if(proyecto.isPresent()) {
+            return mapper.mapToDto(proyecto.get());
+        } else {
+            throw new ProjectException("notFound", "No se encontró el proyecto "+id);
+        }
     }
 
 }

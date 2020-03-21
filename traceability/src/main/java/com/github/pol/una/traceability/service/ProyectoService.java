@@ -1,7 +1,9 @@
 package com.github.pol.una.traceability.service;
 
 import com.github.pol.una.traceability.dto.ProyectoDTO;
+import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
+import com.github.pol.una.traceability.exceptions.ProjectException;
 
 import java.util.List;
 
@@ -12,4 +14,6 @@ public interface ProyectoService {
     ProyectoDTO saveProject(ProyectoDTO proyectoDTO);
 
     List<ProyectoDTO> getAllProjects();
+
+    ProyectoDTO getProjectById(Long id) throws ProjectException;
 }

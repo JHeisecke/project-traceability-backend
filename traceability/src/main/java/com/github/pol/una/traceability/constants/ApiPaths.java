@@ -23,5 +23,6 @@ public class ApiPaths {
     public static final String PROJECT = BASE + "/proyecto";
     public static final String PROJECT_SAVE = PROJECT + "/save";
     public static final String PROJECT_ALL = BASE + "/proyectos";
+    public static final String PROJECT_BY_ID = BASE + "/proyecto/{id}";
 
 }
