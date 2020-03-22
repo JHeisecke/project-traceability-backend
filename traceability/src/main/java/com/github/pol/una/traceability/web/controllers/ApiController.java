@@ -1,16 +1,20 @@
 package com.github.pol.una.traceability.web.controllers;
 
 import com.github.pol.una.traceability.constants.ApiPaths;
+import com.github.pol.una.traceability.dto.ProyectoDTO;
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
-import com.github.pol.una.traceability.entities.Usuario;
+import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
+import com.github.pol.una.traceability.service.ProyectoService;
 import com.github.pol.una.traceability.service.RolService;
 import com.github.pol.una.traceability.service.UsuarioService;
+import com.github.pol.una.traceability.web.response.BaseResponseDTO;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +26,9 @@ import java.util.List;
 public class ApiController extends BaseRestController{
 
     @Autowired
+    private ProyectoService proyectoService;
+    @Autowired
     private UsuarioService usuarioService;
-
     @Autowired
     private RolService rolService;
 
@@ -62,5 +67,31 @@ public class ApiController extends BaseRestController{
     @GetMapping(ApiPaths.USER)
     public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> getUsuario(@RequestBody UsuarioDTO usuarioDTO){
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.findByUsername(usuarioDTO.getUsername())));
+    }
+
+    @PostMapping(ApiPaths.PROJECT_SAVE)
+    public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> saveProject(@RequestBody ProyectoDTO proyecto){
+        return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.saveProject(proyecto)));
+    }
+
+    @GetMapping(ApiPaths.PROJECT_ALL)
+    public ResponseEntity<ListResponseDTO> getAllProjects(){
+        List<ProyectoDTO> projects = proyectoService.getAllProjects();
+        return ResponseEntity.ok(ListResponseDTO.success(projects));
+    }
+
+    @GetMapping(ApiPaths.PROJECT_BY_ID)
+    public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> getProjectById(@PathVariable Long id) throws ProjectException {
+        return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.getProjectById(id)));
+    }
+
+    @PostMapping(ApiPaths.PROJECT_DELETE)
+    public ResponseEntity<?> deleteProject(@PathVariable Long id) throws ProjectException {
+        try {
+            proyectoService.deleteProject(id);
+            return new ResponseEntity<BaseResponseDTO>(new BaseResponseDTO(true,HttpStatus.OK),HttpStatus.OK);
+        }catch (ProjectException e) {
+            throw e;
+        }
     }
 }
