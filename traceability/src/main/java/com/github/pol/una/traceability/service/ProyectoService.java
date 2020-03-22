@@ -5,6 +5,7 @@ import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.exceptions.ProjectException;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -15,5 +16,5 @@ public interface ProyectoService {
 
     List<ProyectoDTO> getAllProjects();
 
-    ProyectoDTO getProjectById(Long id) throws ProjectException;
+    ProyectoDTO getProjectById(Long id) throws ProjectException, ParseException;
 }
