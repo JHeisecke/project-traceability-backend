@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -80,7 +79,7 @@ public class ApiController extends BaseRestController{
     }
 
     @GetMapping(ApiPaths.PROJECT_BY_ID)
-    public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> getProjectById(@PathVariable Long id) throws ProjectException, ParseException {
+    public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> getProjectById(@PathVariable Long id) throws ProjectException {
         return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.getProjectById(id)));
     }
 }

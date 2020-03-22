@@ -9,9 +9,6 @@ import com.github.pol.una.traceability.service.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,14 +48,9 @@ public class ProyectoServiceImpl  implements ProyectoService {
     }
 
     @Override
-    public ProyectoDTO getProjectById(Long id) throws ProjectException, ParseException {
+    public ProyectoDTO getProjectById(Long id) throws ProjectException {
         Optional<Proyecto> proyecto = proyectoRepository.findById(id);
-        DateFormat outputFormatter = new SimpleDateFormat("yyyy-MM-dd");
         if(proyecto.isPresent()) {
-            Date fechaFin = proyecto.get().getFechaFin();
-            Date fechaInicio = proyecto.get().getFechaFin();
-            proyecto.get().setFechaFin(outputFormatter.parse(outputFormatter.format(fechaFin)));
-            proyecto.get().setFechaFin(outputFormatter.parse(outputFormatter.format(fechaInicio)));
             return mapper.mapToDto(proyecto.get());
         } else {
             throw new ProjectException("notFound", "No se encontró el proyecto "+id);
