@@ -7,6 +7,7 @@ import com.github.pol.una.traceability.mapper.impl.ProyectoMapper;
 import com.github.pol.una.traceability.repository.ProyectoRepository;
 import com.github.pol.una.traceability.service.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -52,6 +53,16 @@ public class ProyectoServiceImpl  implements ProyectoService {
         Optional<Proyecto> proyecto = proyectoRepository.findById(id);
         if(proyecto.isPresent()) {
             return mapper.mapToDto(proyecto.get());
+        } else {
+            throw new ProjectException("notFound", "No se encontró el proyecto "+id);
+        }
+    }
+
+    @Override
+    public void deleteProject(Long id) throws ProjectException {
+        Optional<Proyecto> proyecto = proyectoRepository.findById(id);
+        if(proyecto.isPresent()) {
+            proyectoRepository.delete(proyecto.get());
         } else {
             throw new ProjectException("notFound", "No se encontró el proyecto "+id);
         }

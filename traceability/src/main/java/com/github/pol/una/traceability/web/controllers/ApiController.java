@@ -10,9 +10,11 @@ import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.service.ProyectoService;
 import com.github.pol.una.traceability.service.RolService;
 import com.github.pol.una.traceability.service.UsuarioService;
+import com.github.pol.una.traceability.web.response.BaseResponseDTO;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -81,5 +83,15 @@ public class ApiController extends BaseRestController{
     @GetMapping(ApiPaths.PROJECT_BY_ID)
     public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> getProjectById(@PathVariable Long id) throws ProjectException {
         return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.getProjectById(id)));
+    }
+
+    @PostMapping(ApiPaths.PROJECT_DELETE)
+    public ResponseEntity<?> deleteProject(@PathVariable Long id) throws ProjectException {
+        try {
+            proyectoService.deleteProject(id);
+            return new ResponseEntity<BaseResponseDTO>(new BaseResponseDTO(true,HttpStatus.OK),HttpStatus.OK);
+        }catch (ProjectException e) {
+            throw e;
+        }
     }
 }

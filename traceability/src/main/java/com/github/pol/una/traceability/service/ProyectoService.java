@@ -4,6 +4,7 @@ import com.github.pol.una.traceability.dto.ProyectoDTO;
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.exceptions.ProjectException;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface ProyectoService {
     List<ProyectoDTO> getAllProjects();
 
     ProyectoDTO getProjectById(Long id) throws ProjectException;
+
+    void deleteProject(Long id) throws ProjectException;
 }
