@@ -1,12 +1,14 @@
 package com.github.pol.una.traceability.web.controllers;
 
 import com.github.pol.una.traceability.constants.ApiPaths;
+import com.github.pol.una.traceability.dto.ItemDTO;
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.entities.Usuario;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.service.RolService;
+import com.github.pol.una.traceability.service.ItemService;
 import com.github.pol.una.traceability.service.UsuarioService;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
@@ -62,5 +64,11 @@ public class ApiController extends BaseRestController{
     @GetMapping(ApiPaths.USER)
     public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> getUsuario(@RequestBody UsuarioDTO usuarioDTO){
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.findByUsername(usuarioDTO.getUsername())));
+    }
+
+    @GetMapping(ApiPaths.ITEM_BY_ID_PROJECT)
+    public ResponseEntity<ListResponseDTO> getItemById(@PathVariable Long idProyecto) {
+        List<ItemDTO> items = itemService.getItemByProjectId(idProyecto);
+        return ResponseEntity.ok(ListResponseDTO.success(items ));
     }
 }

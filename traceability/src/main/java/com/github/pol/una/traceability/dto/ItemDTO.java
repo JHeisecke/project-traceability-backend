@@ -1,48 +1,20 @@
-package com.github.pol.una.traceability.entities;
+package com.github.pol.una.traceability.dto;
+/**
+ * @author yedaloc
+ */
+public class ItemDTO {
 
-import javax.persistence.*;
-
-public class Item {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Id
-    @Column (name = "id_fase")
     private Long idFase;
-
-    @Id
-    @Column (name = "id_item_padre")
     private Long idItemPadre;
-
-
-    @Column(name = "estado")
     private String estado;
-
-    @Id
-    @Column (name = "id_linea_base")
-    private long idLineaBase;
-
-    @Column (name = "fecha_alta")
+    private Long idLineaBase;
     private String fechaAlta;
-
-    @Column (name = "fecha_modificacion")
     private String fechaModificacion;
-
-    @Column (name = "usuario_modificacion")
     private Long usuarioModificacion;
-
-    @Column(name = "usuario_alta")
     private Long usuarioAlta;
-
-    @Column(name = "observacion")
     private String observacion;
-
-    @Column(name = "descripcion")
     private String descripcion;
-
-    @Column(name = "prioridad")
     private String prioridad;
 
     public Long getId() {
@@ -120,5 +92,7 @@ public class Item {
     public void setPrioridad(String prioridad) {
         this.prioridad = prioridad;
     }
+
+
 
 }
