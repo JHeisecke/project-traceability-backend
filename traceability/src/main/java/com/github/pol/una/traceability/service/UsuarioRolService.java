@@ -1,15 +1,15 @@
 package com.github.pol.una.traceability.service;
 
-import com.github.pol.una.traceability.dto.UsuarioRolProyectoDTO;
+import com.github.pol.una.traceability.dto.UsuarioRolDTO;
 
 import java.util.List;
 
 /**
  * @author jvillagra
  */
-public interface UsuarioRolProyectoService {
+public interface UsuarioRolService {
 
-    List<UsuarioRolProyectoDTO> getAllRolesUsuario(Long usuarioId);
+    List<UsuarioRolDTO> getAllRolesUsuario(Long usuarioId);
 
     void asignarRolUsuario(Long usuarioId, Long rolId);
 }
