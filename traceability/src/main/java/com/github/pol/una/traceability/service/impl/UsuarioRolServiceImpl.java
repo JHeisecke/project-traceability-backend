@@ -1,10 +1,9 @@
 package com.github.pol.una.traceability.service.impl;
 
 import com.github.pol.una.traceability.dto.UsuarioRolProyectoDTO;
-import com.github.pol.una.traceability.entities.UsuarioRolProyecto;
 import com.github.pol.una.traceability.mapper.impl.UsuarioRolProyectoMapper;
 import com.github.pol.una.traceability.repository.UsuarioRolProyectoRepository;
-import com.github.pol.una.traceability.service.UsuarioRolProyectoService;
+import com.github.pol.una.traceability.service.UsuarioRolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.util.List;
  * @author jvillagra
  */
 @Service
-public class UsuarioRolProyectoServiceImpl implements UsuarioRolProyectoService{
+public class UsuarioRolProyectoServiceImpl implements UsuarioRolService {
 
     @Autowired
     private UsuarioRolProyectoRepository repository;
