@@ -1,7 +1,7 @@
 package com.github.pol.una.traceability.mapper.impl;
 
-import com.github.pol.una.traceability.dto.UsuarioRolDTO;
-import com.github.pol.una.traceability.entities.UsuarioRol;
+import com.github.pol.una.traceability.dto.PermisoRolDTO;
+import com.github.pol.una.traceability.entities.PermisoRol;
 import com.github.pol.una.traceability.mapper.BaseMapper;
 import com.github.pol.una.traceability.mapper.OrikaBeanMapper;
 import ma.glasnost.orika.MapperFacade;
@@ -15,16 +15,16 @@ import java.util.stream.Collectors;
  * @author jvillagra
  */
 @Component
-public class UsuarioRolMapper implements BaseMapper<UsuarioRol, UsuarioRolDTO> {
+public class PermisoRolMapper implements BaseMapper<PermisoRol, PermisoRolDTO> {
 
     private final OrikaBeanMapper mapper;
 
-    public UsuarioRolMapper(OrikaBeanMapper mapper){
+    public PermisoRolMapper(OrikaBeanMapper mapper){
         this.mapper = mapper;
     }
 
     @Override
-    public List<UsuarioRolDTO> mapAsList(List<UsuarioRol> entityList) {
+    public List<PermisoRolDTO> mapAsList(List<PermisoRol> entityList) {
         return entityList.stream()
                 .filter(Objects::nonNull)
                 .map(this::mapToDto)
@@ -32,13 +32,13 @@ public class UsuarioRolMapper implements BaseMapper<UsuarioRol, UsuarioRolDTO> {
     }
 
     @Override
-    public UsuarioRolDTO mapToDto(UsuarioRol entity) {
-        return mapper.map(entity, UsuarioRolDTO.class);
+    public PermisoRolDTO mapToDto(PermisoRol entity) {
+        return mapper.map(entity, PermisoRolDTO.class);
     }
 
     @Override
-    public UsuarioRol mapToEntity(UsuarioRolDTO dto) {
-        return mapper.map(dto, UsuarioRol.class);
+    public PermisoRol mapToEntity(PermisoRolDTO dto) {
+        return mapper.map(dto, PermisoRol.class);
     }
 
     @Override
