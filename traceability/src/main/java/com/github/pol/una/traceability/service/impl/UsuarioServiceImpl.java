@@ -2,10 +2,12 @@ package com.github.pol.una.traceability.service.impl;
 
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
+import com.github.pol.una.traceability.entities.Proyecto;
 import com.github.pol.una.traceability.entities.Rol;
 import com.github.pol.una.traceability.entities.Usuario;
 import com.github.pol.una.traceability.entities.UsuarioRolProyecto;
 import com.github.pol.una.traceability.exceptions.BusinessException;
+import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.mapper.impl.RolMapper;
@@ -94,6 +96,16 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioDTO.setRoles(rolService.getRolesByUsuarioId(usuarioDTO.getId()));
         } catch (RolException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteUser(String username) throws UserException {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if(usuario != null) {
+            usuarioRepository.delete(usuario);
+        } else {
+            throw new UserException("notFound", "No se encontró el usuario "+username);
         }
     }
 
