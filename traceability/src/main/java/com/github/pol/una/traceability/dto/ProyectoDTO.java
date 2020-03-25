@@ -1,6 +1,6 @@
 package com.github.pol.una.traceability.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ProyectoDTO {
 
@@ -8,11 +8,9 @@ public class ProyectoDTO {
     private String nombre;
     private String descripcion;
     private String estado;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private Long idLider;
-    private Date fechaAlta;
-    private Date fechaModificacion;
     private Long usuarioAlta;
     private Long usuarioModificacion;
 
@@ -40,19 +38,19 @@ public class ProyectoDTO {
         this.estado = estado;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -63,18 +61,6 @@ public class ProyectoDTO {
     public void setIdLider(Long idLider) {
         this.idLider = idLider;
     }
-
-    public Date getFechaAlta() {
-        return fechaAlta;
-    }
-
-    public void setFechaAlta(Date fechaAlta) { this.fechaAlta = fechaAlta;}
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) { this.fechaModificacion = fechaModificacion; }
 
     public Long getUsuarioAlta() { return usuarioAlta; }
 

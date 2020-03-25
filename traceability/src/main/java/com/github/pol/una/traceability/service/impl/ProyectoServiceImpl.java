@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,11 +27,6 @@ public class ProyectoServiceImpl  implements ProyectoService {
 
     @Override
     public ProyectoDTO saveProject(ProyectoDTO proyectoDTO) {
-        if(proyectoDTO.getId() == null){
-            proyectoDTO.setFechaAlta(new Date());
-        }else{
-            proyectoDTO.setFechaModificacion(new Date());
-        }
         proyectoRepository.save(mapper.mapToEntity(proyectoDTO));
         return proyectoDTO;
     }

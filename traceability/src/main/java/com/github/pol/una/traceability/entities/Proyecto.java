@@ -1,7 +1,7 @@
 package com.github.pol.una.traceability.entities;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "proyecto", schema = "public")
@@ -20,19 +20,13 @@ public class Proyecto {
     private String estado;
 
     @Column (name = "fecha_inicio")
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column (name = "fecha_fin")
-    private Date fechaFin;
+    private LocalDate fechaFin;
 
     @Column (name = "id_lider")
     private long idLider;
-
-    @Column (name = "fecha_alta")
-    private Date fechaAlta;
-
-    @Column (name = "fecha_modificacion")
-    private Date fechaModificacion;
 
     @Column(name = "usuario_alta")
     private long usuarioAlta;
@@ -72,36 +66,20 @@ public class Proyecto {
         this.estado = estado;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) { this.fechaInicio = fechaInicio; }
+    public void setFechaInicio(LocalDate fechaInicio) { this.fechaInicio = fechaInicio; }
 
-    public Date getFechaFin() { return fechaFin; }
+    public LocalDate getFechaFin() { return fechaFin; }
 
-    public void setFechaFin(Date fechaFin) { this.fechaFin = fechaFin; }
+    public void setFechaFin(LocalDate fechaFin) { this.fechaFin = fechaFin; }
 
     public long getIdLider() { return idLider; }
 
     public void setIdLider(long idLider) {
         this.idLider = idLider;
-    }
-
-    public Date getFechaAlta() {
-        return fechaAlta;
-    }
-
-    public void setFechaAlta(Date fechaAlta) {
-        this.fechaAlta = fechaAlta;
-    }
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
     }
 
     public long getUsuarioAlta() { return usuarioAlta; }
