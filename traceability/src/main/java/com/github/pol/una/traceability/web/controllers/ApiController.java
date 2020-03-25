@@ -86,6 +86,7 @@ public class ApiController extends BaseRestController{
     }
 
     // FIXME los deletes son siempre voids, no devuelven ninguna entidad, simplemente se realiza el borrado
+    // FIXME se debe utilizar el DeleteMapping
     @PostMapping(ApiPaths.PROJECT_DELETE)
     public ResponseEntity<?> deleteProject(@PathVariable Long id) throws ProjectException {
         try {
