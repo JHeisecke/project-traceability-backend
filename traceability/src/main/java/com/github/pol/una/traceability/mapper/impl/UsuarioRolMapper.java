@@ -1,7 +1,7 @@
 package com.github.pol.una.traceability.mapper.impl;
 
-import com.github.pol.una.traceability.dto.UsuarioRolProyectoDTO;
-import com.github.pol.una.traceability.entities.UsuarioRolProyecto;
+import com.github.pol.una.traceability.dto.UsuarioRolDTO;
+import com.github.pol.una.traceability.entities.UsuarioRol;
 import com.github.pol.una.traceability.mapper.BaseMapper;
 import com.github.pol.una.traceability.mapper.OrikaBeanMapper;
 import ma.glasnost.orika.MapperFacade;
@@ -15,16 +15,16 @@ import java.util.stream.Collectors;
  * @author jvillagra
  */
 @Component
-public class UsuarioRolProyectoMapper implements BaseMapper<UsuarioRolProyecto, UsuarioRolProyectoDTO> {
+public class UsuarioRolMapper implements BaseMapper<UsuarioRol, UsuarioRolDTO> {
 
     private final OrikaBeanMapper mapper;
 
-    public UsuarioRolProyectoMapper(OrikaBeanMapper mapper){
+    public UsuarioRolMapper(OrikaBeanMapper mapper){
         this.mapper = mapper;
     }
 
     @Override
-    public List<UsuarioRolProyectoDTO> mapAsList(List<UsuarioRolProyecto> entityList) {
+    public List<UsuarioRolDTO> mapAsList(List<UsuarioRol> entityList) {
         return entityList.stream()
                 .filter(Objects::nonNull)
                 .map(this::mapToDto)
@@ -32,13 +32,13 @@ public class UsuarioRolProyectoMapper implements BaseMapper<UsuarioRolProyecto, 
     }
 
     @Override
-    public UsuarioRolProyectoDTO mapToDto(UsuarioRolProyecto entity) {
-        return mapper.map(entity, UsuarioRolProyectoDTO.class);
+    public UsuarioRolDTO mapToDto(UsuarioRol entity) {
+        return mapper.map(entity, UsuarioRolDTO.class);
     }
 
     @Override
-    public UsuarioRolProyecto mapToEntity(UsuarioRolProyectoDTO dto) {
-        return mapper.map(dto, UsuarioRolProyecto.class);
+    public UsuarioRol mapToEntity(UsuarioRolDTO dto) {
+        return mapper.map(dto, UsuarioRol.class);
     }
 
     @Override
