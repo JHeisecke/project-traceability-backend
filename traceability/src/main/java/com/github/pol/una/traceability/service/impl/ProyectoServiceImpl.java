@@ -36,12 +36,6 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public ProyectoDTO saveProject(ProyectoDTO proyectoDTO) {
-        proyectoRepository.save(mapper.mapToEntity(proyectoDTO));
-        if(proyectoDTO.getId() == null){
-            proyectoDTO.setFechaAlta(new Date());
-        }else{
-            proyectoDTO.setFechaModificacion(new Date());
-        }
         Proyecto proyecto = mapper.mapToEntity(proyectoDTO);
         proyectoRepository.save(proyecto);
         usuarioProyectoService.save(proyecto.getId(), proyecto.getIdLider());
