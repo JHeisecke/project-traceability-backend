@@ -10,8 +10,7 @@ import java.util.List;
  */
 public interface ItemService {
 
-    List<ItemDTO> getAll() ;
-    ItemDTO getItembyProyectoId(Long id) throws ItemException;
+    List<ItemDTO> getItemsByProyectoId(Long id) throws ItemException;
 
     ItemDTO saveItem(ItemDTO itemDTO) throws ItemException;
 

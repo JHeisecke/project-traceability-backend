@@ -11,8 +11,7 @@ import java.util.Optional;
  */
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    List<Item> findAll();
-    Optional<Item> findByIdProyecto(Long idProyecto);
+    List<Item> findByIdProyecto(Long idProyecto);
 
 
 }
