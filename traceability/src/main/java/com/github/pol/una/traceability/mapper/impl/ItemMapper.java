@@ -17,7 +17,7 @@ public class ItemMapper implements BaseMapper<Item, ItemDTO> {
 
     private final OrikaBeanMapper mapper;
 
-    public ItenMapper(OrikaBeanMapper mapper){
+    public ItemMapper(OrikaBeanMapper mapper){
         this.mapper = mapper;
     }
 

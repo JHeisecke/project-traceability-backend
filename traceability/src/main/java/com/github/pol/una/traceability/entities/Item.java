@@ -45,6 +45,9 @@ public class Item {
     @Column(name = "prioridad")
     private String prioridad;
 
+    @Column(name = "id_proyecto")
+    private Long idProyecto;
+
     public Long getId() {
         return id;
     }
@@ -120,5 +123,9 @@ public class Item {
     public void setPrioridad(String prioridad) {
         this.prioridad = prioridad;
     }
+
+    public Long getIdProyecto() {return idProyecto;}
+
+    public void setIdProyecto(Long idProyecto)  {this.idProyecto = idProyecto; }
 
 }

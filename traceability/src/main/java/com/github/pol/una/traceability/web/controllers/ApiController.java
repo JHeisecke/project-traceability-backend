@@ -5,6 +5,8 @@ import com.github.pol.una.traceability.dto.ItemDTO;
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
 import com.github.pol.una.traceability.entities.Usuario;
+import com.github.pol.una.traceability.entities.Item;
+import com.github.pol.una.traceability.exceptions.ItemException;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
 import com.github.pol.una.traceability.service.RolService;
@@ -28,6 +30,9 @@ public class ApiController extends BaseRestController{
 
     @Autowired
     private RolService rolService;
+
+    @Autowired
+    private ItemService itemService;
 
     @PostMapping(ApiPaths.LOGIN)
     public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> login(@RequestBody UsuarioDTO usuario) throws UserException {
@@ -66,9 +71,9 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.findByUsername(usuarioDTO.getUsername())));
     }
 
-    @GetMapping(ApiPaths.ITEM_BY_ID_PROJECT)
-    public ResponseEntity<ListResponseDTO> getItemById(@PathVariable Long idProyecto) {
-        List<ItemDTO> items = itemService.getItemByProjectId(idProyecto);
+    @GetMapping(ApiPaths.ITEM_BY_PROJECT)
+    public ResponseEntity<ListResponseDTO<ItemDTO>> getItemById(@PathVariable Long idProyecto) throws ItemException {
+        List<ItemDTO> items = (List<ItemDTO>) itemService.getItembyProyectoId(idProyecto);
         return ResponseEntity.ok(ListResponseDTO.success(items ));
     }
 }
