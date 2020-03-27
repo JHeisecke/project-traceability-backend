@@ -113,4 +113,9 @@ public class ApiController extends BaseRestController{
         List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByProyectoId(idProyecto);
         return ResponseEntity.ok(ListResponseDTO.success(items ));
     }
+
+    @PostMapping(ApiPaths.ITEM_SAVE)
+    public ResponseEntity<ObjectResponseDTO<ItemDTO>> saveItem(@RequestBody ItemDTO item) throws ItemException {
+        return ResponseEntity.ok(ObjectResponseDTO.success(itemService.saveItem(item)));
+    }
 }
