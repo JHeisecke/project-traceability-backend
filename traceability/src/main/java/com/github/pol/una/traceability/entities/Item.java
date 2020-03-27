@@ -2,25 +2,24 @@ package com.github.pol.una.traceability.entities;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "item", schema = "public")
 public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Id
     @Column (name = "id_fase")
     private Long idFase;
 
-    @Id
     @Column (name = "id_item_padre")
     private Long idItemPadre;
 
 
     @Column(name = "estado")
     private String estado;
-
-    @Id
+    
     @Column (name = "id_linea_base")
     private long idLineaBase;
 
