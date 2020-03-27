@@ -19,7 +19,7 @@ public class Item {
 
     @Column(name = "estado")
     private String estado;
-    
+
     @Column (name = "id_linea_base")
     private long idLineaBase;
 
