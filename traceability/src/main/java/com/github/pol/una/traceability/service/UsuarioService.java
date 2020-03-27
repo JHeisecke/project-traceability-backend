@@ -21,4 +21,6 @@ public interface UsuarioService {
     List<UsuarioDTO> getAll();
 
     UsuarioDTO saveUser(UsuarioDTO usuarioDTO);
+
+    void deleteUser(String username) throws UserException;
 }

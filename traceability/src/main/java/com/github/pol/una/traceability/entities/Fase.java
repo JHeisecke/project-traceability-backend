@@ -19,12 +19,6 @@ public class Fase {
     @Column (name = "fecha_modificacion")
     private String fechaModificacion;
 
-    @Column(name = "usuario_alta")
-    private Long usuarioAlta;
-
-    @Column (name = "usuario_modificacion")
-    private Long usuarioModificacion;
-
     public Long getId() {
         return id;
     }
@@ -58,20 +52,5 @@ public class Fase {
     public void setFecha_modificacion(String fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-
-    public long getUsuarioAlta() {
-        return usuarioAlta;
-    }
-
-    public void setUsuarioAlta(long usuarioAlta) {
-        this.usuarioAlta = usuarioAlta;
-    }
-
-    public long getUsuarioMdificacion() {
-        return usuarioModificacion;
-    }
-
-    public void setUsuarioModificacion(long usuarioModificacion) { this.usuarioModificacion = usuarioModificacion; }
-
 
     }

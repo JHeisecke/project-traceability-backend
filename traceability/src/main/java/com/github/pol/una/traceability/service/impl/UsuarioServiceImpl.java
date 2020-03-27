@@ -2,27 +2,21 @@ package com.github.pol.una.traceability.service.impl;
 
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
-import com.github.pol.una.traceability.entities.Rol;
 import com.github.pol.una.traceability.entities.Usuario;
-import com.github.pol.una.traceability.entities.UsuarioRolProyecto;
-import com.github.pol.una.traceability.exceptions.BusinessException;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
-import com.github.pol.una.traceability.mapper.impl.RolMapper;
 import com.github.pol.una.traceability.mapper.impl.UsuarioMapper;
 import com.github.pol.una.traceability.repository.UsuarioRepository;
 import com.github.pol.una.traceability.service.RolService;
-import com.github.pol.una.traceability.service.UsuarioRolProyectoService;
+import com.github.pol.una.traceability.service.UsuarioRolService;
 import com.github.pol.una.traceability.service.UsuarioService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author jvillagra
@@ -39,7 +33,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private RolService rolService;
     @Autowired
-    private UsuarioRolProyectoService usuarioRolProyectoService;
+    private UsuarioRolService usuarioRolService;
 
     @Override
     public UsuarioDTO login(UsuarioDTO usuarioDTO) throws UserException {
@@ -77,7 +71,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.save(mapper.mapToEntity(usuarioDTO));
         for(RolDTO rol : usuarioDTO.getRoles()){
             usuario= usuarioRepository.findByUsername(usuarioDTO.getUsername());
-            usuarioRolProyectoService.asignarRolUsuario(usuario.getId(), rol.getId());
+            usuarioRolService.asignarRolUsuario(usuario.getId(), rol.getId());
         }
         return usuarioDTO;
     }
@@ -94,6 +88,16 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioDTO.setRoles(rolService.getRolesByUsuarioId(usuarioDTO.getId()));
         } catch (RolException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteUser(String username) throws UserException {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if(usuario != null) {
+            usuarioRepository.delete(usuario);
+        } else {
+            throw new UserException("notFound", "No se encontró el usuario "+username);
         }
     }
 

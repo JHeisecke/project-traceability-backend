@@ -1,17 +1,17 @@
 package com.github.pol.una.traceability.dto;
 
-public class UsuarioRolProyectoDTO {
+public class UsuarioRolDTO {
 
-    private Long idProyecto;
+    private Long id;
     private Long idRol;
     private Long idUsuario;
 
-    public Long getIdProyecto() {
-        return idProyecto;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdProyecto(Long idProyecto) {
-        this.idProyecto = idProyecto;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getIdRol() {

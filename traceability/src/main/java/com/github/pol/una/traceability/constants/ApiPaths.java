@@ -14,11 +14,19 @@ public class ApiPaths {
 
     public static final String LOGIN = BASE + "/login";
     public static final String USER = BASE + "/usuario";
+    public static final String USER_DELETE = USER + "/delete/{username}";
     public static final String USER_SAVE = USER + "/save";
     public static final String ROL = BASE + "/roles";
     public static final String ROL_BY_ID = BASE + "/rol/{id}";
     public static final String ROL_BY_NOMBRE = BASE + "/rol/nombre/{nombre}";
     public static final String USER_ALL = BASE + "/usuarios";
+
+    public static final String PROJECT = BASE + "/proyecto";
+    public static final String PROJECT_SAVE = PROJECT + "/save";
+    public static final String PROJECT_DELETE = PROJECT + "/delete/{id}";
+    public static final String PROJECT_ALL = BASE + "/proyectos";
+    public static final String PROJECT_BY_ID = BASE + "/proyecto/{id}";
+
     public static final String ITEMS = BASE + "/items";
     public static final String ITEMS_BY_PROJECT = ITEMS + "/{idProyecto}";
 }

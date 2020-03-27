@@ -1,15 +1,16 @@
 package com.github.pol.una.traceability.dto;
 
+import java.time.LocalDate;
+
 public class ProyectoDTO {
 
     private Long id;
     private String nombre;
+    private String descripcion;
     private String estado;
-    private String fechaInicio;
-    private String fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private Long idLider;
-    private String fechaAlta;
-    private String fechaModificacion;
     private Long usuarioAlta;
     private Long usuarioModificacion;
 
@@ -37,19 +38,19 @@ public class ProyectoDTO {
         this.estado = estado;
     }
 
-    public String getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public String getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(String fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -60,18 +61,6 @@ public class ProyectoDTO {
     public void setIdLider(Long idLider) {
         this.idLider = idLider;
     }
-
-    public String getFechaAlta() {
-        return fechaAlta;
-    }
-
-    public void setFechaAlta(String fechaAlta) { this.fechaAlta = fechaAlta;}
-
-    public String getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(String fechaModificacion) { this.fechaModificacion = fechaModificacion; }
 
     public Long getUsuarioAlta() { return usuarioAlta; }
 
@@ -87,5 +76,11 @@ public class ProyectoDTO {
         this.usuarioModificacion = usuarioModificacion;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }
