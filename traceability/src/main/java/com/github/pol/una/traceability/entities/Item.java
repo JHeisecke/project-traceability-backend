@@ -22,7 +22,7 @@ public class Item {
     private String estado;
 
     @Column (name = "id_linea_base")
-    private long idLineaBase;
+    private Long idLineaBase;
 
     @Column (name = "fecha_alta")
     private LocalDate fechaAlta;
