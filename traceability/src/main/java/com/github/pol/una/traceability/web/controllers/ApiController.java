@@ -9,6 +9,7 @@ import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.exceptions.ItemException;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
+import com.github.pol.una.traceability.service.PermisoRolService;
 import com.github.pol.una.traceability.service.ProyectoService;
 import com.github.pol.una.traceability.service.RolService;
 import com.github.pol.una.traceability.service.ItemService;
@@ -32,6 +33,8 @@ public class ApiController extends BaseRestController{
     private UsuarioService usuarioService;
     @Autowired
     private RolService rolService;
+    @Autowired
+    private PermisoRolService permisoRolService;
 
     @Autowired
     private ItemService itemService;
@@ -127,5 +130,10 @@ public class ApiController extends BaseRestController{
         }catch (ItemException e) {
             throw e;
         }
+    }
+
+    @GetMapping(ApiPaths.ROL_USERS)
+    public ResponseEntity<ListResponseDTO> getUsuariosByRol(@PathVariable Long id){
+        return ResponseEntity.ok(ListResponseDTO.success(permisoRolService.getAllPermisosByRol(id)));
     }
 }

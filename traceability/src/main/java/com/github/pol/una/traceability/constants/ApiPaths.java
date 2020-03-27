@@ -19,6 +19,7 @@ public class ApiPaths {
     public static final String ROL = BASE + "/roles";
     public static final String ROL_BY_ID = BASE + "/rol/{id}";
     public static final String ROL_BY_NOMBRE = BASE + "/rol/nombre/{nombre}";
+    public static final String ROL_USERS = BASE + "/rol/usuarios/{id}";
     public static final String USER_ALL = BASE + "/usuarios";
 
     public static final String PROJECT = BASE + "/proyecto";
