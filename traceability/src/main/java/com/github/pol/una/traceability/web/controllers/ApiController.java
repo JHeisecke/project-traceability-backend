@@ -70,9 +70,10 @@ public class ApiController extends BaseRestController{
     }
 
     @DeleteMapping(ApiPaths.USER_DELETE)
-    public void deleteuser(@PathVariable String username) throws UserException {
+    public ResponseEntity<Void> deleteUser(@PathVariable String username) throws UserException {
         try {
             usuarioService.deleteUser(username);
+            return ResponseEntity.ok().build();
         }catch (UserException e) {
             throw e;
         }
@@ -94,9 +95,10 @@ public class ApiController extends BaseRestController{
     }
 
     @DeleteMapping(ApiPaths.PROJECT_DELETE)
-    public void deleteProject(@PathVariable Long id) throws ProjectException {
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id) throws ProjectException {
         try {
             proyectoService.deleteProject(id);
+            return ResponseEntity.ok().build();
         }catch (ProjectException e) {
             throw e;
         }
