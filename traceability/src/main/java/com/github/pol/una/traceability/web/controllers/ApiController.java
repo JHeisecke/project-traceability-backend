@@ -69,6 +69,15 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.findByUsername(usuarioDTO.getUsername())));
     }
 
+    @DeleteMapping(ApiPaths.USER_DELETE)
+    public ResponseEntity<Void> deleteUser(@PathVariable String username) throws UserException {
+        try {
+            usuarioService.deleteUser(username);
+            return ResponseEntity.ok().build();
+        }catch (UserException e) {
+            throw e;
+        }
+    }
     @PostMapping(ApiPaths.PROJECT_SAVE)
     public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> saveProject(@RequestBody ProyectoDTO proyecto){
         return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.saveProject(proyecto)));
@@ -85,13 +94,11 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.getProjectById(id)));
     }
 
-    // FIXME los deletes son siempre voids, no devuelven ninguna entidad, simplemente se realiza el borrado
-    // FIXME se debe utilizar el DeleteMapping
-    @PostMapping(ApiPaths.PROJECT_DELETE)
-    public ResponseEntity<?> deleteProject(@PathVariable Long id) throws ProjectException {
+    @DeleteMapping(ApiPaths.PROJECT_DELETE)
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id) throws ProjectException {
         try {
             proyectoService.deleteProject(id);
-            return new ResponseEntity<BaseResponseDTO>(new BaseResponseDTO(true,HttpStatus.OK),HttpStatus.OK);
+            return ResponseEntity.ok().build();
         }catch (ProjectException e) {
             throw e;
         }

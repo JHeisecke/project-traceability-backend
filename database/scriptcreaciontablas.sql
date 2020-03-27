@@ -6,9 +6,8 @@ fecha_inicio date,
 fecha_fin date,
 id_lider bigint not null,
 fecha_alta date,
-fecha_modificacion date,
-usuario_alta bigint,
-usuario_modificacion int);
+fecha_modificacion date
+);
 	
 
 create table parametro (
@@ -32,8 +31,6 @@ id bigserial primary key,
 id_proyecto bigint unique not null,
 estado varchar(25) unique,
 fecha_alta date,
-usuario_modificacion int unique,
-usuario_alta bigint unique,
 fecha_modificacion date
 );
 
@@ -81,9 +78,7 @@ id bigserial primary key,
 id_fase integer unique,
 estado varchar(40),
 fecha_alta date,
-fecha_modificacion date,
-usuario_modificacion int unique,
-usuario_alta bigint unique
+fecha_modificacion date
 );
 
 
@@ -95,66 +90,32 @@ estado varchar (25) unique,
 id_linea_base bigint unique,
 fecha_alta date,
 fecha_modificacion date,
-usuario_modificacion int unique,
-usuario_alta bigint unique,
 observacion varchar (70),
 descripcion varchar (50),
 prioridad varchar (20)
 );
 
 
-alter table proyecto add constraint usuario_alta_fkey foreign key (usuario_alta)
-references usuario (id) match simple
-	on update no action on delete no action;
-
-	
-alter table proyecto add constraint usuario_modificacion_fkey foreign key (usuario_modificacion)
-references usuario (id) match simple
-	on update no action on delete no action;
-
-
-alter table fase add constraint usuario_alta_fkey2 foreign key (usuario_alta)
-references usuario (id) match simple
-	on update no action on delete no action;
-
-alter table fase add constraint id_faseuseral_fkey foreign key (usuario_alta)
-references usuario (id) match simple
-	on update no action on delete no action;
-	
-alter table fase add constraint usuario_modificacion_fkey2 foreign key (usuario_modificacion)
-references usuario (id) match simple
-	on update no action on delete no action;
-
 
 alter table usuario_proyecto add constraint usuario_rol_proyecto_fkey foreign key (id_proyecto)
 references proyecto (id) match simple
-	on update no action on delete no action;
+	on update no action on delete cascade;
 	
 	
 alter table usuario_rol add constraint id_rol_fkey foreign key (id_rol)
 references rol (id) match simple
-	on update no action on delete no action;
+	on update no action on delete cascade;
 
 alter table usuario_proyecto add constraint id_usuario_2_fkey foreign key (id_usuario)
 references usuario (id) match simple
-	on update no action on delete no action;
+	on update no action on delete cascade;
 
 alter table usuario_rol add constraint id_usuario_3_fkey foreign key (id_usuario)
 references usuario (id) match simple
-	on update no action on delete no action;
+	on update no action on delete cascade;
 
 alter table linea_base add constraint id_fase_2_fkey foreign key (id_fase)
 references fase (id) match simple
-on update no action on delete no action;
-
-
-alter table linea_base add constraint id_usuario_alta_2_fkey foreign key (usuario_alta)
-references usuario (id) match simple
-on update no action on delete no action;
-
-
-alter table linea_base add constraint usuario_modificacion_2_fkey foreign key (usuario_modificacion)
-references usuario (id) match simple
 on update no action on delete no action;
 
 
@@ -165,16 +126,6 @@ on update no action on delete no action;
 
 alter table item add constraint linea_base_3_fkey foreign key (id_linea_base)
 references linea_base (id) match simple
-on update no action on delete no action;
-
-
-alter table item add constraint usuario_modificacion_3_fkey_fkey foreign key (usuario_modificacion)
-references usuario (id) match simple
-on update no action on delete no action;
-
-
-alter table item add constraint usuario_alta_3_fkey foreign key (usuario_alta)
-references linea_base (usuario_alta) match simple
 on update no action on delete no action;
 
 -- Inserts de prueba
@@ -207,14 +158,14 @@ INSERT INTO usuario_rol (id_usuario, id_rol) values (3, 3);
 INSERT INTO usuario_rol (id_usuario, id_rol) values (4, 3);
 INSERT INTO usuario_rol (id_usuario, id_rol) values (5, 2);
 
-INSERT INTO recurso(id, nombre, descripcion)
-VALUES(1, 'sistema','Sistema de Trazabilidad');
 INSERT INTO recurso(nombre, descripcion)
-VALUES(2, 'modAdmin','Modulo de Administracion');
+VALUES('sistema','Sistema de Trazabilidad');
 INSERT INTO recurso(nombre, descripcion)
-VALUES(3, 'modConfig','Modulo de Configuracion');
+VALUES('modAdmin','Modulo de Administracion');
 INSERT INTO recurso(nombre, descripcion)
-VALUES(4, 'modDesa','Modulo de Desarrollo');
+VALUES('modConfig','Modulo de Configuracion');
+INSERT INTO recurso(nombre, descripcion)
+VALUES('modDesa','Modulo de Desarrollo');
 
 INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
 VALUES(1,1,1);

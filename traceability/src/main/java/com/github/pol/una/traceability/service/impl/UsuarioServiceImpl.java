@@ -91,4 +91,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    @Override
+    public void deleteUser(String username) throws UserException {
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        if(usuario != null) {
+            usuarioRepository.delete(usuario);
+        } else {
+            throw new UserException("notFound", "No se encontró el usuario "+username);
+        }
+    }
+
 }
