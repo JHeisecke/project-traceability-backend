@@ -99,7 +99,7 @@ prioridad varchar (20)
 
 alter table usuario_proyecto add constraint usuario_rol_proyecto_fkey foreign key (id_proyecto)
 references proyecto (id) match simple
-	on update no action on delete no action;
+	on update no action on delete cascade;
 	
 	
 alter table usuario_rol add constraint id_rol_fkey foreign key (id_rol)
