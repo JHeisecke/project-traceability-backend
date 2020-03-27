@@ -1,5 +1,6 @@
 package com.github.pol.una.traceability.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -12,10 +13,8 @@ public class ItemDTO {
     private Long idItemPadre;
     private String estado;
     private Long idLineaBase;
-    private Date fechaAlta;
-    private Date fechaModificacion;
-    private Long usuarioModificacion;
-    private Long usuarioAlta;
+    private LocalDate fechaAlta;
+    private LocalDate fechaModificacion;
     private String observacion;
     private String descripcion;
     private String prioridad;
@@ -46,32 +45,20 @@ public class ItemDTO {
 
     public void setIdLineaBase(Long idLineaBase)  {this.idLineaBase = idLineaBase; }
 
-    public Date getFechaAlta() {
+    public LocalDate getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(Date fechaAlta) {
+    public void setFechaAlta(LocalDate fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public Date getFechaModificacion() {
+    public LocalDate getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(Date fechaModificacion) {
+    public void setFechaModificacion(LocalDate fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
-    }
-
-    public long getUsuarioModificacion() {
-        return usuarioModificacion;
-    }
-
-    public void setUsuarioModificacion(long usuarioModificacion) { this.usuarioModificacion = usuarioModificacion; }
-
-    public long getUsuarioAlta() {return usuarioAlta; }
-
-    public void setUsuarioAlta(long usuarioAlta) {
-        this.usuarioAlta = usuarioAlta;
     }
 
     public String getObservacion() { return observacion; }
