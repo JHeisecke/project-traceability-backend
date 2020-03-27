@@ -69,6 +69,14 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.findByUsername(usuarioDTO.getUsername())));
     }
 
+    @DeleteMapping(ApiPaths.USER_DELETE)
+    public void deleteuser(@PathVariable String username) throws UserException {
+        try {
+            usuarioService.deleteUser(username);
+        }catch (UserException e) {
+            throw e;
+        }
+    }
     @PostMapping(ApiPaths.PROJECT_SAVE)
     public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> saveProject(@RequestBody ProyectoDTO proyecto){
         return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.saveProject(proyecto)));
@@ -84,7 +92,7 @@ public class ApiController extends BaseRestController{
     public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> getProjectById(@PathVariable Long id) throws ProjectException {
         return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.getProjectById(id)));
     }
-    
+
     @DeleteMapping(ApiPaths.PROJECT_DELETE)
     public void deleteProject(@PathVariable Long id) throws ProjectException {
         try {
