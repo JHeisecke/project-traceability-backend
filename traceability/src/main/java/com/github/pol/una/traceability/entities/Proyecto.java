@@ -28,14 +28,6 @@ public class Proyecto {
     @Column (name = "id_lider")
     private long idLider;
 
-    @Column(name = "usuario_alta")
-    private long usuarioAlta;
-
-    @Column (name = "usuario_modificacion")
-    private long usuarioModificacion;
-
-
-
     public Long getId() {
         return id;
     }
@@ -82,15 +74,4 @@ public class Proyecto {
         this.idLider = idLider;
     }
 
-    public long getUsuarioAlta() { return usuarioAlta; }
-
-    public void setUsuarioAlta(long usuarioAlta) {
-        this.usuarioAlta = usuarioAlta;
-    }
-
-    public long getUsuarioModificacion() {
-        return usuarioModificacion;
-    }
-
-    public void setUsuarioModificacion(long usuarioModificacion) { this.usuarioModificacion = usuarioModificacion; }
 }

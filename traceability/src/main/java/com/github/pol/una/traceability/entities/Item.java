@@ -30,12 +30,6 @@ public class Item {
     @Column (name = "fecha_modificacion")
     private String fechaModificacion;
 
-    @Column (name = "usuario_modificacion")
-    private long usuarioModificacion;
-
-    @Column(name = "usuario_alta")
-    private long usuarioAlta;
-
     @Column(name = "observacion")
     private String observacion;
 
@@ -85,18 +79,6 @@ public class Item {
 
     public void setFechaModificacion(String fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
-    }
-
-    public long getUsuarioModificacion() {
-        return usuarioModificacion;
-    }
-
-    public void setUsuarioModificacion(long usuarioModificacion) { this.usuarioModificacion = usuarioModificacion; }
-
-    public long getUsuarioAlta() {return usuarioAlta; }
-
-    public void setUsuarioAlta(long usuarioAlta) {
-        this.usuarioAlta = usuarioAlta;
     }
 
     public String getObservacion() { return observacion; }
