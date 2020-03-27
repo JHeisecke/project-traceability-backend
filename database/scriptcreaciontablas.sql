@@ -43,13 +43,17 @@ nombre varchar (80),
 descripcion varchar (1000)
 );
 
-create table usuario_rol_proyecto (
+create table usuario_proyecto (
 id bigserial primary key,
 id_proyecto bigint,
-id_rol bigint,
 id_usuario bigint
 );	
-	
+
+create table usuario_rol (
+id bigserial primary key,
+id_rol bigint,
+id_usuario bigint
+);
 
 create table rol (
 id bigserial primary key,
@@ -122,30 +126,22 @@ references usuario (id) match simple
 	on update no action on delete no action;
 
 
-alter table usuario_rol_proyecto add constraint usuario_rol_proyecto_fkey foreign key (id_proyecto)
+alter table usuario_proyecto add constraint usuario_rol_proyecto_fkey foreign key (id_proyecto)
 references proyecto (id) match simple
 	on update no action on delete no action;
 	
 	
-alter table usuario_rol_proyecto add constraint id_rol_fkey foreign key (id_rol)
+alter table usuario_rol add constraint id_rol_fkey foreign key (id_rol)
 references rol (id) match simple
 	on update no action on delete no action;
-	
 
-alter table usuario_rol_proyecto add constraint id_usuario_2_fkey foreign key (id_usuario)
+alter table usuario_proyecto add constraint id_usuario_2_fkey foreign key (id_usuario)
 references usuario (id) match simple
 	on update no action on delete no action;
 
-
-alter table permiso_rol add constraint id_rol_2_fkey foreign key (id_rol)
-references rol (id) match simple
-on update no action on delete no action;
-
-
-alter table permiso_rol add constraint id_permiso_2_fkey foreign key (id_permiso)
-references permiso (id) match simple
-on update no action on delete no action;
-
+alter table usuario_rol add constraint id_usuario_3_fkey foreign key (id_usuario)
+references usuario (id) match simple
+	on update no action on delete no action;
 
 alter table linea_base add constraint id_fase_2_fkey foreign key (id_fase)
 references fase (id) match simple
@@ -188,23 +184,55 @@ VALUES('Administrador','admin','admin','admin@gmail.com');
 INSERT INTO USUARIO(nombre_completo, password,username,email)
 VALUES('MatiasFare','mfare','mfare','mfare@gmail.com');
 INSERT INTO USUARIO(nombre_completo, password,username,email)
-VALUES('Yeshua','yedalog','yedalog','jessica@gmail.com');
+VALUES('Yeshua','yedaloc','yedaloc','jessica@gmail.com');
 INSERT INTO USUARIO(nombre_completo, password,username,email)
 VALUES('Javier Heinecken','javier','javier','javier@gmail.com');
 INSERT INTO USUARIO(nombre_completo, password,username,email)
 VALUES('Jazmin','jazmin','jazmin','jazmin@gmail.com');
 
 -- Estos permisos son de pruba, hace falta definir los permisos reales del sistema
-INSERT INTO permiso(nombre, descripcion) VALUES ('ABM Proyecto', 'Permite acceso a modulo Proyecto');
-INSERT INTO permiso(nombre, descripcion) VALUES ('ABM Usuario', 'Permite acceso a modulo Usuario');
-INSERT INTO permiso(nombre, descripcion) VALUES ('ABM Roles', 'Permite Acceso a modulo Roles');
+INSERT INTO permiso(nombre, descripcion) VALUES ('visualizar', 'Permite visualizar elementos');
+INSERT INTO permiso(nombre, descripcion) VALUES ('crear', 'Permite creacion de elementos');
+INSERT INTO permiso(nombre, descripcion) VALUES ('editar', 'Permite edicion de elementos');
+INSERT INTO permiso(nombre, descripcion) VALUES ('eliminar', 'Permite eliminacion de elementos');
+INSERT INTO permiso(nombre, descripcion) VALUES ('crud', 'Permisos ABM o CRUD sobre elementos');
 
 INSERT INTO ROL(nombre, descripcion) VALUES('sysadmin','Administrador del sistema');
 INSERT INTO ROL(nombre, descripcion) VALUES('Developer','Desarrollador en proyectos');
 INSERT INTO ROL(nombre, descripcion) VALUES('Team Leader','Lider de proyectos');
 
-INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (1, 1);
-INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (2, 2);
-INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (3, 3);
-INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (4, 3);
-INSERT INTO usuario_rol_proyecto (id_rol, id_usuario) values (5, 2);
+INSERT INTO usuario_rol (id_usuario, id_rol) values (1, 1);
+INSERT INTO usuario_rol (id_usuario, id_rol) values (2, 2);
+INSERT INTO usuario_rol (id_usuario, id_rol) values (3, 3);
+INSERT INTO usuario_rol (id_usuario, id_rol) values (4, 3);
+INSERT INTO usuario_rol (id_usuario, id_rol) values (5, 2);
+
+INSERT INTO recurso(id, nombre, descripcion)
+VALUES(1, 'sistema','Sistema de Trazabilidad');
+INSERT INTO recurso(nombre, descripcion)
+VALUES(2, 'modAdmin','Modulo de Administracion');
+INSERT INTO recurso(nombre, descripcion)
+VALUES(3, 'modConfig','Modulo de Configuracion');
+INSERT INTO recurso(nombre, descripcion)
+VALUES(4, 'modDesa','Modulo de Desarrollo');
+
+INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
+VALUES(1,1,1);
+INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
+VALUES(1,2,1);
+INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
+VALUES(1,3,1);
+INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
+VALUES(1,5,2);
+INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
+VALUES(1,5,3);
+INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
+VALUES(1,5,4);
+INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
+VALUES(2,5,4);
+INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
+VALUES(3,5,2);
+INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
+VALUES(3,5,3);
+INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
+VALUES(3,5,4);

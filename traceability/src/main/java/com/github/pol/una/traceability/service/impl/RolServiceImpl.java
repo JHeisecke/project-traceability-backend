@@ -1,14 +1,14 @@
 package com.github.pol.una.traceability.service.impl;
 
 import com.github.pol.una.traceability.dto.RolDTO;
-import com.github.pol.una.traceability.dto.UsuarioRolProyectoDTO;
+import com.github.pol.una.traceability.dto.UsuarioRolDTO;
 import com.github.pol.una.traceability.entities.Rol;
-import com.github.pol.una.traceability.entities.UsuarioRolProyecto;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.mapper.impl.RolMapper;
 import com.github.pol.una.traceability.repository.RolRepository;
+import com.github.pol.una.traceability.service.PermisoRolService;
 import com.github.pol.una.traceability.service.RolService;
-import com.github.pol.una.traceability.service.UsuarioRolProyectoService;
+import com.github.pol.una.traceability.service.UsuarioRolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,10 @@ public class RolServiceImpl implements RolService {
     private RolMapper rolMapper;
 
     @Autowired
-    private UsuarioRolProyectoService usuarioRolProyectoService;
+    private UsuarioRolService usuarioRolService;
+
+    @Autowired
+    private PermisoRolService permisoRolService;
 
     @Override
     public List<RolDTO> getAll(){
@@ -64,14 +67,15 @@ public class RolServiceImpl implements RolService {
     @Override
     public List<RolDTO> getRolesByUsuarioId(Long usuarioId) throws RolException {
 
-        List<UsuarioRolProyectoDTO> usuarioRolesProyectos = usuarioRolProyectoService.getAllRolesUsuario(usuarioId);
+        List<UsuarioRolDTO> usuarioRoles = usuarioRolService.getAllRolesUsuario(usuarioId);
         List<RolDTO> rolesUsuario = new ArrayList<>();
 
-        if(usuarioRolesProyectos != null){
-            for(UsuarioRolProyectoDTO urp : usuarioRolesProyectos){
-                rolesUsuario.add(this.getRolById(urp.getIdRol()));
+        if(usuarioRoles != null){
+            for(UsuarioRolDTO usuarioRol : usuarioRoles){
+                RolDTO rol = this.getRolById(usuarioRol.getIdRol());
+                rol.setPermisos(permisoRolService.getAllPermisosByRol(rol.getId()));
+                rolesUsuario.add(rol);
             }
-
         }
         return rolesUsuario;
     }
