@@ -73,7 +73,7 @@ public class ApiController extends BaseRestController{
 
     @GetMapping(ApiPaths.ITEMS_BY_PROJECT)
     public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByProjectId(@PathVariable Long idProyecto) throws ItemException {
-        List<ItemDTO> items = (List<ItemDTO>) itemService.getItembyProyectoId(idProyecto);
+        List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByProyectoId(idProyecto);
         return ResponseEntity.ok(ListResponseDTO.success(items ));
     }
 }
