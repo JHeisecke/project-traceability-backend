@@ -93,4 +93,12 @@ public class RolServiceImpl implements RolService {
         permisoRolService.asignarPermisosRol(rol.getPermisos(), rol.getId());
         return rol;
     }
+
+    @Override
+    public void deleteRol(Long idRol) {
+        Optional<Rol> rol = rolRepository.findById(idRol);
+        if(rol.isPresent()) {
+            rolRepository.delete(rol.get());
+        }
+    }
 }

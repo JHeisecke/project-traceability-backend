@@ -16,7 +16,7 @@ public class ApiPaths {
     public static final String USER = BASE + "/usuario";
     public static final String USER_DELETE = USER + "/delete/{username}";
     public static final String USER_SAVE = USER + "/save";
-    public static final String ROL = BASE + "/roles";
+    public static final String ROLES = BASE + "/roles";
     public static final String ROL_BY_ID = BASE + "/rol/{id}";
     public static final String ROL_BY_NOMBRE = BASE + "/rol/nombre/{nombre}";
     public static final String ROL_USERS = BASE + "/rol/usuarios/{id}";
@@ -27,6 +27,8 @@ public class ApiPaths {
     public static final String PROJECT_DELETE = PROJECT + "/delete/{id}";
     public static final String PROJECT_ALL = BASE + "/proyectos";
     public static final String PROJECT_BY_ID = BASE + "/proyecto/{id}";
+    public static final String ROL = BASE + "/rol";
+    public static final String ROL_DELETE = ROL + "/delete/{id}";
 
     public static final String ITEM = BASE + "/item";
     public static final String ITEM_SAVE = ITEM + "/save";

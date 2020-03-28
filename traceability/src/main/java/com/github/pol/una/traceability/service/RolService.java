@@ -19,4 +19,6 @@ public interface RolService {
     List<RolDTO> getRolesByUsuarioId(Long usuarioId) throws RolException;
 
     RolDTO save(RolDTO rol);
+
+    void deleteRol(Long rol);
 }

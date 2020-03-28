@@ -55,7 +55,7 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.saveUser(user)));
     }
 
-    @GetMapping(ApiPaths.ROL)
+    @GetMapping(ApiPaths.ROLES)
     public ResponseEntity<ListResponseDTO> getRolesExistentes(){
         List<RolDTO> roles = rolService.getAll();
         return ResponseEntity.ok(ListResponseDTO.success(roles));
@@ -137,8 +137,13 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ListResponseDTO.success(permisoRolService.getAllPermisosByRol(id)));
     }
 
-    @PostMapping(ApiPaths.ROL_NUEVO)
+    @PostMapping(ApiPaths.ROL)
     public ResponseEntity<ObjectResponseDTO<RolDTO>> saveRol(@RequestBody RolDTO rol){
         return ResponseEntity.ok(ObjectResponseDTO.success(rolService.save(rol)));
+    }
+
+    @DeleteMapping(ApiPaths.ROL_DELETE)
+    public void deleteRol(@PathVariable Long id){
+        rolService.deleteRol(id);
     }
 }
