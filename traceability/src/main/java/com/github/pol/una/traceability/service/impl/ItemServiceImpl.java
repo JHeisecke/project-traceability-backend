@@ -3,8 +3,10 @@ package com.github.pol.una.traceability.service.impl;
 import com.github.pol.una.traceability.dto.ItemDTO;
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.entities.Item;
+import com.github.pol.una.traceability.entities.Proyecto;
 import com.github.pol.una.traceability.entities.Rol;
 import com.github.pol.una.traceability.exceptions.ItemException;
+import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.mapper.impl.ItemMapper;
 import com.github.pol.una.traceability.repository.ItemRepository;
 import com.github.pol.una.traceability.service.ItemService;
@@ -32,6 +34,16 @@ public class ItemServiceImpl implements ItemService {
     public ItemDTO saveItem(ItemDTO itemDTO) throws ItemException {
         itemRepository.save(itemMapper.mapToEntity(itemDTO));
         return itemDTO;
+    }
+
+    @Override
+    public void deleteItem(Long id) throws ItemException {
+        Optional<Item> item = itemRepository.findById(id);
+        if(item.isPresent()) {
+            itemRepository.delete(item.get());
+        } else {
+            throw new ItemException("notFound", "No se encontró el item "+id);
+        }
     }
 
     @Override

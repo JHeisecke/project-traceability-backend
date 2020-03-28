@@ -118,4 +118,14 @@ public class ApiController extends BaseRestController{
     public ResponseEntity<ObjectResponseDTO<ItemDTO>> saveItem(@RequestBody ItemDTO item) throws ItemException {
         return ResponseEntity.ok(ObjectResponseDTO.success(itemService.saveItem(item)));
     }
+
+    @DeleteMapping(ApiPaths.ITEM_DELETE)
+    public ResponseEntity<Void> deleteItem(@PathVariable Long id) throws ItemException {
+        try {
+            itemService.deleteItem(id);
+            return ResponseEntity.ok().build();
+        }catch (ItemException e) {
+            throw e;
+        }
+    }
 }

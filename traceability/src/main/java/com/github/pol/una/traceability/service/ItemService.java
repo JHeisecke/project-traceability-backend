@@ -14,4 +14,5 @@ public interface ItemService {
 
     ItemDTO saveItem(ItemDTO itemDTO) throws ItemException;
 
+    void deleteItem(Long id) throws ItemException;
 }
