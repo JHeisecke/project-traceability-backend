@@ -136,4 +136,9 @@ public class ApiController extends BaseRestController{
     public ResponseEntity<ListResponseDTO> getUsuariosByRol(@PathVariable Long id){
         return ResponseEntity.ok(ListResponseDTO.success(permisoRolService.getAllPermisosByRol(id)));
     }
+
+    @PostMapping(ApiPaths.ROL_NUEVO)
+    public ResponseEntity<ObjectResponseDTO<RolDTO>> saveRol(@RequestBody RolDTO rol){
+        return ResponseEntity.ok(ObjectResponseDTO.success(rolService.save(rol)));
+    }
 }
