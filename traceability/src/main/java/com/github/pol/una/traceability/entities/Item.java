@@ -17,6 +17,8 @@ public class Item {
     @Column (name = "id_item_padre")
     private Long idItemPadre;
 
+    @Column (name = "nombre")
+    private String nombre;
 
     @Column(name = "estado")
     private String estado;
@@ -110,4 +112,11 @@ public class Item {
 
     public void setIdProyecto(Long idProyecto)  {this.idProyecto = idProyecto; }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

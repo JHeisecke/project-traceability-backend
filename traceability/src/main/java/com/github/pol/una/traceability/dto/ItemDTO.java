@@ -10,6 +10,7 @@ public class ItemDTO {
 
     private Long id;
     private Long idFase;
+    private String nombre;
     private Long idItemPadre;
     private String estado;
     private Long idLineaBase;
@@ -87,6 +88,11 @@ public class ItemDTO {
 
     public void setIdProyecto(Long idProyecto)  {this.idProyecto = idProyecto; }
 
+    public String getNombre() {
+        return nombre;
+    }
 
-
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

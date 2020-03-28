@@ -29,7 +29,7 @@ email varchar(50) unique
 create table fase (
 id bigserial primary key,
 id_proyecto bigint unique not null,
-estado varchar(25) unique,
+estado varchar(25),
 fecha_alta date,
 fecha_modificacion date
 );
@@ -75,7 +75,7 @@ descripcion varchar (1000)
 
 create table linea_base (
 id bigserial primary key,
-id_fase integer unique,
+id_fase integer,
 estado varchar(40),
 fecha_alta date,
 fecha_modificacion date
@@ -84,10 +84,11 @@ fecha_modificacion date
 
 create table item (
 id bigserial primary key,
-id_item_padre bigint unique,
-id_fase bigint unique,
-estado varchar (25) unique,
-id_linea_base bigint unique,
+id_item_padre bigint,
+nombre varchar (80),
+id_fase bigint,
+estado varchar (25),
+id_linea_base bigint,
 fecha_alta date,
 fecha_modificacion date,
 observacion varchar (70),
