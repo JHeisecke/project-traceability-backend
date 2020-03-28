@@ -1,49 +1,25 @@
-package com.github.pol.una.traceability.entities;
+package com.github.pol.una.traceability.dto;
 
-import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
-@Entity
-@Table(name = "item", schema = "public")
-public class Item {
+/**
+ * @author yedaloc
+ */
+public class ItemDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column (name = "id_fase")
     private Long idFase;
-
-    @Column (name = "id_item_padre")
-    private Long idItemPadre;
-
-    @Column (name = "nombre")
     private String nombre;
-
-    @Column(name = "estado")
+    private Long idItemPadre;
     private String estado;
-
-    @Column (name = "id_linea_base")
     private Long idLineaBase;
-
-    @Column (name = "fecha_alta")
     private LocalDate fechaAlta;
-
-    @Column (name = "fecha_modificacion")
     private LocalDate fechaModificacion;
-
-    @Column(name = "observacion")
     private String observacion;
-
-    @Column(name = "descripcion")
     private String descripcion;
-
-    @Column(name = "prioridad")
     private String prioridad;
-
-    @Column(name = "id_proyecto")
     private Long idProyecto;
-
     public Long getId() {
         return id;
     }
