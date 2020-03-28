@@ -36,7 +36,6 @@ public class RolDTO {
         this.descripcion = descripcion;
     }
 
-
     public List<PermisoDTO> getPermisos() {
         return permisos;
     }
