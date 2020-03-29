@@ -1,19 +1,12 @@
 package com.github.pol.una.traceability.web.controllers;
 
 import com.github.pol.una.traceability.constants.ApiPaths;
-import com.github.pol.una.traceability.dto.ProyectoDTO;
-import com.github.pol.una.traceability.dto.ItemDTO;
-import com.github.pol.una.traceability.dto.RolDTO;
-import com.github.pol.una.traceability.dto.UsuarioDTO;
+import com.github.pol.una.traceability.dto.*;
 import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.exceptions.ItemException;
 import com.github.pol.una.traceability.exceptions.RolException;
 import com.github.pol.una.traceability.exceptions.UserException;
-import com.github.pol.una.traceability.service.PermisoRolService;
-import com.github.pol.una.traceability.service.ProyectoService;
-import com.github.pol.una.traceability.service.RolService;
-import com.github.pol.una.traceability.service.ItemService;
-import com.github.pol.una.traceability.service.UsuarioService;
+import com.github.pol.una.traceability.service.*;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +28,10 @@ public class ApiController extends BaseRestController{
     private RolService rolService;
     @Autowired
     private PermisoRolService permisoRolService;
-
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private PermisoService permisoService;
 
     @PostMapping(ApiPaths.LOGIN)
     public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> login(@RequestBody UsuarioDTO usuario) throws UserException {
@@ -163,5 +157,15 @@ public class ApiController extends BaseRestController{
     @DeleteMapping(ApiPaths.ROL_DELETE)
     public void deleteRol(@PathVariable Long id){
         rolService.deleteRol(id);
+    }
+
+    /**
+     * PERMISOS ENDPOINTS
+     *
+     */
+    @GetMapping(ApiPaths.PERMISOS_ALL)
+    public ResponseEntity<ListResponseDTO> getPermisosExistentes(){
+        List<PermisoDTO> permisos = permisoService.getAllPermisos();
+        return ResponseEntity.ok(ListResponseDTO.success(permisos));
     }
 }

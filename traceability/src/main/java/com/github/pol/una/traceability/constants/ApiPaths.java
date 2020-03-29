@@ -37,4 +37,6 @@ public class ApiPaths {
     public static final String ITEM_SAVE = ITEM + "/save";
     public static final String ITEMS_BY_PROJECT = ITEM + "/{idProyecto}";
     public static final String ITEM_DELETE = ITEM + "/delete/{id}";
+
+    public static final String PERMISOS_ALL = BASE + "/permisos";
 }
