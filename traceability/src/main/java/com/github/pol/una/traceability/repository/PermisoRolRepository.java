@@ -10,7 +10,7 @@ public interface PermisoRolRepository extends JpaRepository<PermisoRol, PermisoR
 
     List<PermisoRol> findByIdRol(Long idRol);
 
-    List<PermisoRol> findByIdRolAndIdPermisoAndIdRecurso(Long idRol, Long idPermiso, Long idRecurso);
+    PermisoRol findByIdRolAndIdPermisoAndIdRecurso(Long idRol, Long idPermiso, Long idRecurso);
 
     List<PermisoRol> findByIdRolAndIdPermiso(Long idRol, Long idPermiso);
 }
