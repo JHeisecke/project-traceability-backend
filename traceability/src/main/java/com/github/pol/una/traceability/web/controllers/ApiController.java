@@ -109,6 +109,11 @@ public class ApiController extends BaseRestController{
         }
     }
 
+    /**
+     * ITEMS ENDPOINTS
+     *
+     */
+
     @GetMapping(ApiPaths.ITEMS_BY_PROJECT)
     public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByProjectId(@PathVariable Long idProyecto) throws ItemException {
         List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByProyectoId(idProyecto);
