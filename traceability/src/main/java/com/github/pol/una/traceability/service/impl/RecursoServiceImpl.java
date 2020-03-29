@@ -8,6 +8,7 @@ import com.github.pol.una.traceability.service.RecursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -29,5 +30,10 @@ public class RecursoServiceImpl implements RecursoService {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public List<RecursoDTO> getAllRecursos() {
+        return mapper.mapAsList(repository.findAll());
     }
 }

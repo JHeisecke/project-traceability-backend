@@ -32,6 +32,8 @@ public class ApiController extends BaseRestController{
     private ItemService itemService;
     @Autowired
     private PermisoService permisoService;
+    @Autowired
+    private RecursoService recursoService;
 
     @PostMapping(ApiPaths.LOGIN)
     public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> login(@RequestBody UsuarioDTO usuario) throws UserException {
@@ -167,5 +169,14 @@ public class ApiController extends BaseRestController{
     public ResponseEntity<ListResponseDTO> getPermisosExistentes(){
         List<PermisoDTO> permisos = permisoService.getAllPermisos();
         return ResponseEntity.ok(ListResponseDTO.success(permisos));
+    }
+    /**
+     * RECURSOS ENDPOINTS
+     *
+     */
+    @GetMapping(ApiPaths.RECURSOS_ALL)
+    public ResponseEntity<ListResponseDTO> getRecursosExistentes(){
+        List<RecursoDTO> recursos = recursoService.getAllRecursos();
+        return ResponseEntity.ok(ListResponseDTO.success(recursos));
     }
 }
