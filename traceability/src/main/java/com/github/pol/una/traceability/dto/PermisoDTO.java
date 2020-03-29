@@ -10,7 +10,7 @@ public class PermisoDTO {
     private Long id;
     private String nombre;
     private String descripcion;
-    private List<Long> recursos;
+    private List<RecursoDTO> recursos;
 
     public Long getId() {
         return id;
@@ -36,11 +36,11 @@ public class PermisoDTO {
         this.descripcion = descripcion;
     }
 
-    public List<Long> getRecursos() {
+    public List<RecursoDTO> getRecursos() {
         return recursos;
     }
 
-    public void setRecursos(List<Long> recursos) {
+    public void setRecursos(List<RecursoDTO> recursos) {
         this.recursos = recursos;
     }
 }
