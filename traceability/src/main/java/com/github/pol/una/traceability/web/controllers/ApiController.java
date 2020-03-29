@@ -44,6 +44,10 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.login(usuario)));
     }
 
+    /**
+     * USER ENDPOINTS
+     *
+     */
     @GetMapping(ApiPaths.USER_ALL)
     public ResponseEntity<ListResponseDTO> getUsuariosExistentes() {
         List<UsuarioDTO> users = usuarioService.getAll();
@@ -53,22 +57,6 @@ public class ApiController extends BaseRestController{
     @PostMapping(ApiPaths.USER_SAVE)
     public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> saveUser(@RequestBody UsuarioDTO user){
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.saveUser(user)));
-    }
-
-    @GetMapping(ApiPaths.ROLES)
-    public ResponseEntity<ListResponseDTO> getRolesExistentes(){
-        List<RolDTO> roles = rolService.getAll();
-        return ResponseEntity.ok(ListResponseDTO.success(roles));
-    }
-
-    @GetMapping(ApiPaths.ROL_BY_ID)
-    public ResponseEntity<ObjectResponseDTO<RolDTO>> getRolById(@PathVariable Long id) throws RolException{
-        return ResponseEntity.ok(ObjectResponseDTO.success(rolService.getRolById(id)));
-    }
-
-    @GetMapping(ApiPaths.ROL_BY_NOMBRE)
-    public ResponseEntity<ObjectResponseDTO<RolDTO>> getRolByNombre(@PathVariable String nombre) throws RolException{
-        return ResponseEntity.ok(ObjectResponseDTO.success(rolService.getRolByNombre(nombre)));
     }
 
     @GetMapping(ApiPaths.USER)
@@ -85,6 +73,16 @@ public class ApiController extends BaseRestController{
             throw e;
         }
     }
+
+    @GetMapping(ApiPaths.USERS_BY_ROLE)
+    public ResponseEntity<ListResponseDTO> getUsuariosByRol(@PathVariable Long id){
+        return ResponseEntity.ok(ListResponseDTO.success(permisoRolService.getAllPermisosByRol(id)));
+    }
+
+    /**
+     * PROJECT ENDPOINTS
+     *
+     */
     @PostMapping(ApiPaths.PROJECT_SAVE)
     public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> saveProject(@RequestBody ProyectoDTO proyecto){
         return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.saveProject(proyecto)));
@@ -132,12 +130,27 @@ public class ApiController extends BaseRestController{
         }
     }
 
-    @GetMapping(ApiPaths.ROL_USERS)
-    public ResponseEntity<ListResponseDTO> getUsuariosByRol(@PathVariable Long id){
-        return ResponseEntity.ok(ListResponseDTO.success(permisoRolService.getAllPermisosByRol(id)));
+    /**
+     * ROLES ENDPOINTS
+     *
+     */
+    @GetMapping(ApiPaths.ROLES)
+    public ResponseEntity<ListResponseDTO> getRolesExistentes(){
+        List<RolDTO> roles = rolService.getAll();
+        return ResponseEntity.ok(ListResponseDTO.success(roles));
     }
 
-    @PostMapping(ApiPaths.ROL)
+    @GetMapping(ApiPaths.ROL_BY_ID)
+    public ResponseEntity<ObjectResponseDTO<RolDTO>> getRolById(@PathVariable Long id) throws RolException{
+        return ResponseEntity.ok(ObjectResponseDTO.success(rolService.getRolById(id)));
+    }
+
+    @GetMapping(ApiPaths.ROL_BY_NOMBRE)
+    public ResponseEntity<ObjectResponseDTO<RolDTO>> getRolByNombre(@PathVariable String nombre) throws RolException{
+        return ResponseEntity.ok(ObjectResponseDTO.success(rolService.getRolByNombre(nombre)));
+    }
+
+    @PostMapping(ApiPaths.ROL_SAVE)
     public ResponseEntity<ObjectResponseDTO<RolDTO>> saveRol(@RequestBody RolDTO rol){
         return ResponseEntity.ok(ObjectResponseDTO.success(rolService.save(rol)));
     }
