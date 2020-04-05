@@ -39,7 +39,9 @@ public class RolServiceImpl implements RolService {
         List<Rol> listaRoles = rolRepository.findAll();
         List<RolDTO> rolDTOS = new ArrayList<>();
         for(Rol rol : listaRoles){
-            rolDTOS.add(rolMapper.mapToDto(rol));
+            RolDTO rolDTO = rolMapper.mapToDto(rol);
+            rolDTO.setPermisos(permisoRolService.getAllPermisosByRol(rol.getId()));
+            rolDTOS.add(rolDTO);
         }
         return rolDTOS;
     }
@@ -47,7 +49,9 @@ public class RolServiceImpl implements RolService {
     public RolDTO getRolById(Long id) throws RolException {
         Optional<Rol> rol = rolRepository.findById(id);
         if(rol.isPresent()) {
-            return rolMapper.mapToDto(rol.get());
+            RolDTO rolDTO = rolMapper.mapToDto(rol.get());
+            rolDTO.setPermisos(permisoRolService.getAllPermisosByRol(rol.get().getId()));
+            return rolDTO;
         } else {
             throw new RolException("notFound", "No se encontró el rol");
         }
@@ -57,7 +61,9 @@ public class RolServiceImpl implements RolService {
     public RolDTO getRolByNombre(String nombre) throws RolException {
         Optional<Rol> rol = rolRepository.findByNombre(nombre);
         if(rol.isPresent()) {
-            return rolMapper.mapToDto(rol.get());
+            RolDTO rolDTO = rolMapper.mapToDto(rol.get());
+            rolDTO.setPermisos(permisoRolService.getAllPermisosByRol(rol.get().getId()));
+            return rolDTO;
         } else {
             throw new RolException("notFound", "No se encontró el rol");
         }
@@ -78,5 +84,21 @@ public class RolServiceImpl implements RolService {
             }
         }
         return rolesUsuario;
+    }
+
+    @Override
+    public RolDTO save(RolDTO rol) {
+
+        rolRepository.save(rolMapper.mapToEntity(rol));
+        permisoRolService.asignarPermisosRol(rol.getPermisos(), rol.getId());
+        return rol;
+    }
+
+    @Override
+    public void deleteRol(Long idRol) {
+        Optional<Rol> rol = rolRepository.findById(idRol);
+        if(rol.isPresent()) {
+            rolRepository.delete(rol.get());
+        }
     }
 }

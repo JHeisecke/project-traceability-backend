@@ -26,4 +26,9 @@ public class PermisoServiceImpl implements PermisoService {
     public PermisoDTO getPermisosById(Long id) {
         return mapper.mapToDto(permisoRepository.findById(id));
     }
+
+    @Override
+    public List<PermisoDTO> getAllPermisos() {
+        return mapper.mapAsList(permisoRepository.findAll());
+    }
 }

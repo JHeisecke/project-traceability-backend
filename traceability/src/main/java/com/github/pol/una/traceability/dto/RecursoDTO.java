@@ -1,16 +1,13 @@
 package com.github.pol.una.traceability.dto;
 
-import java.util.List;
-
 /**
  * @author jvillagra
  */
-public class RolDTO {
+public class RecursoDTO {
 
     private Long id;
     private String nombre;
     private String descripcion;
-    private List<PermisoDTO> permisos;
 
     public Long getId() {
         return id;
@@ -34,13 +31,5 @@ public class RolDTO {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public List<PermisoDTO> getPermisos() {
-        return permisos;
-    }
-
-    public void setPermisos(List<PermisoDTO> permisos) {
-        this.permisos = permisos;
     }
 }

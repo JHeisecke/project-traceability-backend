@@ -1,7 +1,6 @@
 package com.github.pol.una.traceability.service;
 
 import com.github.pol.una.traceability.dto.PermisoDTO;
-import com.github.pol.una.traceability.dto.PermisoRolDTO;
 
 import java.util.List;
 
@@ -11,4 +10,6 @@ import java.util.List;
 public interface PermisoRolService {
 
     List<PermisoDTO> getAllPermisosByRol(Long idRol);
+
+    List<PermisoDTO> asignarPermisosRol(List<PermisoDTO> permisos, Long idRol);
 }

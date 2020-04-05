@@ -1,16 +1,21 @@
-package com.github.pol.una.traceability.dto;
+package com.github.pol.una.traceability.entities;
 
-import java.util.List;
+import javax.persistence.*;
 
 /**
  * @author jvillagra
  */
-public class RolDTO {
+@Entity
+@Table(name="recurso", schema = "public")
+public class Recurso {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "descripcion")
     private String descripcion;
-    private List<PermisoDTO> permisos;
 
     public Long getId() {
         return id;
@@ -34,13 +39,5 @@ public class RolDTO {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public List<PermisoDTO> getPermisos() {
-        return permisos;
-    }
-
-    public void setPermisos(List<PermisoDTO> permisos) {
-        this.permisos = permisos;
     }
 }
