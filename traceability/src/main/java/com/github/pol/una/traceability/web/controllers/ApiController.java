@@ -157,8 +157,9 @@ public class ApiController extends BaseRestController{
     }
 
     @DeleteMapping(ApiPaths.ROL_DELETE)
-    public void deleteRol(@PathVariable Long id){
+    public ResponseEntity<Void> deleteRol(@PathVariable Long id){
         rolService.deleteRol(id);
+        return ResponseEntity.ok().build();
     }
 
     /**

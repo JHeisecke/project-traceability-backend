@@ -4,7 +4,7 @@ Integrantes:
 * Yesshua Lopez (yedaloc)
 * Matias Fare (matiasfare)
 
-###Dependencias
+### Dependencias
 * Java 8
 * Postgres10
 
@@ -22,7 +22,7 @@ Integrantes:
 
     $ ./run.sh
     
-####OBS: User administrador default
+#### OBS: User administrador default
   
-    user: admin
-    pass: admin
+  user: admin
+  pass: admin
