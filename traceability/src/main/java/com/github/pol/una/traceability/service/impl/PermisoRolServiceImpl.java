@@ -48,11 +48,11 @@ public class PermisoRolServiceImpl implements PermisoRolService {
                 RecursoDTO recurso = recursoService.getById(permisoRol.getIdRecurso());
                 if(recurso != null) {
                     for(RecursoDTO recursoDTO : recursosPorPermiso){
-                        if (recursoDTO == recurso){
+                        if(recursoDTO == recurso){
                             cargado = true;
                         }
                     }
-                    if(!cargado) {
+                    if(Boolean.FALSE.equals(cargado)) {
                         recursosPorPermiso.add(recurso);
                     }
                     cargado = false;
@@ -65,7 +65,7 @@ public class PermisoRolServiceImpl implements PermisoRolService {
                     cargado = true;
                 }
             }
-            if(!cargado) {
+            if(Boolean.FALSE.equals(cargado)) {
                 permisos.add(permiso);
             }
 
@@ -75,7 +75,7 @@ public class PermisoRolServiceImpl implements PermisoRolService {
 
     @Override
     public List<PermisoDTO> asignarPermisosRol(List<PermisoDTO> permisos, Long idRol) {
-
+        borrarPermisosRol(idRol);
         for(PermisoDTO permiso : permisos){
             for(RecursoDTO recursoDTO : permiso.getRecursos()){
                 if(permisoRolRepository.findByIdRolAndIdPermisoAndIdRecurso(idRol, permiso.getId(), recursoDTO.getId() )
@@ -89,5 +89,10 @@ public class PermisoRolServiceImpl implements PermisoRolService {
             }
         }
         return permisos;
+    }
+
+    @Override
+    public void borrarPermisosRol(Long idRol) {
+        permisoRolRepository.deleteByIdRol(idRol);
     }
 }
