@@ -32,8 +32,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDTO saveItem(ItemDTO itemDTO) throws ItemException {
-        Optional<Item> item = itemRepository.findById(itemDTO.getId());
-        if(item.isPresent()){
+        if(itemDTO.getId() != null){
            itemDTO.setVersion(itemDTO.getVersion()+1L);
         }
         itemRepository.save(itemMapper.mapToEntity(itemDTO));
