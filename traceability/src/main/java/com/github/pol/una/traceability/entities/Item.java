@@ -44,6 +44,9 @@ public class Item {
     @Column(name = "id_proyecto")
     private Long idProyecto;
 
+    @Column(name = "version")
+    private Long version;
+
     public Long getId() {
         return id;
     }
@@ -119,4 +122,8 @@ public class Item {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Long getVersion() {return version;}
+
+    public void setVersion(Long version)  {this.version = version; }
 }

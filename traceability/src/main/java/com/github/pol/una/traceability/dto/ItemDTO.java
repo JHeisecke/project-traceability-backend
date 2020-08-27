@@ -20,6 +20,8 @@ public class ItemDTO {
     private String descripcion;
     private String prioridad;
     private Long idProyecto;
+    private Long version;
+
     public Long getId() {
         return id;
     }
@@ -95,4 +97,8 @@ public class ItemDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Long getVersion() { return version; }
+
+    public void setVersion(Long version) { this.version = version; }
 }

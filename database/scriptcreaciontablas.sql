@@ -93,7 +93,8 @@ fecha_alta date,
 fecha_modificacion date,
 observacion varchar (70),
 descripcion varchar (50),
-prioridad varchar (20)
+prioridad varchar (20),
+version	integer
 );
 
 
@@ -128,6 +129,8 @@ on update no action on delete no action;
 alter table item add constraint linea_base_3_fkey foreign key (id_linea_base)
 references linea_base (id) match simple
 on update no action on delete no action;
+
+alter table item alter column version set default 1;
 
 -- Inserts de prueba
 
