@@ -93,6 +93,8 @@ public class PermisoRolServiceImpl implements PermisoRolService {
 
     @Override
     public void borrarPermisosRol(Long idRol) {
-        permisoRolRepository.deleteByIdRol(idRol);
+        if(!permisoRolRepository.findByIdRol(idRol).isEmpty()) {
+            permisoRolRepository.deleteByIdRol(idRol);
+        }
     }
 }
