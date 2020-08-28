@@ -12,4 +12,6 @@ public interface PermisoRolService {
     List<PermisoDTO> getAllPermisosByRol(Long idRol);
 
     List<PermisoDTO> asignarPermisosRol(List<PermisoDTO> permisos, Long idRol);
+
+    void borrarPermisosRol(Long idRol);
 }
