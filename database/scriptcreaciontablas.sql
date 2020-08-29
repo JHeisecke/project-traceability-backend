@@ -202,7 +202,7 @@ INSERT INTO parametro (id, dominio, valor, orden, descripcion)
 VALUES (default,'estado_item','BAJO',3,'estado de prioridad bajo');
 
 INSERT INTO parametro (id, dominio, valor, orden, descripcion)
-VALUES (default,'estado_proyecto','CURSO',1,'el proyecto esta en curso');
+VALUES (default,'estado_proyecto','EN CURSO',1,'el proyecto esta en curso');
 
 INSERT INTO parametro (id, dominio, valor, orden, descripcion)
 VALUES (default,'estado_proyecto','PRODUCCION',2,'el proyecto esta en produccion');
