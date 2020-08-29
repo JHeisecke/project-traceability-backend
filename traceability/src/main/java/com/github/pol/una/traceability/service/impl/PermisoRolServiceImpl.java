@@ -34,43 +34,28 @@ public class PermisoRolServiceImpl implements PermisoRolService {
 
     @Override
     public List<PermisoDTO> getAllPermisosByRol(Long idRol) {
-        List<PermisoRolDTO> permisosPorRol = mapper.mapAsList(permisoRolRepository.findByIdRol(idRol));
-        List<PermisoDTO> permisos = new ArrayList<>();
-        Boolean cargado = false;
-
-        for(PermisoRolDTO permisoRolDTO : permisosPorRol){
-
-            List<PermisoRolDTO> permisoDeRol = mapper.mapAsList(permisoRolRepository
-                    .findByIdRolAndIdPermiso(idRol, permisoRolDTO.getIdPermiso()));
-            List<RecursoDTO> recursosPorPermiso = new ArrayList<>();
-
-            for(PermisoRolDTO permisoRol : permisoDeRol) {
-                RecursoDTO recurso = recursoService.getById(permisoRol.getIdRecurso());
-                if(recurso != null) {
-                    for(RecursoDTO recursoDTO : recursosPorPermiso){
-                        if(recursoDTO == recurso){
-                            cargado = true;
-                        }
-                    }
-                    if(Boolean.FALSE.equals(cargado)) {
-                        recursosPorPermiso.add(recurso);
-                    }
-                    cargado = false;
-                }
+        List<PermisoRolDTO> permisosPorRol;
+        List<PermisoDTO> listadoPermisos = permisoService.getAllPermisos();
+        List<PermisoDTO> result = new ArrayList<>();
+        for(PermisoDTO permisoEnListado : listadoPermisos){
+            permisosPorRol = mapper
+                    .mapAsList(permisoRolRepository.findByIdRolAndIdPermiso(idRol, permisoEnListado.getId()));
+            if(!permisosPorRol.isEmpty()) {
+                PermisoDTO permiso = permisoService.getPermisosById(permisoEnListado.getId());
+                permiso.setRecursos(getListaRecursosPorPermiso(permisosPorRol));
+                result.add(permiso);
             }
-            PermisoDTO permiso = permisoService.getPermisosById(permisoRolDTO.getIdPermiso());
-            permiso.setRecursos(recursosPorPermiso);
-            for(PermisoDTO permisoEnLista : permisos){
-                if(permisoEnLista.getId().equals(permiso.getId())){
-                    cargado = true;
-                }
-            }
-            if(Boolean.FALSE.equals(cargado)) {
-                permisos.add(permiso);
-            }
-
+            permisosPorRol.clear();
         }
-        return permisos;
+        return result;
+    }
+
+    private List<RecursoDTO> getListaRecursosPorPermiso(List<PermisoRolDTO> permisoRol) {
+        List<RecursoDTO> recursos = new ArrayList<>();
+        for(PermisoRolDTO permisoRolDTO : permisoRol){
+            recursos.add(recursoService.getById(permisoRolDTO.getIdRecurso()));
+        }
+        return recursos;
     }
 
     @Override
