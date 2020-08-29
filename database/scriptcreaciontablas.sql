@@ -191,3 +191,39 @@ INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
 VALUES(3,5,3);
 INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
 VALUES(3,5,4);
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_item','ALTO',1,'estado de prioridad alto');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_item','MEDIO',2,'estado de prioridad medio');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_item','BAJO',3,'estado de prioridad bajo');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_proyecto','CURSO',1,'el proyecto esta en curso');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_proyecto','PRODUCCION',2,'el proyecto esta en produccion');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_proyecto','ANALISIS',3,'el proyecto esta en analisis');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_fase','INICIAL',1,'La fase se ha inicializado');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_fase','DESARROLLO',2,'La fase esta en desarrollo');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_fase','REVISION',3,'La fase esta en Revision');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_fase','COMPLETA',4,'La fase esta completa');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_lineabase','ABIERTO',1,'La linea base esta abierta');
+
+INSERT INTO parametro (id, dominio, valor, orden, descripcion)
+VALUES (default,'estado_lineabase','CERRADO',2,'La linea base esta cerrada');
