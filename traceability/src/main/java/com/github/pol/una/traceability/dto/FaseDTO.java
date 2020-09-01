@@ -1,25 +1,17 @@
-package com.github.pol.una.traceability.entities;
+package com.github.pol.una.traceability.dto;
 
-import javax.persistence.*;
+
 import java.util.Date;
 
-@Entity
-@Table(name = "fase", schema = "public")
-public class Fase {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+/**
+ * @author jvillagra
+ * 2020-09-01
+ */
+public class FaseDTO {
     private Long id;
-
-    @Column(name = "id_proyecto")
     private Long idProyecto;
-
-    @Column(name = "estado")
     private String estado;
-
-    @Column(name = "fecha_alta", updatable = false)
     private Date fechaAlta;
-
-    @Column (name = "fecha_modificacion")
     private Date fechaModificacion;
 
     public Long getId() {
@@ -30,11 +22,17 @@ public class Fase {
         this.id = id;
     }
 
-    public Long getIdProyecto() {return idProyecto;}
+    public Long getIdProyecto() {
+        return idProyecto;
+    }
 
-    public void setIdProyecto(Long idProyecto)  {this.idProyecto = idProyecto; }
+    public void setIdProyecto(Long idProyecto) {
+        this.idProyecto = idProyecto;
+    }
 
-    public String getEstado() { return estado; }
+    public String getEstado() {
+        return estado;
+    }
 
     public void setEstado(String estado) {
         this.estado = estado;
@@ -52,8 +50,7 @@ public class Fase {
         return fechaModificacion;
     }
 
-    public void setFecha_modificacion(Date fechaModificacion) {
+    public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
-
-    }
+}
