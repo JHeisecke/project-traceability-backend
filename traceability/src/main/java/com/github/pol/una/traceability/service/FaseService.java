@@ -1,7 +1,6 @@
 package com.github.pol.una.traceability.service;
 
 import com.github.pol.una.traceability.dto.FaseDTO;
-import com.github.pol.una.traceability.exceptions.FaseException;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ public interface FaseService {
      * Guardar nueva fase
      * @param fase
      * @return
-     * @throws FaseException
      */
     FaseDTO saveFase(FaseDTO fase);
 
@@ -22,7 +20,6 @@ public interface FaseService {
      * Encontrar fases por id
      * @param id
      * @return
-     * @throws FaseException
      */
     FaseDTO getById(Long id);
 
@@ -30,7 +27,6 @@ public interface FaseService {
      * Encontrar fases por proyecto
      * @param idProyecto
      * @return
-     * @throws FaseException
      */
     List<FaseDTO> getByIdProyecto(Long idProyecto);
 

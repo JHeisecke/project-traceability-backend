@@ -41,4 +41,9 @@ public class ApiPaths {
     public static final String PERMISOS_ALL = BASE + "/permisos";
 
     public static final String RECURSOS_ALL = BASE + "/recursos";
+
+    public static final String FASE = BASE + "/fase";
+    public static final String FASE_SAVE = FASE + "/save";
+    public static final String FASE_BY_ID = FASE + "/{id}";
+    public static final String FASE_BY_PROJECT = FASE + "/proyecto/{idProyecto}";
 }
