@@ -102,8 +102,7 @@ version	integer
 alter table usuario_proyecto add constraint usuario_rol_proyecto_fkey foreign key (id_proyecto)
 references proyecto (id) match simple
 	on update no action on delete cascade;
-	
-	
+
 alter table usuario_rol add constraint id_rol_fkey foreign key (id_rol)
 references rol (id) match simple
 	on update no action on delete cascade;
@@ -128,6 +127,10 @@ on update no action on delete no action;
 
 alter table item add constraint linea_base_3_fkey foreign key (id_linea_base)
 references linea_base (id) match simple
+on update no action on delete no action;
+
+alter table item add constraint id_fase_item_fkey foreign key (id_fase)
+references fase (id) match simple
 on update no action on delete no action;
 
 alter table item alter column version set default 1;
