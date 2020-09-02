@@ -227,3 +227,5 @@ VALUES (default,'estado_lineabase','ABIERTO',1,'La linea base esta abierta');
 
 INSERT INTO parametro (id, dominio, valor, orden, descripcion)
 VALUES (default,'estado_lineabase','CERRADO',2,'La linea base esta cerrada');
+
+DELETE FROM permiso where nombre='crud';
