@@ -150,7 +150,7 @@ INSERT INTO permiso(nombre, descripcion) VALUES ('visualizar', 'Permite visualiz
 INSERT INTO permiso(nombre, descripcion) VALUES ('crear', 'Permite creacion de elementos');
 INSERT INTO permiso(nombre, descripcion) VALUES ('editar', 'Permite edicion de elementos');
 INSERT INTO permiso(nombre, descripcion) VALUES ('eliminar', 'Permite eliminacion de elementos');
-INSERT INTO permiso(nombre, descripcion) VALUES ('crud', 'Permisos ABM o CRUD sobre elementos');
+
 
 INSERT INTO ROL(nombre, descripcion) VALUES('sysadmin','Administrador del sistema');
 INSERT INTO ROL(nombre, descripcion) VALUES('Developer','Desarrollador en proyectos');
@@ -160,7 +160,7 @@ INSERT INTO usuario_rol (id_usuario, id_rol) values (1, 1);
 INSERT INTO usuario_rol (id_usuario, id_rol) values (2, 2);
 INSERT INTO usuario_rol (id_usuario, id_rol) values (3, 3);
 INSERT INTO usuario_rol (id_usuario, id_rol) values (4, 3);
-INSERT INTO usuario_rol (id_usuario, id_rol) values (5, 2);
+
 
 INSERT INTO recurso(nombre, descripcion)
 VALUES('sistema','Sistema de Trazabilidad');
@@ -177,20 +177,7 @@ INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
 VALUES(1,2,1);
 INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
 VALUES(1,3,1);
-INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
-VALUES(1,5,2);
-INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
-VALUES(1,5,3);
-INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
-VALUES(1,5,4);
-INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
-VALUES(2,5,4);
-INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
-VALUES(3,5,2);
-INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
-VALUES(3,5,3);
-INSERT INTO permiso_rol (id_rol, id_permiso, id_recurso)
-VALUES(3,5,4);
+
 
 INSERT INTO parametro (id, dominio, valor, orden, descripcion)
 VALUES (default,'estado_item','ALTO',1,'estado de prioridad alto');
@@ -228,4 +215,3 @@ VALUES (default,'estado_lineabase','ABIERTO',1,'La linea base esta abierta');
 INSERT INTO parametro (id, dominio, valor, orden, descripcion)
 VALUES (default,'estado_lineabase','CERRADO',2,'La linea base esta cerrada');
 
-DELETE FROM permiso where nombre='crud';
