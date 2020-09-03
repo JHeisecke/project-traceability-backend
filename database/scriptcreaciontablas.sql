@@ -8,7 +8,7 @@ id_lider bigint not null,
 fecha_alta date,
 fecha_modificacion date
 );
-	
+
 
 create table parametro (
 id bigserial primary key,
@@ -44,7 +44,7 @@ create table usuario_proyecto (
 id bigserial primary key,
 id_proyecto bigint,
 id_usuario bigint
-);	
+);
 
 create table usuario_rol (
 id bigserial primary key,
@@ -127,10 +127,6 @@ on update no action on delete no action;
 
 alter table item add constraint linea_base_3_fkey foreign key (id_linea_base)
 references linea_base (id) match simple
-on update no action on delete no action;
-
-alter table item add constraint id_fase_item_fkey foreign key (id_fase)
-references fase (id) match simple
 on update no action on delete no action;
 
 alter table item alter column version set default 1;
