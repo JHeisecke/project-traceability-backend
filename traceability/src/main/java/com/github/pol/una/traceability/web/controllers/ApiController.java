@@ -2,10 +2,8 @@ package com.github.pol.una.traceability.web.controllers;
 
 import com.github.pol.una.traceability.constants.ApiPaths;
 import com.github.pol.una.traceability.dto.*;
-import com.github.pol.una.traceability.exceptions.ProjectException;
-import com.github.pol.una.traceability.exceptions.ItemException;
-import com.github.pol.una.traceability.exceptions.RolException;
-import com.github.pol.una.traceability.exceptions.UserException;
+import com.github.pol.una.traceability.entities.LineaBase;
+import com.github.pol.una.traceability.exceptions.*;
 import com.github.pol.una.traceability.service.*;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
@@ -34,6 +32,9 @@ public class ApiController extends BaseRestController{
     private PermisoService permisoService;
     @Autowired
     private RecursoService recursoService;
+
+    @Autowired
+    private LineaBaseService lineabaseService;
 
     @PostMapping(ApiPaths.LOGIN)
     public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> login(@RequestBody UsuarioDTO usuario) throws UserException {
@@ -181,3 +182,35 @@ public class ApiController extends BaseRestController{
         return ResponseEntity.ok(ListResponseDTO.success(recursos));
     }
 }
+
+    /**
+     * LINEABASE ENDPOINTS
+     *
+     */
+
+
+    @PostMapping(ApiPaths.LINEABASE_SAVE)
+    public ResponseEntity<ObjectResponseDTO<LineaBaseDTO>> saveLineaBase(@RequestBody LineaBaseDTO lineabase)  {
+        return ResponseEntity.ok(ObjectResponseDTO.success(lineabaseService.saveLineaBase(lineabase)));
+    }
+
+    @DeleteMapping(ApiPaths.LINEABASE_DELETE)
+    public ResponseEntity<Void> deleteLineaBase(@PathVariable Long id) {
+        try {
+            lineabaseService.deleteLineabase(id);
+            return ResponseEntity.ok().build();
+        }catch (LineaBaseException e) {
+            throw e;
+        }
+    }
+
+    @GetMapping(ApiPaths.LINEABASE_ALL)
+    public ResponseEntity<ListResponseDTO> getAllLineaBase(){
+        List<LineaBaseDTO> lineabase = lineabaseService.getAllLineaBase();
+        return ResponseEntity.ok(ListResponseDTO.success(lineabase));
+    }
+
+    @GetMapping(ApiPaths.LINEABASE_BY_ID)
+    public ResponseEntity<ObjectResponseDTO<LineaBaseDTO>> getLineaBaseById(@PathVariable Long id) {
+        return ResponseEntity.ok(ObjectResponseDTO.success(lineabaseService.getLineaBaseById(id)));
+    }

@@ -1,26 +1,13 @@
-package com.github.pol.una.traceability.entities;
+package com.github.pol.una.traceability.dto;
 
-import javax.persistence.*;
-@Entity
-@Table(name = "LineaBase", schema = "public")
-public class LineaBase {
+public class LineaBaseDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Id
-    @Column (name = "id_fase")
-    private long idFase;
-
-    @Column(name = "estado")
+    private Long idFase;
     private String estado;
-
-    @Column (name = "fecha_alta")
     private String fechaAlta;
-
-    @Column (name = "fecha_modificacion")
     private String fechaModificacion;
+
 
     public Long getId() {
         return id;
@@ -30,20 +17,21 @@ public class LineaBase {
         this.id = id;
     }
 
-    public long getIdFase() {
+    public Long getIdFase() {
         return idFase;
     }
 
-    public void setIdFase(long idFase) {
+    public void setIdFase(Long idFase) {
         this.idFase = idFase;
     }
 
-    public String getEstado() { return estado; }
+    public String getEstado() {
+        return estado;
+    }
 
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
 
     public String getFechaAlta() {
         return fechaAlta;
@@ -53,7 +41,7 @@ public class LineaBase {
         this.fechaAlta = fechaAlta;
     }
 
-    public String getFechaModificacion() {
+    public String getfechaModificacion() {
         return fechaModificacion;
     }
 
@@ -61,4 +49,6 @@ public class LineaBase {
         this.fechaModificacion = fechaModificacion;
     }
 
-}
+
+    }
+
