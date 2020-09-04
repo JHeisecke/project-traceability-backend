@@ -2,12 +2,12 @@ package com.github.pol.una.traceability.web.controllers;
 
 import com.github.pol.una.traceability.constants.ApiPaths;
 import com.github.pol.una.traceability.dto.*;
-import com.github.pol.una.traceability.entities.LineaBase;
 import com.github.pol.una.traceability.exceptions.*;
 import com.github.pol.una.traceability.service.*;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-public class ApiController extends BaseRestController{
+public class ApiController extends BaseRestController {
 
     @Autowired
     private ProyectoService proyectoService;
@@ -43,7 +43,6 @@ public class ApiController extends BaseRestController{
 
     /**
      * USER ENDPOINTS
-     *
      */
     @GetMapping(ApiPaths.USER_ALL)
     public ResponseEntity<ListResponseDTO> getUsuariosExistentes() {
@@ -52,12 +51,12 @@ public class ApiController extends BaseRestController{
     }
 
     @PostMapping(ApiPaths.USER_SAVE)
-    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> saveUser(@RequestBody UsuarioDTO user){
+    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> saveUser(@RequestBody UsuarioDTO user) {
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.saveUser(user)));
     }
 
     @GetMapping(ApiPaths.USER)
-    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> getUsuario(@RequestBody UsuarioDTO usuarioDTO){
+    public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> getUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         return ResponseEntity.ok(ObjectResponseDTO.success(usuarioService.findByUsername(usuarioDTO.getUsername())));
     }
 
@@ -66,27 +65,26 @@ public class ApiController extends BaseRestController{
         try {
             usuarioService.deleteUser(username);
             return ResponseEntity.ok().build();
-        }catch (UserException e) {
+        } catch (UserException e) {
             throw e;
         }
     }
 
     @GetMapping(ApiPaths.USERS_BY_ROLE)
-    public ResponseEntity<ListResponseDTO> getUsuariosByRol(@PathVariable Long id){
+    public ResponseEntity<ListResponseDTO> getUsuariosByRol(@PathVariable Long id) {
         return ResponseEntity.ok(ListResponseDTO.success(permisoRolService.getAllPermisosByRol(id)));
     }
 
     /**
      * PROJECT ENDPOINTS
-     *
      */
     @PostMapping(ApiPaths.PROJECT_SAVE)
-    public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> saveProject(@RequestBody ProyectoDTO proyecto){
+    public ResponseEntity<ObjectResponseDTO<ProyectoDTO>> saveProject(@RequestBody ProyectoDTO proyecto) {
         return ResponseEntity.ok(ObjectResponseDTO.success(proyectoService.saveProject(proyecto)));
     }
 
     @GetMapping(ApiPaths.PROJECT_ALL)
-    public ResponseEntity<ListResponseDTO> getAllProjects(){
+    public ResponseEntity<ListResponseDTO> getAllProjects() {
         List<ProyectoDTO> projects = proyectoService.getAllProjects();
         return ResponseEntity.ok(ListResponseDTO.success(projects));
     }
@@ -101,20 +99,19 @@ public class ApiController extends BaseRestController{
         try {
             proyectoService.deleteProject(id);
             return ResponseEntity.ok().build();
-        }catch (ProjectException e) {
+        } catch (ProjectException e) {
             throw e;
         }
     }
 
     /**
      * ITEMS ENDPOINTS
-     *
      */
 
     @GetMapping(ApiPaths.ITEMS_BY_PROJECT)
     public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByProjectId(@PathVariable Long idProyecto) throws ItemException {
         List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByProyectoId(idProyecto);
-        return ResponseEntity.ok(ListResponseDTO.success(items ));
+        return ResponseEntity.ok(ListResponseDTO.success(items));
     }
 
     @PostMapping(ApiPaths.ITEM_SAVE)
@@ -127,70 +124,67 @@ public class ApiController extends BaseRestController{
         try {
             itemService.deleteItem(id);
             return ResponseEntity.ok().build();
-        }catch (ItemException e) {
+        } catch (ItemException e) {
             throw e;
         }
     }
 
     /**
      * ROLES ENDPOINTS
-     *
      */
     @GetMapping(ApiPaths.ROLES)
-    public ResponseEntity<ListResponseDTO> getRolesExistentes(){
+    public ResponseEntity<ListResponseDTO> getRolesExistentes() {
         List<RolDTO> roles = rolService.getAll();
         return ResponseEntity.ok(ListResponseDTO.success(roles));
     }
 
     @GetMapping(ApiPaths.ROL_BY_ID)
-    public ResponseEntity<ObjectResponseDTO<RolDTO>> getRolById(@PathVariable Long id) throws RolException{
+    public ResponseEntity<ObjectResponseDTO<RolDTO>> getRolById(@PathVariable Long id) throws RolException {
         return ResponseEntity.ok(ObjectResponseDTO.success(rolService.getRolById(id)));
     }
 
     @GetMapping(ApiPaths.ROL_BY_NOMBRE)
-    public ResponseEntity<ObjectResponseDTO<RolDTO>> getRolByNombre(@PathVariable String nombre) throws RolException{
+    public ResponseEntity<ObjectResponseDTO<RolDTO>> getRolByNombre(@PathVariable String nombre) throws RolException {
         return ResponseEntity.ok(ObjectResponseDTO.success(rolService.getRolByNombre(nombre)));
     }
 
     @PostMapping(ApiPaths.ROL_SAVE)
-    public ResponseEntity<ObjectResponseDTO<RolDTO>> saveRol(@RequestBody RolDTO rol){
+    public ResponseEntity<ObjectResponseDTO<RolDTO>> saveRol(@RequestBody RolDTO rol) {
         return ResponseEntity.ok(ObjectResponseDTO.success(rolService.save(rol)));
     }
 
     @DeleteMapping(ApiPaths.ROL_DELETE)
-    public ResponseEntity<Void> deleteRol(@PathVariable Long id){
+    public ResponseEntity<Void> deleteRol(@PathVariable Long id) {
         rolService.deleteRol(id);
         return ResponseEntity.ok().build();
     }
 
     /**
      * PERMISOS ENDPOINTS
-     *
      */
     @GetMapping(ApiPaths.PERMISOS_ALL)
-    public ResponseEntity<ListResponseDTO> getPermisosExistentes(){
+    public ResponseEntity<ListResponseDTO> getPermisosExistentes() {
         List<PermisoDTO> permisos = permisoService.getAllPermisos();
         return ResponseEntity.ok(ListResponseDTO.success(permisos));
     }
+
     /**
      * RECURSOS ENDPOINTS
-     *
      */
     @GetMapping(ApiPaths.RECURSOS_ALL)
-    public ResponseEntity<ListResponseDTO> getRecursosExistentes(){
+    public ResponseEntity<ListResponseDTO> getRecursosExistentes() {
         List<RecursoDTO> recursos = recursoService.getAllRecursos();
         return ResponseEntity.ok(ListResponseDTO.success(recursos));
     }
-}
+
 
     /**
      * LINEABASE ENDPOINTS
-     *
      */
 
 
     @PostMapping(ApiPaths.LINEABASE_SAVE)
-    public ResponseEntity<ObjectResponseDTO<LineaBaseDTO>> saveLineaBase(@RequestBody LineaBaseDTO lineaBase)  {
+    public ResponseEntity<ObjectResponseDTO<LineaBaseDTO>> saveLineaBase(@RequestBody LineaBaseDTO lineaBase) {
         return ResponseEntity.ok(ObjectResponseDTO.success(lineaBaseService.saveLineaBase(lineaBase)));
     }
 
@@ -199,18 +193,19 @@ public class ApiController extends BaseRestController{
         try {
             lineaBaseService.deleteLineaBase(id);
             return ResponseEntity.ok().build();
-        }catch (LineaBaseException e) {
+        } catch (LineaBaseException e) {
             throw e;
         }
     }
 
     @GetMapping(ApiPaths.LINEABASE_ALL)
-    public ResponseEntity<ListResponseDTO> getAllLineaBase(){
+    public ResponseEntity<ListResponseDTO> getAllLineaBase() {
         List<LineaBaseDTO> lineaBase = lineaBaseService.getAllLineaBase();
         return ResponseEntity.ok(ListResponseDTO.success(lineaBase));
     }
 
     @GetMapping(ApiPaths.LINEABASE_BY_ID)
-    public ResponseEntity<ObjectResponseDTO<LineaBaseDTO>> getLineaBaseById(@PathVariable Long id) {
+    public ResponseEntity getLineaBaseById(@PathVariable Long id) throws LineaBaseException {
         return ResponseEntity.ok(ObjectResponseDTO.success(lineaBaseService.getLineaBaseById(id)));
     }
+}

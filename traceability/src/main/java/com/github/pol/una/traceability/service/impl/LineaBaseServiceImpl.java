@@ -10,11 +10,12 @@ import com.github.pol.una.traceability.mapper.impl.LineaBaseMapper;
 import com.github.pol.una.traceability.repository.LineaBaseRepository;
 import com.github.pol.una.traceability.service.LineaBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class LineaBaseServiceImpl implements LineaBaseService {
 
     @Autowired
@@ -22,6 +23,7 @@ public class LineaBaseServiceImpl implements LineaBaseService {
     @Autowired
     private LineaBaseMapper lineaBaseMapper;
 
+    @Override
     public LineaBaseDTO saveLineaBase(LineaBaseDTO lineaBaseDTO)  {
         LineaBase lineaBase = lineaBaseMapper.mapToEntity(lineaBaseDTO);
         lineaBaseRepository.save(lineaBase);
@@ -41,10 +43,11 @@ public class LineaBaseServiceImpl implements LineaBaseService {
 
     @Override
     public List<LineaBaseDTO> getAllLineaBase() {
-        List<LineaBase> listaLineaBase = lineabaseRepository.findAll();
+        List<LineaBase> listaLineaBase = lineaBaseRepository.findAll();
         List<LineaBaseDTO> lineabaseDTOS = new ArrayList<>();
         for(LineaBase liba : listaLineaBase){
             LineaBaseDTO lineabaseDTO = lineaBaseMapper.mapToDto(liba);
+            lineabaseDTO.setItems()
             lineabaseDTOS.add(lineabaseDTO);
         }
         return lineabaseDTOS;
@@ -52,7 +55,7 @@ public class LineaBaseServiceImpl implements LineaBaseService {
 
     @Override
     public LineaBaseDTO getLineaBaseById(Long id) throws LineaBaseException {
-        Optional<LineaBase> lineabase = lineabaseRepository.findById(id);
+        Optional<LineaBase> lineabase = lineaBaseRepository.findById(id);
         if(lineabase.isPresent()) {
             return lineaBaseMapper.mapToDto(lineabase.get());
         } else {

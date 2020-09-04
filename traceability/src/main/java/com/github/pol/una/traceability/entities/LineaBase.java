@@ -7,9 +7,9 @@ public class LineaBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private Long id;
 
-    @Id
     @Column (name = "id_fase")
     private long idFase;
 

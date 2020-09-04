@@ -16,15 +16,13 @@ import java.util.List;
 public interface LineaBaseService {
 
 
-    LineaBaseDTO saveLineaBase(LineaBaseDTO lineabaseDTO) throws LineaBaseException;
+    LineaBaseDTO saveLineaBase(LineaBaseDTO lineabaseDTO) ;
 
     void deleteLineaBase(Long id) throws LineaBaseException;
 
     List<LineaBaseDTO> getAllLineaBase();
 
     LineaBaseDTO getLineaBaseById(Long id) throws LineaBaseException;
-
-
 
 
 }
