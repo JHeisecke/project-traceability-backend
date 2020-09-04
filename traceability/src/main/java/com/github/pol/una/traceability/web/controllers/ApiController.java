@@ -34,7 +34,7 @@ public class ApiController extends BaseRestController{
     private RecursoService recursoService;
 
     @Autowired
-    private LineaBaseService lineabaseService;
+    private LineaBaseService lineaBaseService;
 
     @PostMapping(ApiPaths.LOGIN)
     public ResponseEntity<ObjectResponseDTO<UsuarioDTO>> login(@RequestBody UsuarioDTO usuario) throws UserException {
@@ -190,14 +190,14 @@ public class ApiController extends BaseRestController{
 
 
     @PostMapping(ApiPaths.LINEABASE_SAVE)
-    public ResponseEntity<ObjectResponseDTO<LineaBaseDTO>> saveLineaBase(@RequestBody LineaBaseDTO lineabase)  {
-        return ResponseEntity.ok(ObjectResponseDTO.success(lineabaseService.saveLineaBase(lineabase)));
+    public ResponseEntity<ObjectResponseDTO<LineaBaseDTO>> saveLineaBase(@RequestBody LineaBaseDTO lineaBase)  {
+        return ResponseEntity.ok(ObjectResponseDTO.success(lineaBaseService.saveLineaBase(lineaBase)));
     }
 
     @DeleteMapping(ApiPaths.LINEABASE_DELETE)
-    public ResponseEntity<Void> deleteLineaBase(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteLineaBase(@PathVariable Long id) throws LineaBaseException {
         try {
-            lineabaseService.deleteLineabase(id);
+            lineaBaseService.deleteLineaBase(id);
             return ResponseEntity.ok().build();
         }catch (LineaBaseException e) {
             throw e;
@@ -206,11 +206,11 @@ public class ApiController extends BaseRestController{
 
     @GetMapping(ApiPaths.LINEABASE_ALL)
     public ResponseEntity<ListResponseDTO> getAllLineaBase(){
-        List<LineaBaseDTO> lineabase = lineabaseService.getAllLineaBase();
-        return ResponseEntity.ok(ListResponseDTO.success(lineabase));
+        List<LineaBaseDTO> lineaBase = lineaBaseService.getAllLineaBase();
+        return ResponseEntity.ok(ListResponseDTO.success(lineaBase));
     }
 
     @GetMapping(ApiPaths.LINEABASE_BY_ID)
     public ResponseEntity<ObjectResponseDTO<LineaBaseDTO>> getLineaBaseById(@PathVariable Long id) {
-        return ResponseEntity.ok(ObjectResponseDTO.success(lineabaseService.getLineaBaseById(id)));
+        return ResponseEntity.ok(ObjectResponseDTO.success(lineaBaseService.getLineaBaseById(id)));
     }
