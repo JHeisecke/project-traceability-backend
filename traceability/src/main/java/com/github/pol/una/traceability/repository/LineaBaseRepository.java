@@ -13,7 +13,7 @@ public interface LineaBaseRepository extends JpaRepository<LineaBase, LineaBaseD
 
     List<LineaBase> findAll();
 
-
+    List<LineaBase> findByIdProyecto(Long idProyecto);
 
 
 }

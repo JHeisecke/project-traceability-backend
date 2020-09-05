@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -25,32 +26,22 @@ public class LineaBaseServiceImpl implements LineaBaseService {
 
     @Override
     public LineaBaseDTO saveLineaBase(LineaBaseDTO lineaBaseDTO)  {
-        LineaBase lineaBase = lineaBaseMapper.mapToEntity(lineaBaseDTO);
-        lineaBaseRepository.save(lineaBase);
 
-        return lineaBaseDTO;
-    }
-
-    @Override
-    public void deleteLineaBase(Long id) throws LineaBaseException {
-        Optional<LineaBase> lineabase = lineaBaseRepository.findById(id);
-        if(lineabase.isPresent()) {
-            lineaBaseRepository.delete(lineabase.get());
-        } else {
-            throw new LineaBaseException("notFound", "No se encontró la linea base "+id);
+        if(lineaBaseDTO.getId() != null){
+            lineaBaseDTO.setFechaModificacion(new Date());
+        }else{
+            lineaBaseDTO.setFechaAlta(new Date());
         }
+
+        LineaBase lineaBase = lineaBaseMapper.mapToEntity(lineaBaseDTO);
+
+        return lineaBaseMapper.mapToDto( lineaBaseRepository.save(lineaBase));
     }
+
 
     @Override
     public List<LineaBaseDTO> getAllLineaBase() {
-        List<LineaBase> listaLineaBase = lineaBaseRepository.findAll();
-        List<LineaBaseDTO> lineabaseDTOS = new ArrayList<>();
-        for(LineaBase liba : listaLineaBase){
-            LineaBaseDTO lineabaseDTO = lineaBaseMapper.mapToDto(liba);
-            lineabaseDTO.setItems()
-            lineabaseDTOS.add(lineabaseDTO);
-        }
-        return lineabaseDTOS;
+       return lineaBaseMapper.mapAsList(lineaBaseRepository.findAll());
     }
 
     @Override
@@ -63,6 +54,8 @@ public class LineaBaseServiceImpl implements LineaBaseService {
         }
     }
 
-
-
+    @Override
+    public List<LineaBaseDTO> getLineaBaseByProyecto(Long idProyecto) {
+        return lineaBaseMapper.mapAsList(lineaBaseRepository.findByIdProyecto(idProyecto));
+    }
 }

@@ -204,19 +204,10 @@ public class ApiController extends BaseRestController {
 
 
     @PostMapping(ApiPaths.LINEABASE_SAVE)
-    public ResponseEntity<ObjectResponseDTO<LineaBaseDTO>> saveLineaBase(@RequestBody LineaBaseDTO lineaBase) {
+    public ResponseEntity<ObjectResponseDTO> saveLineaBase(@RequestBody LineaBaseDTO lineaBase) {
         return ResponseEntity.ok(ObjectResponseDTO.success(lineaBaseService.saveLineaBase(lineaBase)));
     }
 
-    @DeleteMapping(ApiPaths.LINEABASE_DELETE)
-    public ResponseEntity<Void> deleteLineaBase(@PathVariable Long id) throws LineaBaseException {
-        try {
-            lineaBaseService.deleteLineaBase(id);
-            return ResponseEntity.ok().build();
-        } catch (LineaBaseException e) {
-            throw e;
-        }
-    }
 
     @GetMapping(ApiPaths.LINEABASE_ALL)
     public ResponseEntity<ListResponseDTO> getAllLineaBase() {
@@ -228,4 +219,11 @@ public class ApiController extends BaseRestController {
     public ResponseEntity getLineaBaseById(@PathVariable Long id) throws LineaBaseException {
         return ResponseEntity.ok(ObjectResponseDTO.success(lineaBaseService.getLineaBaseById(id)));
     }
+
+    @GetMapping(ApiPaths.LINEABASE_BY_PROJECT)
+    public ResponseEntity getLineaBaseByIdProyectoAndIdFase(@PathVariable Long idProyecto) throws LineaBaseException {
+        return ResponseEntity.ok(ObjectResponseDTO.success(lineaBaseService.getLineaBaseByProyecto(idProyecto)));
+    }
+
+
 }

@@ -1,6 +1,8 @@
 package com.github.pol.una.traceability.entities;
 
 import javax.persistence.*;
+import java.util.Date;
+
 @Entity
 @Table(name = "LineaBase", schema = "public")
 public class LineaBase {
@@ -10,17 +12,22 @@ public class LineaBase {
     @Column (name = "id")
     private Long id;
 
+    @Column (name ="id_proyecto")
+    private Long idProyecto;
+
     @Column (name = "id_fase")
-    private long idFase;
+    private Long idFase;
 
     @Column(name = "estado")
     private String estado;
 
-    @Column (name = "fecha_alta")
-    private String fechaAlta;
+    @Column (name = "fecha_alta", updatable = false)
+    private Date fechaAlta;
 
     @Column (name = "fecha_modificacion")
-    private String fechaModificacion;
+    private Date fechaModificacion;
+
+
 
     public Long getId() {
         return id;
@@ -30,35 +37,41 @@ public class LineaBase {
         this.id = id;
     }
 
-    public long getIdFase() {
-        return idFase;
-    }
-
-    public void setIdFase(long idFase) {
-        this.idFase = idFase;
-    }
-
     public String getEstado() { return estado; }
 
     public void setEstado(String estado) {
         this.estado = estado;
     }
 
-
-    public String getFechaAlta() {
+    public Date getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(String fechaAlta) {
+    public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public String getFechaModificacion() {
+    public Date getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(String fechaModificacion) {
+    public Long getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(Long idProyecto) {
+        this.idProyecto = idProyecto;
+    }
+
+    public void setIdFase(Long idFase) {
+        this.idFase = idFase;
+    }
+
+    public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 
+    public Long getIdFase() {
+        return idFase;
+    }
 }
