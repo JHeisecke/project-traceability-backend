@@ -8,7 +8,7 @@ id_lider bigint not null,
 fecha_alta date,
 fecha_modificacion date
 );
-	
+
 
 create table parametro (
 id bigserial primary key,
@@ -44,7 +44,7 @@ create table usuario_proyecto (
 id bigserial primary key,
 id_proyecto bigint,
 id_usuario bigint
-);	
+);
 
 create table usuario_rol (
 id bigserial primary key,
@@ -102,8 +102,7 @@ version	integer
 alter table usuario_proyecto add constraint usuario_rol_proyecto_fkey foreign key (id_proyecto)
 references proyecto (id) match simple
 	on update no action on delete cascade;
-	
-	
+
 alter table usuario_rol add constraint id_rol_fkey foreign key (id_rol)
 references rol (id) match simple
 	on update no action on delete cascade;
