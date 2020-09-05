@@ -47,4 +47,9 @@ public class ApiPaths {
     public static final String LINEABASE_DELETE = LINEABASE + "/delete/{id}";
     public static final String LINEABASE_ALL = LINEABASE + "/linea_bases";
     public static final String LINEABASE_BY_ID = LINEABASE + "/linea_base/{id}";
+
+    public static final String FASE = BASE + "/fase";
+    public static final String FASE_SAVE = FASE + "/save";
+    public static final String FASE_BY_ID = FASE + "/{id}";
+    public static final String FASE_BY_PROJECT = FASE + "/proyecto/{idProyecto}";
 }

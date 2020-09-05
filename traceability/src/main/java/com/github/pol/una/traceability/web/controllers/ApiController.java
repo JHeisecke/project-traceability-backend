@@ -32,6 +32,8 @@ public class ApiController extends BaseRestController {
     private PermisoService permisoService;
     @Autowired
     private RecursoService recursoService;
+    @Autowired
+    private FaseService faseService;
 
     @Autowired
     private LineaBaseService lineaBaseService;
@@ -175,6 +177,24 @@ public class ApiController extends BaseRestController {
     public ResponseEntity<ListResponseDTO> getRecursosExistentes() {
         List<RecursoDTO> recursos = recursoService.getAllRecursos();
         return ResponseEntity.ok(ListResponseDTO.success(recursos));
+    }
+    /**
+     * FASES ENDPOINTS
+     *
+     */
+    @GetMapping(ApiPaths.FASE_BY_ID)
+    public ResponseEntity<ObjectResponseDTO> getFaseById(@PathVariable Long id){
+        return ResponseEntity.ok(ObjectResponseDTO.success(faseService.getById(id)));
+    }
+
+    @GetMapping(ApiPaths.FASE_BY_PROJECT)
+    public ResponseEntity<ListResponseDTO> getFaseByProyecto(@PathVariable Long idProyecto){
+        return ResponseEntity.ok(ListResponseDTO.success(faseService.getByIdProyecto(idProyecto)));
+    }
+
+    @PostMapping(ApiPaths.FASE_SAVE)
+    public ResponseEntity<ObjectResponseDTO> saveFase(@RequestBody FaseDTO fase){
+        return ResponseEntity.ok(ObjectResponseDTO.success(faseService.saveFase(fase)));
     }
 
 
