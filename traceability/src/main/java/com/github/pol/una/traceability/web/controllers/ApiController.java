@@ -131,6 +131,12 @@ public class ApiController extends BaseRestController {
         }
     }
 
+    @GetMapping(ApiPaths.ITEMS_BY_LINEABASE)
+    public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByBaseLineId(@PathVariable Long isLineaBase) throws ItemException {
+        List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByBaseLineId(isLineaBase);
+        return ResponseEntity.ok(ListResponseDTO.success(items));
+    }
+
     /**
      * ROLES ENDPOINTS
      */
@@ -197,12 +203,9 @@ public class ApiController extends BaseRestController {
         return ResponseEntity.ok(ObjectResponseDTO.success(faseService.saveFase(fase)));
     }
 
-
     /**
      * LINEABASE ENDPOINTS
      */
-
-
     @PostMapping(ApiPaths.LINEABASE_SAVE)
     public ResponseEntity<ObjectResponseDTO> saveLineaBase(@RequestBody LineaBaseDTO lineaBase) {
         return ResponseEntity.ok(ObjectResponseDTO.success(lineaBaseService.saveLineaBase(lineaBase)));
@@ -221,7 +224,7 @@ public class ApiController extends BaseRestController {
     }
 
     @GetMapping(ApiPaths.LINEABASE_BY_PROJECT)
-    public ResponseEntity getLineaBaseByIdProyectoAndIdFase(@PathVariable Long idProyecto) throws LineaBaseException {
+    public ResponseEntity getLineaBaseByIdProyecto(@PathVariable Long idProyecto) throws LineaBaseException {
         return ResponseEntity.ok(ObjectResponseDTO.success(lineaBaseService.getLineaBaseByProyecto(idProyecto)));
     }
 

@@ -63,6 +63,18 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
-
+    @Override
+    public List<ItemDTO> getItemsByBaseLineId(Long idLineaBase) throws ItemException {
+        List<Item> items = itemRepository.findByIdLineaBase(idLineaBase);
+        List<ItemDTO> itemDTOs = new ArrayList<>();
+        if (items != null) {
+            for(Item item : items){
+                itemDTOs.add(itemMapper.mapToDto(item));
+            }
+            return itemDTOs;
+        } else {
+            throw new ItemException("notFound", "Este proyecto no tiene items");
+        }
+    }
 
 }
