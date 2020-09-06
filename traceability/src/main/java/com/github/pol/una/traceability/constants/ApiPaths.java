@@ -38,6 +38,8 @@ public class ApiPaths {
     public static final String ITEMS_BY_PROJECT = ITEM + "/{idProyecto}";
     public static final String ITEM_DELETE = ITEM + "/delete/{id}";
     public static final String ITEMS_BY_LINEABASE = ITEM + "/linea-base/{idLineaBase}";
+    public static final String ITEMS_BY_PROYECTO_FASE = ITEMS_BY_PROJECT + "/{idFase}";
+    public static final String ITEM_ASIGN_LINEA_BASE = ITEM + "/linea-base/asignar";
 
     public static final String PERMISOS_ALL = BASE + "/permisos";
 

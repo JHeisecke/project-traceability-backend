@@ -1,7 +1,7 @@
 package com.github.pol.una.traceability.entities;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "item", schema = "public")
@@ -26,11 +26,11 @@ public class Item {
     @Column (name = "id_linea_base")
     private Long idLineaBase;
 
-    @Column (name = "fecha_alta")
-    private LocalDate fechaAlta;
+    @Column (name = "fecha_alta", updatable = false)
+    private Date fechaAlta;
 
     @Column (name = "fecha_modificacion")
-    private LocalDate fechaModificacion;
+    private Date fechaModificacion;
 
     @Column(name = "observacion")
     private String observacion;
@@ -73,19 +73,19 @@ public class Item {
 
     public void setIdLineaBase(Long idLineaBase)  {this.idLineaBase = idLineaBase; }
 
-    public LocalDate getFechaAlta() {
+    public Date getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(LocalDate fechaAlta) {
+    public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public LocalDate getFechaModificacion() {
+    public Date getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(LocalDate fechaModificacion) {
+    public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 
