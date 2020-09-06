@@ -123,7 +123,7 @@ on update no action on delete no action;
 
 
 alter table item add constraint item_padre_fkey foreign key (id_item_padre)
-references usuario (id) match simple
+references item (id) match simple
 on update no action on delete no action;
 
 
