@@ -22,6 +22,9 @@ public class Fase {
     @Column (name = "fecha_modificacion")
     private Date fechaModificacion;
 
+    @Column(name = "orden")
+    private Long orden;
+
     public Long getId() {
         return id;
     }
@@ -56,4 +59,15 @@ public class Fase {
         this.fechaModificacion = fechaModificacion;
     }
 
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
     }
+
+    public Long getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Long orden) {
+        this.orden = orden;
+    }
+}
