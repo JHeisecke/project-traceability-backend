@@ -26,10 +26,17 @@ public class ItemServiceImpl implements ItemService {
     private ItemMapper itemMapper;
 
     @Override
-    public ItemDTO saveItem(ItemDTO itemDTO) {
+    public ItemDTO saveItem(ItemDTO itemDTO) throws ItemException {
         if(itemDTO.getId() != null){
-           itemDTO.setVersion(itemDTO.getVersion()+1L);
-           itemDTO.setFechaModificacion(new Date());
+            if(itemDTO.getIdLineaBase() != null){
+                throw new ItemException("com.github.pol.una.traceability.service.item.blockedItem",
+                        "El item con id "+ itemDTO.getId() +
+                        "no se puede editar. Es parte de la linea base con id " +
+                        itemDTO.getIdLineaBase());
+            }else {
+                itemDTO.setVersion(itemDTO.getVersion() + 1L);
+                itemDTO.setFechaModificacion(new Date());
+            }
         }else{
             itemDTO.setFechaAlta(new Date());
         }

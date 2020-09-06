@@ -12,7 +12,7 @@ public interface ItemService {
 
     List<ItemDTO> getItemsByProyectoId(Long id) throws ItemException;
 
-    ItemDTO saveItem(ItemDTO itemDTO);
+    ItemDTO saveItem(ItemDTO itemDTO) throws ItemException;
 
     void deleteItem(Long id) throws ItemException;
 
