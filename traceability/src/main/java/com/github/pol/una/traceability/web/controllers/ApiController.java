@@ -132,7 +132,7 @@ public class ApiController extends BaseRestController {
 
     @GetMapping(ApiPaths.ITEMS_BY_LINEABASE)
     public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByBaseLineId(@PathVariable Long idLineaBase) throws ItemException {
-        List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByBaseLineId(idLineaBase);
+        List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByLineaBase(idLineaBase);
         return ResponseEntity.ok(ListResponseDTO.success(items));
     }
 
