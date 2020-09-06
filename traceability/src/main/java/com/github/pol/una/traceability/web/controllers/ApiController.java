@@ -6,6 +6,7 @@ import com.github.pol.una.traceability.exceptions.*;
 import com.github.pol.una.traceability.service.*;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -166,6 +167,12 @@ public class ApiController extends BaseRestController {
         return ResponseEntity.ok(ListResponseDTO.success(
                 itemService.asignarLineaBase(idLineaBase, items))
         );
+    }
+
+    @GetMapping(ApiPaths.ITEM_LAST_OF_FASE)
+    public ResponseEntity<ObjectResponseDTO<ItemDTO>> getLastItemOfFase(@PathVariable Long idFase)
+        throws ItemException {
+        return ResponseEntity.ok(ObjectResponseDTO.success(itemService.getLastItemOfFase(idFase)));
     }
 
     /**

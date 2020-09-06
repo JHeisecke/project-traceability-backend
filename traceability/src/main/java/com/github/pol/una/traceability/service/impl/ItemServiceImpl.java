@@ -112,4 +112,14 @@ public class ItemServiceImpl implements ItemService {
                 .findByIdProyectoAndIdFaseAndIdLineaBaseIsNull(idProyecto, idFase)
         );
     }
+
+    @Override
+    public ItemDTO getLastItemOfFase(Long idFase) throws ItemException {
+        try {
+            List<ItemDTO> itemsFase = itemMapper.mapAsList(itemRepository.findByIdFaseOrderByIdDesc(idFase));
+            return itemsFase.get(0);
+        }catch (Exception e){
+            throw new ItemException(e.getMessage(), "Uno de los parametros no se encontró");
+        }
+    }
 }
