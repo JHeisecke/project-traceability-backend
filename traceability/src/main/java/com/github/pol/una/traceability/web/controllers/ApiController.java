@@ -151,7 +151,7 @@ public class ApiController extends BaseRestController {
     public ResponseEntity<ListResponseDTO<ItemDTO>> asignarLineaBaseItems(
                             @RequestParam Long idLineaBase,
                             @RequestBody List<ItemDTO> items
-                    ) {
+                    ) throws ItemException {
         return ResponseEntity.ok(ListResponseDTO.success(
                 itemService.asignarLineaBase(idLineaBase, items))
         );

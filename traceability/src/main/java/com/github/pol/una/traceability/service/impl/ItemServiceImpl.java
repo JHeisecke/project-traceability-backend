@@ -82,11 +82,18 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDTO> asignarLineaBase(Long idLineaBase, List<ItemDTO> items) {
+    public List<ItemDTO> asignarLineaBase(Long idLineaBase, List<ItemDTO> items)
+            throws ItemException {
         List<ItemDTO> result = new ArrayList<>();
-        for(ItemDTO dto : items){
-            dto.setIdLineaBase(idLineaBase);
-            result.add(saveItem(dto));
+        for(ItemDTO dtoRecibido : items){
+            Optional<Item> dtoId = itemRepository.findById(dtoRecibido.getId());
+            if(dtoId.isPresent()) {
+                ItemDTO dto = itemMapper.mapToDto(dtoId.get());
+                dto.setIdLineaBase(idLineaBase);
+                result.add(saveItem(dto));
+            }else{
+                throw new ItemException("com.github.pol.una.traceability.service.item", "No existe el item con id "+ dtoRecibido.getId());
+            }
         }
         return result;
     }
