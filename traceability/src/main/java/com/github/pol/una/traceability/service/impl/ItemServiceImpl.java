@@ -1,18 +1,13 @@
 package com.github.pol.una.traceability.service.impl;
 
 import com.github.pol.una.traceability.dto.ItemDTO;
-import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.entities.Item;
-import com.github.pol.una.traceability.entities.Proyecto;
-import com.github.pol.una.traceability.entities.Rol;
 import com.github.pol.una.traceability.exceptions.ItemException;
-import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.mapper.impl.ItemMapper;
 import com.github.pol.una.traceability.repository.ItemRepository;
 import com.github.pol.una.traceability.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,9 +26,12 @@ public class ItemServiceImpl implements ItemService {
     private ItemMapper itemMapper;
 
     @Override
-    public ItemDTO saveItem(ItemDTO itemDTO) throws ItemException {
+    public ItemDTO saveItem(ItemDTO itemDTO) {
         if(itemDTO.getId() != null){
            itemDTO.setVersion(itemDTO.getVersion()+1L);
+           itemDTO.setFechaModificacion(new Date());
+        }else{
+            itemDTO.setFechaAlta(new Date());
         }
         itemRepository.save(itemMapper.mapToEntity(itemDTO));
         return itemDTO;
@@ -64,7 +62,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDTO> getItemsByBaseLineId(Long idLineaBase) throws ItemException {
+    public List<ItemDTO> getItemsByLineaBase(Long idLineaBase) throws ItemException {
         List<Item> items = itemRepository.findByIdLineaBase(idLineaBase);
         List<ItemDTO> itemDTOs = new ArrayList<>();
         if (items != null) {
@@ -77,4 +75,26 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
+    @Override
+    public List<ItemDTO> getItemsByProyectoAndFase(Long idProyecto, Long idFase) {
+        return itemMapper.mapAsList(
+                itemRepository.findByIdProyectoAndIdFase(idProyecto, idFase));
+    }
+
+    @Override
+    public List<ItemDTO> asignarLineaBase(Long idLineaBase, List<ItemDTO> items)
+            throws ItemException {
+        List<ItemDTO> result = new ArrayList<>();
+        for(ItemDTO dtoRecibido : items){
+            Optional<Item> dtoId = itemRepository.findById(dtoRecibido.getId());
+            if(dtoId.isPresent()) {
+                ItemDTO dto = itemMapper.mapToDto(dtoId.get());
+                dto.setIdLineaBase(idLineaBase);
+                result.add(saveItem(dto));
+            }else{
+                throw new ItemException("com.github.pol.una.traceability.service.item", "No existe el item con id "+ dtoRecibido.getId());
+            }
+        }
+        return result;
+    }
 }

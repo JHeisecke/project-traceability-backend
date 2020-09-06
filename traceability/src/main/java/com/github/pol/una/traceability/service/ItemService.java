@@ -12,9 +12,13 @@ public interface ItemService {
 
     List<ItemDTO> getItemsByProyectoId(Long id) throws ItemException;
 
-    ItemDTO saveItem(ItemDTO itemDTO) throws ItemException;
+    ItemDTO saveItem(ItemDTO itemDTO);
 
     void deleteItem(Long id) throws ItemException;
 
-    List<ItemDTO> getItemsByBaseLineId(Long idLineaBase) throws ItemException;
+    List<ItemDTO> getItemsByLineaBase(Long idLineaBase) throws ItemException;
+
+    List<ItemDTO> getItemsByProyectoAndFase(Long idProyecto, Long idFase);
+
+    List<ItemDTO> asignarLineaBase(Long idLineaBase, List<ItemDTO> items) throws ItemException;
 }
