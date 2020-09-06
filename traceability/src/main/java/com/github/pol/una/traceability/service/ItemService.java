@@ -25,4 +25,6 @@ public interface ItemService {
     List<ItemDTO> getItemsByProyectoAndFaseAndLineaBaseNull(Long idProyecto, Long idFase);
 
     ItemDTO getLastItemOfFase(Long idFase) throws ItemException;
+
+    ItemDTO getItemById(Long id) throws ItemException;
 }

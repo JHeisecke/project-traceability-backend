@@ -175,6 +175,11 @@ public class ApiController extends BaseRestController {
         return ResponseEntity.ok(ObjectResponseDTO.success(itemService.getLastItemOfFase(idFase)));
     }
 
+    @GetMapping(ApiPaths.ITEM_BY_ID)
+    public ResponseEntity<ObjectResponseDTO<ItemDTO>> getItemById(@PathVariable Long id)
+        throws ItemException {
+        return ResponseEntity.ok(ObjectResponseDTO.success(itemService.getItemById(id)));
+    }
     /**
      * ROLES ENDPOINTS
      */

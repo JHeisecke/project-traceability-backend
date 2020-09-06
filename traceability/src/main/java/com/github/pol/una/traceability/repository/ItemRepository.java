@@ -20,4 +20,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByIdProyectoAndIdFaseAndIdLineaBaseIsNull(Long idProyecto, Long idFase);
 
     List<Item> findByIdFaseOrderByIdDesc(Long idFase);
+
+    Optional<Item> findById(Long id);
 }

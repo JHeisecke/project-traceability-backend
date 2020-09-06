@@ -43,6 +43,7 @@ public class ApiPaths {
     public static final String ITEM_ASIGN_LINEA_BASE = ITEM_LINEA_BASE + "/asignar";
     public static final String ITEMS_BY_PROYECTO_FASE_LINEA_BASE = ITEM_LINEA_BASE + "/{idProyecto}/{idFase}";
     public static final String ITEM_LAST_OF_FASE = ITEM + "/fase/last/{idFase}";
+    public static final String ITEM_BY_ID = ITEM + "/{id}";
 
     public static final String PERMISOS_ALL = BASE + "/permisos";
 
