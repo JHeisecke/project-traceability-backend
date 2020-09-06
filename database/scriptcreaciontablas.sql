@@ -31,7 +31,8 @@ id bigserial primary key,
 id_proyecto bigint unique not null,
 estado varchar(25),
 fecha_alta date,
-fecha_modificacion date
+fecha_modificacion date,
+orden integer
 );
 
 create table recurso(
