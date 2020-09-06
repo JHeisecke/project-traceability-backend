@@ -31,9 +31,12 @@ public class ItemServiceImpl implements ItemService {
     private ItemMapper itemMapper;
 
     @Override
-    public ItemDTO saveItem(ItemDTO itemDTO) throws ItemException {
+    public ItemDTO saveItem(ItemDTO itemDTO) {
         if(itemDTO.getId() != null){
            itemDTO.setVersion(itemDTO.getVersion()+1L);
+           itemDTO.setFechaModificacion(new Date());
+        }else{
+            itemDTO.setFechaAlta(new Date());
         }
         itemRepository.save(itemMapper.mapToEntity(itemDTO));
         return itemDTO;
@@ -64,7 +67,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDTO> getItemsByBaseLineId(Long idLineaBase) throws ItemException {
+    public List<ItemDTO> getItemsByLineaBase(Long idLineaBase) throws ItemException {
         List<Item> items = itemRepository.findByIdLineaBase(idLineaBase);
         List<ItemDTO> itemDTOs = new ArrayList<>();
         if (items != null) {
@@ -77,4 +80,19 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
+    @Override
+    public List<ItemDTO> getItemsByProyectoAndFase(Long idProyecto, Long idFase) {
+        return itemMapper.mapAsList(
+                itemRepository.findByIdProyectoAndIdFase(idProyecto, idFase));
+    }
+
+    @Override
+    public List<ItemDTO> asignarLineaBase(Long idLineaBase, List<ItemDTO> items) {
+        List<ItemDTO> result = new ArrayList<>();
+        for(ItemDTO dto : items){
+            dto.setIdLineaBase(idLineaBase);
+            result.add(saveItem(dto));
+        }
+        return result;
+    }
 }

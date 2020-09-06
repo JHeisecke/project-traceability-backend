@@ -6,6 +6,7 @@ import com.github.pol.una.traceability.exceptions.*;
 import com.github.pol.una.traceability.service.*;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -133,8 +134,29 @@ public class ApiController extends BaseRestController {
 
     @GetMapping(ApiPaths.ITEMS_BY_LINEABASE)
     public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByBaseLineId(@PathVariable Long isLineaBase) throws ItemException {
-        List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByBaseLineId(isLineaBase);
+        List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByLineaBase(isLineaBase);
         return ResponseEntity.ok(ListResponseDTO.success(items));
+    }
+
+    @GetMapping(ApiPaths.ITEMS_BY_PROYECTO_FASE)
+    public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByIdProyectoAndIdFase(
+                                @PathVariable Long idProyecto,
+                                @PathVariable Long idFase
+                        ) {
+
+        return ResponseEntity.ok(ListResponseDTO.success(
+                itemService.getItemsByProyectoAndFase(idProyecto, idFase))
+        );
+    }
+
+    @GetMapping(ApiPaths.ITEM_ASIGN_LINEA_BASE)
+    public ResponseEntity<ListResponseDTO<ItemDTO>> asignarLineaBaseItems(
+                            @RequestParam Long idLineaBase,
+                            @RequestBody List<ItemDTO> items
+                    ) {
+        return ResponseEntity.ok(ListResponseDTO.success(
+                itemService.asignarLineaBase(idLineaBase, items))
+        );
     }
 
     /**

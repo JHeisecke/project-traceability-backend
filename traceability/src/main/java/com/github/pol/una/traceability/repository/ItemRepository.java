@@ -13,6 +13,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     List<Item> findByIdProyecto(Long idProyecto);
 
-
     List<Item> findByIdLineaBase(Long idLineaBase);
+
+    List<Item> findByIdProyectoAndIdFase(Long idProyecto, Long idFase);
 }
