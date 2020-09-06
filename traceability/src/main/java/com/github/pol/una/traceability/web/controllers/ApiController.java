@@ -147,6 +147,17 @@ public class ApiController extends BaseRestController {
         );
     }
 
+    @GetMapping(ApiPaths.ITEMS_BY_PROYECTO_FASE_LINEA_BASE)
+    public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByIdProyectoAndIdFaseAndLineaBase(
+            @PathVariable Long idProyecto,
+            @PathVariable Long idFase
+    ) {
+        return ResponseEntity.ok(ListResponseDTO.success(
+                itemService.getItemsByProyectoAndFaseAndLineaBaseNull(idProyecto, idFase))
+        );
+    }
+
+
     @PostMapping(ApiPaths.ITEM_ASIGN_LINEA_BASE)
     public ResponseEntity<ListResponseDTO<ItemDTO>> asignarLineaBaseItems(
                             @RequestParam Long idLineaBase,

@@ -21,4 +21,7 @@ public interface ItemService {
     List<ItemDTO> getItemsByProyectoAndFase(Long idProyecto, Long idFase);
 
     List<ItemDTO> asignarLineaBase(Long idLineaBase, List<ItemDTO> items) throws ItemException;
+
+    List<ItemDTO> getItemsByProyectoAndFaseAndLineaBaseNull(Long idProyecto, Long idFase);
+
 }

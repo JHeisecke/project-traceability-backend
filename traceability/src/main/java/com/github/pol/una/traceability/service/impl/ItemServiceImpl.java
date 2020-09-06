@@ -97,4 +97,12 @@ public class ItemServiceImpl implements ItemService {
         }
         return result;
     }
+
+    @Override
+    public List<ItemDTO> getItemsByProyectoAndFaseAndLineaBaseNull(
+            Long idProyecto, Long idFase) {
+        return itemMapper.mapAsList(itemRepository
+                .findByIdProyectoAndIdFaseAndIdLineaBaseIsNull(idProyecto, idFase)
+        );
+    }
 }
