@@ -75,6 +75,7 @@ descripcion varchar (1000)
 
 create table linea_base (
 id bigserial primary key,
+id_proyecto integer,
 id_fase integer,
 estado varchar(40),
 fecha_alta date,

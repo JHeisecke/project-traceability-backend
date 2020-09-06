@@ -37,10 +37,18 @@ public class ApiPaths {
     public static final String ITEM_SAVE = ITEM + "/save";
     public static final String ITEMS_BY_PROJECT = ITEM + "/{idProyecto}";
     public static final String ITEM_DELETE = ITEM + "/delete/{id}";
+    public static final String ITEMS_BY_LINEABASE = ITEM + "/linea-base/{idLineaBase}";
 
     public static final String PERMISOS_ALL = BASE + "/permisos";
 
     public static final String RECURSOS_ALL = BASE + "/recursos";
+
+    public static final String LINEABASE = BASE + "/linea-base";
+    public static final String LINEABASE_SAVE = LINEABASE + "/save";
+    public static final String LINEABASE_DELETE = LINEABASE + "/delete/{id}";
+    public static final String LINEABASE_ALL = BASE + "/lineas-base";
+    public static final String LINEABASE_BY_ID = LINEABASE + "/linea-base/{id}";
+    public static final String LINEABASE_BY_PROJECT = LINEABASE + "/{idProyecto}";
 
     public static final String FASE = BASE + "/fase";
     public static final String FASE_SAVE = FASE + "/save";

@@ -15,4 +15,6 @@ public interface ItemService {
     ItemDTO saveItem(ItemDTO itemDTO) throws ItemException;
 
     void deleteItem(Long id) throws ItemException;
+
+    List<ItemDTO> getItemsByBaseLineId(Long idLineaBase) throws ItemException;
 }
