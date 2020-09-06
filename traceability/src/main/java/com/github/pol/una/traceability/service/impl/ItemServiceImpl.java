@@ -28,7 +28,8 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemDTO saveItem(ItemDTO itemDTO) throws ItemException {
         if (itemDTO.getId() != null) {
-            if (itemDTO.getIdLineaBase() != null) {
+            Item entity = itemRepository.getOne(itemDTO.getId());
+            if (entity.getIdLineaBase() != null) {
                 throw new ItemException("com.github.pol.una.traceability.service.item.blockedItem",
                         "El item con id " + itemDTO.getId() +
                                 "no se puede editar. Es parte de la linea base con id " +
