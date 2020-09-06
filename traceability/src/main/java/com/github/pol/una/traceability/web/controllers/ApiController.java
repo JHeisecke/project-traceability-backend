@@ -6,9 +6,7 @@ import com.github.pol.una.traceability.exceptions.*;
 import com.github.pol.una.traceability.service.*;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -149,7 +147,7 @@ public class ApiController extends BaseRestController {
         );
     }
 
-    @GetMapping(ApiPaths.ITEM_ASIGN_LINEA_BASE)
+    @PostMapping(ApiPaths.ITEM_ASIGN_LINEA_BASE)
     public ResponseEntity<ListResponseDTO<ItemDTO>> asignarLineaBaseItems(
                             @RequestParam Long idLineaBase,
                             @RequestBody List<ItemDTO> items

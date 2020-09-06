@@ -1,18 +1,13 @@
 package com.github.pol.una.traceability.service.impl;
 
 import com.github.pol.una.traceability.dto.ItemDTO;
-import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.entities.Item;
-import com.github.pol.una.traceability.entities.Proyecto;
-import com.github.pol.una.traceability.entities.Rol;
 import com.github.pol.una.traceability.exceptions.ItemException;
-import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.mapper.impl.ItemMapper;
 import com.github.pol.una.traceability.repository.ItemRepository;
 import com.github.pol.una.traceability.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.Date;
