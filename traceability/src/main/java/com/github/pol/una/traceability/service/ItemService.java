@@ -16,5 +16,15 @@ public interface ItemService {
 
     void deleteItem(Long id) throws ItemException;
 
-    List<ItemDTO> getItemsByBaseLineId(Long idLineaBase) throws ItemException;
+    List<ItemDTO> getItemsByLineaBase(Long idLineaBase) throws ItemException;
+
+    List<ItemDTO> getItemsByProyectoAndFase(Long idProyecto, Long idFase);
+
+    List<ItemDTO> asignarLineaBase(Long idLineaBase, List<ItemDTO> items) throws ItemException;
+
+    List<ItemDTO> getItemsByProyectoAndFaseAndLineaBaseNull(Long idProyecto, Long idFase);
+
+    ItemDTO getLastItemOfFase(Long idFase) throws ItemException;
+
+    ItemDTO getItemById(Long id) throws ItemException;
 }

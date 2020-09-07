@@ -37,7 +37,13 @@ public class ApiPaths {
     public static final String ITEM_SAVE = ITEM + "/save";
     public static final String ITEMS_BY_PROJECT = ITEM + "/{idProyecto}";
     public static final String ITEM_DELETE = ITEM + "/delete/{id}";
-    public static final String ITEMS_BY_LINEABASE = ITEM + "/linea-base/{idLineaBase}";
+    public static final String ITEM_LINEA_BASE = ITEM + "/linea-base";
+    public static final String ITEMS_BY_LINEABASE = ITEM_LINEA_BASE + "/{idLineaBase}";
+    public static final String ITEMS_BY_PROYECTO_FASE = ITEMS_BY_PROJECT + "/{idFase}";
+    public static final String ITEM_ASIGN_LINEA_BASE = ITEM_LINEA_BASE + "/asignar";
+    public static final String ITEMS_BY_PROYECTO_FASE_LINEA_BASE = ITEM_LINEA_BASE + "/{idProyecto}/{idFase}";
+    public static final String ITEM_LAST_OF_FASE = ITEM + "/fase/last/{idFase}";
+    public static final String ITEM_BY_ID = ITEM + "/data/{id}";
 
     public static final String PERMISOS_ALL = BASE + "/permisos";
 
@@ -45,7 +51,6 @@ public class ApiPaths {
 
     public static final String LINEABASE = BASE + "/linea-base";
     public static final String LINEABASE_SAVE = LINEABASE + "/save";
-    public static final String LINEABASE_DELETE = LINEABASE + "/delete/{id}";
     public static final String LINEABASE_ALL = BASE + "/lineas-base";
     public static final String LINEABASE_BY_ID = LINEABASE + "/linea-base/{id}";
     public static final String LINEABASE_BY_PROJECT = LINEABASE + "/{idProyecto}";

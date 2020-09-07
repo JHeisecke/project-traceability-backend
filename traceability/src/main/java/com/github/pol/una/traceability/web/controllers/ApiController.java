@@ -6,8 +6,8 @@ import com.github.pol.una.traceability.exceptions.*;
 import com.github.pol.una.traceability.service.*;
 import com.github.pol.una.traceability.web.response.ListResponseDTO;
 import com.github.pol.una.traceability.web.response.ObjectResponseDTO;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -132,11 +132,54 @@ public class ApiController extends BaseRestController {
     }
 
     @GetMapping(ApiPaths.ITEMS_BY_LINEABASE)
-    public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByBaseLineId(@PathVariable Long isLineaBase) throws ItemException {
-        List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByBaseLineId(isLineaBase);
+    public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByBaseLineId(@PathVariable Long idLineaBase) throws ItemException {
+        List<ItemDTO> items = (List<ItemDTO>) itemService.getItemsByLineaBase(idLineaBase);
         return ResponseEntity.ok(ListResponseDTO.success(items));
     }
 
+    @GetMapping(ApiPaths.ITEMS_BY_PROYECTO_FASE)
+    public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByIdProyectoAndIdFase(
+                                @PathVariable Long idProyecto,
+                                @PathVariable Long idFase
+                        ) {
+
+        return ResponseEntity.ok(ListResponseDTO.success(
+                itemService.getItemsByProyectoAndFase(idProyecto, idFase))
+        );
+    }
+
+    @GetMapping(ApiPaths.ITEMS_BY_PROYECTO_FASE_LINEA_BASE)
+    public ResponseEntity<ListResponseDTO<ItemDTO>> getItemsByIdProyectoAndIdFaseAndLineaBase(
+            @PathVariable Long idProyecto,
+            @PathVariable Long idFase
+    ) {
+        return ResponseEntity.ok(ListResponseDTO.success(
+                itemService.getItemsByProyectoAndFaseAndLineaBaseNull(idProyecto, idFase))
+        );
+    }
+
+
+    @PostMapping(ApiPaths.ITEM_ASIGN_LINEA_BASE)
+    public ResponseEntity<ListResponseDTO<ItemDTO>> asignarLineaBaseItems(
+                            @RequestParam Long idLineaBase,
+                            @RequestBody List<ItemDTO> items
+                    ) throws ItemException {
+        return ResponseEntity.ok(ListResponseDTO.success(
+                itemService.asignarLineaBase(idLineaBase, items))
+        );
+    }
+
+    @GetMapping(ApiPaths.ITEM_LAST_OF_FASE)
+    public ResponseEntity<ObjectResponseDTO<ItemDTO>> getLastItemOfFase(@PathVariable Long idFase)
+        throws ItemException {
+        return ResponseEntity.ok(ObjectResponseDTO.success(itemService.getLastItemOfFase(idFase)));
+    }
+
+    @GetMapping(ApiPaths.ITEM_BY_ID)
+    public ResponseEntity<ObjectResponseDTO<ItemDTO>> getItemById(@PathVariable Long id)
+        throws ItemException {
+        return ResponseEntity.ok(ObjectResponseDTO.success(itemService.getItemById(id)));
+    }
     /**
      * ROLES ENDPOINTS
      */

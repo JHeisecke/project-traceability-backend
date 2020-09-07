@@ -13,6 +13,7 @@ public class FaseDTO {
     private String estado;
     private Date fechaAlta;
     private Date fechaModificacion;
+    private Long orden;
 
     public Long getId() {
         return id;
@@ -52,5 +53,13 @@ public class FaseDTO {
 
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    public Long getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Long orden) {
+        this.orden = orden;
     }
 }

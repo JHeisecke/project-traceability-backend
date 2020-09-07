@@ -31,7 +31,8 @@ id bigserial primary key,
 id_proyecto bigint unique not null,
 estado varchar(25),
 fecha_alta date,
-fecha_modificacion date
+fecha_modificacion date,
+orden integer
 );
 
 create table recurso(
@@ -122,7 +123,7 @@ on update no action on delete no action;
 
 
 alter table item add constraint item_padre_fkey foreign key (id_item_padre)
-references usuario (id) match simple
+references item (id) match simple
 on update no action on delete no action;
 
 
