@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +82,16 @@ public class UsuarioServiceImpl implements UsuarioService {
         UsuarioDTO usuarioDTO = mapper.mapToDto(usuarioRepository.findByUsername(username));
         listarRolesUsuarios(usuarioDTO);
         return usuarioDTO;
+    }
+
+    @Override
+    public List<UsuarioDTO> findTeamLeaders() {
+        List<UsuarioDTO> responseList = new ArrayList<>();
+        List<Object[]> teamLeaders = usuarioRepository.findTeamLeaders();
+        teamLeaders.forEach(t -> {
+            responseList.add(new UsuarioDTO(((BigInteger) t[0]).longValue() ,(String) t[1]));
+        });
+        return responseList;
     }
 
     private void listarRolesUsuarios(UsuarioDTO usuarioDTO) {
