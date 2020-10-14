@@ -31,7 +31,6 @@ public class ProyectoServiceImpl implements ProyectoService {
     public ProyectoDTO saveProject(ProyectoDTO proyectoDTO) {
         Proyecto proyecto = mapper.mapToEntity(proyectoDTO);
         proyectoRepository.save(proyecto);
-        //usuarioProyectoService.save(proyecto.getId(), proyecto.getIdLider());
         return proyectoDTO;
     }
 
