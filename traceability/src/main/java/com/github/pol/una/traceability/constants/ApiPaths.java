@@ -15,6 +15,7 @@ public class ApiPaths {
     public static final String LOGIN = BASE + "/login";
 
     public static final String USER = BASE + "/usuario";
+    public static final String TEAM_LEADER = USER + "/team-leaders";
     public static final String USER_DELETE = USER + "/delete/{username}";
     public static final String USER_SAVE = USER + "/save";
     public static final String USERS_BY_ROLE = BASE + "/rol/usuarios/{id}";

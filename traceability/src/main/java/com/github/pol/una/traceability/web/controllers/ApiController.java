@@ -72,6 +72,11 @@ public class ApiController extends BaseRestController {
         }
     }
 
+    @GetMapping(ApiPaths.TEAM_LEADER)
+    public ResponseEntity<ListResponseDTO> getTeamLeaders() {
+        return ResponseEntity.ok(ListResponseDTO.success(usuarioService.findTeamLeaders()));
+    }
+
     @GetMapping(ApiPaths.USERS_BY_ROLE)
     public ResponseEntity<ListResponseDTO> getUsuariosByRol(@PathVariable Long id) {
         return ResponseEntity.ok(ListResponseDTO.success(permisoRolService.getAllPermisosByRol(id)));

@@ -16,6 +16,13 @@ public class UsuarioDTO {
     private String email;
     private List<RolDTO> roles;
 
+    public UsuarioDTO() {}
+
+    public UsuarioDTO(Long id, String nombreCompleto) {
+        this.id = id;
+        this.nombreCompleto = nombreCompleto;
+    }
+
     public Long getId() {
         return id;
     }
