@@ -1,5 +1,6 @@
 package com.github.pol.una.traceability.service.impl;
 
+import com.github.pol.una.traceability.dto.FaseDTO;
 import com.github.pol.una.traceability.dto.ItemDTO;
 import com.github.pol.una.traceability.dto.ProyectoDTO;
 import com.github.pol.una.traceability.entities.Item;
@@ -8,6 +9,7 @@ import com.github.pol.una.traceability.exceptions.ItemException;
 import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.mapper.impl.ProyectoMapper;
 import com.github.pol.una.traceability.repository.ProyectoRepository;
+import com.github.pol.una.traceability.service.FaseService;
 import com.github.pol.una.traceability.service.ItemService;
 import com.github.pol.una.traceability.service.ProyectoService;
 import com.github.pol.una.traceability.service.UsuarioProyectoService;
@@ -32,6 +34,8 @@ public class ProyectoServiceImpl implements ProyectoService {
     private UsuarioProyectoService usuarioProyectoService;
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private FaseService faseService;
 
     @Override
     public ProyectoDTO saveProject(ProyectoDTO proyectoDTO) {
@@ -67,6 +71,9 @@ public class ProyectoServiceImpl implements ProyectoService {
         if(proyecto.isPresent()) {
             for(ItemDTO item : itemService.getItemsByProyectoId(proyecto.get().getId())){
                 itemService.deleteItem(item.getId());
+            }
+            for(FaseDTO fase : faseService.getByIdProyecto(proyecto.get().getId())){
+                faseService.deleteFasesByIdProyecto(proyecto.get().getId());
             }
             proyectoRepository.delete(proyecto.get());
         } else {
