@@ -1,10 +1,14 @@
 package com.github.pol.una.traceability.service.impl;
 
+import com.github.pol.una.traceability.dto.ItemDTO;
 import com.github.pol.una.traceability.dto.ProyectoDTO;
+import com.github.pol.una.traceability.entities.Item;
 import com.github.pol.una.traceability.entities.Proyecto;
+import com.github.pol.una.traceability.exceptions.ItemException;
 import com.github.pol.una.traceability.exceptions.ProjectException;
 import com.github.pol.una.traceability.mapper.impl.ProyectoMapper;
 import com.github.pol.una.traceability.repository.ProyectoRepository;
+import com.github.pol.una.traceability.service.ItemService;
 import com.github.pol.una.traceability.service.ProyectoService;
 import com.github.pol.una.traceability.service.UsuarioProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,8 @@ public class ProyectoServiceImpl implements ProyectoService {
     private ProyectoMapper mapper;
     @Autowired
     private UsuarioProyectoService usuarioProyectoService;
+    @Autowired
+    private ItemService itemService;
 
     @Override
     public ProyectoDTO saveProject(ProyectoDTO proyectoDTO) {
@@ -56,9 +62,12 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public void deleteProject(Long id) throws ProjectException {
+    public void deleteProject(Long id) throws ProjectException, ItemException {
         Optional<Proyecto> proyecto = proyectoRepository.findById(id);
         if(proyecto.isPresent()) {
+            for(ItemDTO item : itemService.getItemsByProyectoId(proyecto.get().getId())){
+                itemService.deleteItem(item.getId());
+            }
             proyectoRepository.delete(proyecto.get());
         } else {
             throw new ProjectException("notFound", "No se encontró el proyecto "+id);
