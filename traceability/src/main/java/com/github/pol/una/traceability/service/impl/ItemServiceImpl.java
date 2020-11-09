@@ -118,7 +118,8 @@ public class ItemServiceImpl implements ItemService {
     public ItemDTO getLastItemOfFase(Long idFase) throws ItemException {
         try {
             List<ItemDTO> itemsFase = itemMapper.mapAsList(itemRepository.findByIdFaseOrderByIdDesc(idFase));
-            return itemsFase.get(0);
+            ItemDTO item = itemsFase.size() != 0 ? itemsFase.get(0) : null;
+            return item;
         } catch (Exception e) {
             throw new ItemException(e.getMessage(), "Uno de los parametros no se encontró");
         }
