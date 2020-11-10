@@ -30,4 +30,8 @@ public interface FaseService {
      */
     List<FaseDTO> getByIdProyecto(Long idProyecto);
 
+    /**
+     * Delete fases de un proyecto
+     */
+    void deleteFasesByIdProyecto(Long idProyecto);
 }

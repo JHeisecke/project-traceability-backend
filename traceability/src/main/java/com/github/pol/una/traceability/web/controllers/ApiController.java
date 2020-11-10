@@ -102,7 +102,7 @@ public class ApiController extends BaseRestController {
     }
 
     @DeleteMapping(ApiPaths.PROJECT_DELETE)
-    public ResponseEntity<Void> deleteProject(@PathVariable Long id) throws ProjectException {
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id) throws ProjectException, ItemException {
         try {
             proyectoService.deleteProject(id);
             return ResponseEntity.ok().build();

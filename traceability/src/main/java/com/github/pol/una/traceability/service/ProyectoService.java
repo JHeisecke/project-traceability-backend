@@ -3,6 +3,7 @@ package com.github.pol.una.traceability.service;
 import com.github.pol.una.traceability.dto.ProyectoDTO;
 import com.github.pol.una.traceability.dto.RolDTO;
 import com.github.pol.una.traceability.dto.UsuarioDTO;
+import com.github.pol.una.traceability.exceptions.ItemException;
 import com.github.pol.una.traceability.exceptions.ProjectException;
 import org.springframework.http.ResponseEntity;
 
@@ -18,5 +19,5 @@ public interface ProyectoService {
 
     ProyectoDTO getProjectById(Long id) throws ProjectException;
 
-    void deleteProject(Long id) throws ProjectException;
+    void deleteProject(Long id) throws ProjectException, ItemException;
 }

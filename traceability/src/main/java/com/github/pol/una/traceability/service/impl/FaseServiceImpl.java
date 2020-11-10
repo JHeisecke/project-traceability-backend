@@ -43,4 +43,11 @@ public class FaseServiceImpl implements FaseService {
     public List<FaseDTO> getByIdProyecto(Long idProyecto){
         return mapper.mapAsList(faseRepository.findByIdProyecto(idProyecto));
     }
+
+    @Override
+    public void deleteFasesByIdProyecto(Long idProyecto) {
+        for(FaseDTO fase : getByIdProyecto(idProyecto)){
+            faseRepository.deleteById(fase.getId());
+        }
+    }
 }
